@@ -1,0 +1,626 @@
+THE DISTRIBUTION ON PERMUTATIONS INDUCED BY
+A RANDOM PARKING FUNCTION
+ROSS G. PINSKY
+Abstract. A parking function on [n] creates a permutation in Sn via
+the order in which the n cars appear in the n parking spaces. Placing the uniform probability measure on the set of parking functions on
+[n] induces a probability measure on Sn. We initiate a study of some
+properties of this distribution.
+1. Introduction and Statement of Results
+Consider a row of n parking spaces on a one-way street. A line of n
+cars, numbered from 1 to n, attempts to park, one at a time. The ith car’s
+preferred space is spot number πi ∈ [n]. If this space is already taken, then
+car i proceeds forward and parks in the first available space, if one exists.
+If the car is unable to park, it exits the street. A sequence π = {πi}
+n
+i=1
+is called a parking function on [n] if all n cars are able to park. It is easy
+to see that π is a parking function if and only if |{i : πi ≤ j}| ≥ j, for all
+j ∈ [n]. Let Pn denote the set of parking functions. It is well-known that
+|Pn| = (n+ 1)n−1
+. There are a number of proofs of this result; a particularly
+elegant one due to Pollack can be found in [3]. There is a large literature on
+parking functions and their generalizations; see, for example, the survey [5].
+We can consider a random parking function by placing the uniform probability measure on Pn. Denote this probability measure by P
+Pn . A study of
+random parking functions was initiated by Diaconis and Hicks in [1]. Since
+each parking function yields a permutation σ = σ1 · · · σn ∈ Sn, where σj
+is the number of the car that parked in space j, it follows that a random
+2010 Mathematics Subject Classification. 60C05, 05A05.
+Key words and phrases. parking function, random permutation.
+1
+2 ROSS G. PINSKY
+parking function induces a distribution on the set Sn of permutations of [n].
+In this paper we initiate a study of this distribution.
+We will use the notation Pn and En to denote the uniform probability
+measure and the corresponding expectation on Sn. We will denote by P
+park
+n
+the probability measure on Sn induced by a random parking function in
+Pn. The corresponding expectation will be denoted by E
+park
+n . To be more
+precise concerning the definition of the induced probability measure, define
+Tn : Pn → Sn by Tn(π) = σ, if when using the parking function π, σj is the
+number of the car that parked in space j, for j ∈ [n]. For example, if n = 4
+and π = 2213 ∈ P4, then we have T4(2213) = 3124 ∈ S4. We define
+(1.1) P
+park
+n
+(σ) = P
+Pn
+
+T
+−1
+n
+(σ)
+
+.
+For 1 ≤ i ≤ n < ∞ and σ ∈ Sn, define
+ln,i(σ) = max{l ∈ [i] : σi = max(σi
+, σi−1, · · · , σi−l+1}.
+For n ∈ N, define
+(1.2) Ln(σ) = Yn
+i=1
+ln,i(σ), σ ∈ Sn.
+For example, if σ = 379218645 ∈ S9, then ln,i(σ) = 1, for i ∈ {1, 4, 5, 7, 8},
+ln,i(σ) = 2, for i ∈ {2, 9} and ln,i(σ) = 3, for i ∈ {3, 6}. Thus, L9(σ) =
+1
+52
+23
+3 = 36.
+We have the following proposition.
+Proposition 1.
+(1.3) P
+park
+n
+(σ) = Ln(σ)
+(n + 1)n−1
+, σ ∈ Sn.
+The following corollary of Proposition 1 is immediate, where the asymptotic behavior follows from Stirling’s formula.
+Corollary 1. The expected value of the random variable Ln = Ln(σ) on
+(Sn, Pn) satisfies
+(1.4) EnLn =
+1
+n!
+X
+σ∈Sn
+Ln(σ) = (n + 1)n−1
+n!
+∼
+e
+n+1
+√
+2π n
+3
+2
+.
+We will prove the following weak convergence result for Ln
+PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 3
+Theorem 1. For any ǫ ∈ (0, 2], the random variable Ln = Ln(σ) on (Sn, Pn)
+satisfies
+(1.5) limn→∞
+Pn((2 − ǫ)
+n ≤ Ln ≤ (2 + ǫ)
+n
+)) = 1
+The following corollary follows immediately from Proposition 1 and Theorem 1.
+Corollary 2. For any ǫ ∈ (0, 2], the random variable P
+park
+n = P
+park
+n (σ) on
+(Sn, Pn) satisfies
+(1.6) limn→∞
+Pn
+σ ∈ Sn : P
+park
+n
+(σ) ∈
+
+(2 − ǫ)
+n
+(n + 1)n−1
+,
+(2 + ǫ)
+n
+(n + 1)n−1
+  = 1.
+And the following corollary follows immediately from Corollary 1 and
+Theorem 1.
+Corollary 3. The expectation of the random variable P
+park
+n = P
+park
+n (σ) on
+(Sn, Pn) is given by
+(1.7) EnP
+park
+n =
+1
+n!
+∼
+e
+n
+√
+2πnn+ 1
+2
+.
+Comparing (1.6) and (1.7), we see that for all but a Pn-negligible set of
+permutations in Sn, the P
+park
+n -probability of a permutation in Sn is approximately 2
+n
+(n+1)n−1 , but the “average” P
+park
+n -probability of a permutation in
+Sn is exponentially larger, namely asymptotic to e
+n
+√
+2πn
+n+ 1
+2
+. There is also a
+Pn-negligible set of permutations in Sn each of whose elements has superexponentially larger P
+park
+n -probability than this average (and this is where
+almost all the P
+park
+n -probability lies), and a Pn-negligible set of permutations in Sn for which the P
+park
+n -probability is exponentially smaller than
+this average probability. In particular, we have the following corollary.
+Corollary 4. The maximum value of P
+park
+n = P
+park
+n (σ) is equal to n!
+(n+1)n−1 ∼
+√
+2π n
+3
+2
+en+1 and is attained uniquely at σ = 1 · · · n. The minimum value of P
+park
+n
+is equal to 1
+(n+1)n−1 and is attained uniquely at σ = n · · · 1.
+Proof. The function Ln = Ln(σ), σ ∈ Sn, attains its minimum value 1
+uniquely at σ = n · · · 1 and attains its maximum value n! uniquely at
+σ = 1 · · · n. 
+4 ROSS G. PINSKY
+From the definition of a parking function, it is obvious that
+P
+park
+n
+(σj = 1) = P
+Pn
+(π1 = j), j ∈ [n].
+In [1], the following asymptotic behavior was proven for π1 (or any πk by
+symmetry):
+(1.8)
+For fixed j, P Pn
+(π1 = j) ∼
+1 + P(X ≥ j)
+n
+;
+For fixed j, P Pn
+(π = n − j) ∼
+P(X ≤ j + 1)
+n
+,
+where X is a random variable satisfying P(X = j) = e
+−j
+j
+j−1
+j!
+, j = 1, 2, · · · .
+Thus, it follows that (1.8) also holds with P
+Pn (π1 = j) replaced by P
+park
+n (σj =
+1). It would be nice to obtain similar type asymptotics for P
+park
+n (σj = k),
+for general j, k. It doesn’t seem that our results in this paper can help here.
+Nor do they seem to be useful for obtaining information on the distributions
+of certain classical permutation statistics under P
+park
+n , such as the number
+of inversions, the number of cycles or the number of descents.
+We will also prove the following results.
+Proposition 2. For any m ∈ [n],
+(1.9) P
+park
+n
+(σ1 · · · σm = [m]) = 
+m + 1
+n + 1 m
+.
+We have the following immediately corollary.
+Corollary 5. For any m ∈ N,
+(1.10) limn→∞
+P
+park
+n
+(σ1 · · · σn−m = [n − m]) = e
+−m
+In fact, we also have the following result.
+Proposition 3. For any m ∈ N,
+(1.11) limn→∞
+P
+park
+n
+(σn−m+1 · · · σn = n − m + 1 · · · n) = e
+−m.
+Remark. Note that (1.10) and (1.11) give
+limn→∞
+P
+park
+n
+(σn−m+1 · · · σn = n − m + 1 · · · n|σ1 · · · σn−m = [n − m]) = 1.
+PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 5
+The proof of Proposition 1 is given in section 2, the proof of Theorem 1 is
+given in section 3 and the proofs of Propositions 2 and 3 are given in section
+4.
+2. Proof of Proposition 1
+Recall the definition of ln,i from the paragraph containing equation (1.2)
+which defines Ln. For the proof of the proposition, it will be convenient to
+define ˜ln,i(σ) = ln,σ−1
+i
+(σ). For example, if σ = 379218645, then ˜ln,i(σ) = 1,
+for i ∈ {1, 2, 3, 4, 6},
+˜ln,i = 2, for i ∈ {5, 7} and ˜ln,i = 3, for i ∈ {8, 9}. Of
+course, we can express L in terms of the {
+˜ln,i}:
+Ln(σ) = Yn
+i=1
+ln,i(σ) = Yn
+i=1
+˜ln,i(σ).
+The proposition will follow if we show that for each σ ∈ Sn, there are
+Ln(σ) different parking functions π ∈ P Fn such that Tn(π) = σ, where Tn
+is as in the paragraph containing equation (1.2). Before giving a formal
+proof of the proposition, we illustrate the proof with a concrete example,
+from which the general result should be clear. Consider the permutation
+σ = 379218645 ∈ S9. We look for those π ∈ P F9 that satisfy T9(π) = σ.
+From the definition of the parking process and from the definition of Tn, we
+need π1 = 5 in order to have σ5 = 1, π2 = 4 in order to have σ4 = 2, π3 = 1
+in order to have σ1 = 3 and π4 = 8 in order to have σ8 = 4. In order to
+have σ9 = 5, we can either have π5 = 9, in which case car number 5 parks
+in its preferred space 9, or alternatively, π5 = 8, in which case car number
+5 attempts to park in its preferred space 8 but fails, and then moves on to
+space 9 and parks. Then we need π6 = 7 in order to have σ7 = 6. Then
+similar to the explanation regarding π5, we need π7 to be either 1 or 2 in
+order to have σ2 = 7. In order to have σ6 = 8, we can have either π8 = 6, in
+which car number 8 parks directly in its preferred space 6, or alternatively
+π8 = 5, in which case car number 8 tries and fails to park in space number
+5 and then parks in space number 6, or alternatively, π8 = 4, it which case
+car number 8 tries and fails to park in space number 4 and then also in
+space number 5, before finally parking in space number 6. Similarly, we
+need π9 to be equal to 1,2 or 3 in order to have σ9 = 3. Thus, there are
+6 ROSS G. PINSKY
+1 × 1 × 1 × 1 × 2 × 1 × 2 × 3 × 3 = Q9
+i=1
+˜l9,i(σ) different parking functions
+π ∈ P F9 that yield T9(π) = σ.
+To give a formal proof for the general case, fix σ ∈ Sn. In order to have
+Tn(π) = σ, first we need π1 = σ
+−1
+1
+. Thus there is just one choice for π1,
+and note that ˜ln,1(σ) = 1. Now let k ∈ [n − 1] and assume that we have
+chosen π1, · · · πk in such a way that car number i has parked in space σ
+−1
+i
+,
+for i ∈ [k]. We now want car number k + 1 to park in space σ
+−1
+k+1. By
+construction, this space is vacant at this point, and so are the ˜ln,k(σ) − 1
+spaces immediately to the left of this space. However the space ˜ln,k spaces
+to the left of this space is not vacant (or possibly this space doesn’t exist–it
+would be the zeroth space). Thus, by the parking process, car number k + 1
+will park in space σ
+−1
+k+1 if and only if πk+1 is equal to one of the ˜ln,k+1(σ)
+numbers σ
+−1
+k+1, σ−1
+k+1 − 1, · · · , σ−1
+k+1 − ˜ln,k+1(σ) + 1. This shows that there are
+Ln(σ) = Qn
+i=1
+˜ln,i(σ) different parking functions π satisfying Tn(π) = σ.
+3. Proof of Theorem 1
+We begin with several preliminary results. Recall that Pn is the uniform
+probability measure on Sn.
+Lemma 1.
+(3.1) Pn(ln,i = j) =
+
+
+
+1
+j −
+1
+j+1 =
+1
+j(j+1) , j = 1, · · · , i − 1;
+1
+i
+, j = i.
+.
+Proof. Fix i and let j ∈ [i]. The event {ln,i(σ) ≥ j} is the event 
+σi =
+max{σi
+, σi−1, · · · , σi−j+1}
+	
+. Since Pn is the uniform distribution on Sn, we
+have
+(3.2) Pn(ln,i ≥ j) = 1
+j
+, i ∈ [n], 1 ≤ j ≤ i.
+The lemma now follows.
+We now write
+(3.3) Sn := log Ln =
+Xn
+i=1
+log ln,i.
+From Lemma 1, we have
+(3.4) En log ln,i =
+X
+i−1
+j=1
+log j
+j(j + 1) +
+log i
+i
+.
+PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 7
+Note that En log ln,i does not depend on n, but of course it is only defined
+for 1 ≤ i ≤ n.
+Lemma 2.
+(3.5) lim
+n,i→∞
+En log ln,i = log 2.
+Proof. Recall the Abel-type summation formula [4]:
+X
+1<r≤x
+a(r)f(r) = A(x)f(x)−A(1)f(1)−
+Z x
+1
+A(t)f
+′
+(t)dt, where A(r) = Xr
+i=1
+ai
+.
+We apply this formula with a(r) = 1
+r(r+1) =
+1
+r −
+1
+r+1 and f(r) = log r. We
+have A(r) = 1 − 1
+r+1 = r
+r+1 . Recalling (3.4), we obtain
+lim
+n,i→∞
+En log ln,i = lim
+i→∞
+X
+i−1
+j=1
+log j
+j(j + 1) = lim
+i→∞ 
+i
+i + 1
+log i −
+Z i
+1
+t
+t + 1
+1
+t
+dt
+=
+lim
+i→∞ 
+i
+i + 1
+log i − log(i + 1) + log 2
+= lim
+i→∞ 
+log i
+i + 1
+−
+log i
+i + 1
++ log 2
+= log 2.
+
+From (3.3) and (3.5), we conclude that
+(3.6) limn→∞
+EnSn
+n
+= limn→∞
+1
+n
+En log Ln = log 2.
+We now consider EnS
+2
+n
+. We have
+(3.7)
+EnS
+2
+n = En
+ Xn
+i=1
+log ln,i!2
+=
+Xn
+i=1
+En log l
+2
+n,i + 2 X
+1≤i<j≤n
+En log ln,i log ln,j .
+We have the following proposition.
+Proposition 4. For 1 ≤ i < j ≤ n, the random variables ln,i and ln,j on
+(Sn, Pn) are negatively correlated; that is,
+(3.8) Pn(ln,i ≥ k, ln,j ≥ k) ≤ Pn(ln,i ≥ k)Pn(ln,j ≥ l), for k, l ≥ 1.
+Proof. Since Pn is the uniform probability measure on Sn, for any k ≤ i,
+the events {ln,i ≥ k} =
+
+σi = max(σi
+, · · · , σi−k+1)
+	
+and {ln,j ≥ l} =
+
+σj =
+max(σj , · · · , σj−l+1)
+	
+are independent if l ≤ j − i. Thus, (3.8) holds with
+equality in these cases.
+8 ROSS G. PINSKY
+Consider now the case k ≤ i and j − i + 1 ≤ l ≤ j. In this case
+(3.9)
+{ln,i ≥ k, ln,j ≥ l} =
+
+σj = max(σj , σj−1, · · · , σr)
+	
+∩
+
+σi = max(σi
+, σi−1, · · · , σi−k+1)
+	
+,
+where r = min(i − k + 1, j − l + 1).
+We have
+(3.10) Pn (σj = max(σj , σj−1, · · · , σr)) = 1
+max(l, j − i + k)
+≤
+1
+l
+.
+Also,
+(3.11)
+Pn (σi = max(σi
+, σi−1, · · · , σi−k+1|σj = max(σj , σj−1, · · · , σr)) = 1
+k
+.
+The proposition follows from (3.9)–(3.11) and (3.2).
+We can now prove the theorem.
+Proof of Theorem 1. Since ln,i and ln,j are negatively correlated, one has
+Enf(ln,i)g(ln,j ) ≤ Enf(ln,i)Eng(ln,j ), if f and g are increasing functions on
+[n]. In particular then,
+(3.12) En log ln,i log ln,j ≤ En log ln,iEn log ln,j .
+Using (3.12), a standard straightforward calculation gives
+(3.13) Var(Sn) ≤
+Xn
+i=1
+Var(log ln,i).
+From (3.1), we have
+En(log ln,i)
+2 =
+X
+i−1
+j=1
+(log j)
+2
+j(j + 1) +
+(log i)
+2
+i(i + 1).
+Using this with (3.5) and (3.13), we conclude that there exists a C > 0 such
+that
+(3.14) Var(Sn) ≤ Cn, n ∈ N.
+From (3.6) and(3.14), it follows from the second moment method that
+(3.15) limn→∞
+Pn(log 2 − ǫ ≤
+Sn
+n
+≤ log 2 + ǫ) = 1, for all ǫ > 0.
+Now (1.5) follows from (3.15) and (3.3). 
+PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 9
+4. Proofs of Propositions 2 and 3
+Proof of Proposition 2. Let σ = Tn(π), where Tn is as in the paragraph
+containing equation (1.2). Then σ1 · · · σm = [m] if and only if π1 · · · πm ∈
+Pm. Thus, there are (m + 1)m−1
+choices for π1 · · · πm. Given π1 · · · πm ∈
+Pm, we now consider how many sequences πm+1 · · · πn there are so that
+the concatenated sequence π1 · · · πmπm+1 · · · πn belongs to Pn. Of course,
+we start with the restriction 1 ≤ πj ≤ n, for all j ∈ {m + 1, · · · n}. It is
+easy to see that such a sequence πm+1 · · · πn will be such that the above
+concatenated sequence belongs to Pn if and only if this sequence results in
+all n − m cars being able to park in the following scenario: There is a oneway street with n spaces, but with the first m of them already taken up by a
+trailer. A sequence of n−m cars enters, each with a preferred parking space
+between 1 and n. It is known that the number of such sequences resulting
+in all n − m cars successfully parking is equal to (m + 1)(n + 1)n−m−1
+[2].
+Thus, the number of parking functions π ∈ Pn such that σ = Tn(π) satisfies
+σ1 · · · σm = [m] is equal to (m + 1)m−1
+(m + 1)(n + 1)n−m−1
+. Consequently,
+P
+park
+n
+(σ1 · · · σm = [m]) = (m + 1)m−1
+(m + 1)(n + 1)n−m−1
+(n + 1)n−1
+=
+
+m + 1
+n + 1 m
+.
+
+Proof of Proposition 3. Let σ = Tn(π), where Tn is as in the paragraph
+containing equation (1.2). In order to have σn−m+1 · · · σn = n − m + 1 · · · n,
+it is of course necessary to have σ1 · · · σn−m = [n − m]. As in the proof
+of Proposition 2, but with m replaced by n − m, the number of sequences
+π1 · · · πn−m such that σ1 · · · σn−m = [n − m], is (n − m + 1)n−m−1
+, and for
+each such π1 · · · πn−m, the number of sequences πn−m+1 · · · πn such that the
+concatenation π1 · · · πn−mπn−m+1 · · · πn belongs to Pn is equal to
+(n − m + 1)(n + 1)m−1
+. It is easy to see from the definition of the parking
+process that a sequence πn−m+1 · · · πn from among these (n−m+1)(n+1)m−1
+sequences will be such that for the concatenation π1 · · · πn−mπn−m+1 · · · πn,
+one has σn−m+1 · · · σn = n − m + 1 · · · n if and only if πn−m+i ≤ n − m + i,
+for i ∈ [m]. There are Qm
+i=1(n − m + i) = n!
+(n−m)! such sequences. From this
+10 ROSS G. PINSKY
+it follows that
+P
+park
+n
+(σn−m+1 · · · σn = n − m + 1 · · · n|σ1 · · · σn−m = [n − m]) =
+n!
+(n−m)!
+(n − m + 1)(n + 1)m−1
+,
+and consequently,
+(4.1)
+limn→∞
+P
+park
+n
+(σn−m+1 · · · σn = n − m + 1 · · · n|σ1 · · · σn−m = [n − m]) = 1.
+Now (1.11) follows from (4.1) and (1.10).
+References
+[1] Diaconis, P. and Hicks, A., Probabilizing parking functions, Adv. in Appl. Math. 89
+(2017), 125–155.
+[2] Ehrenborg, R. and Happ, A., Parking cars after a trailer, Australas. J. Combin. 70
+(2018), 402–406.
+[3] Foata, D, and Riordan, J., Mappings of acyclic and parking functions, Aequ. Math.
+10 (1974), 10-22.
+[4] Pinsky, R.G. Problems from the discrete to the continuous, Universitext Springer,
+Cham, (2014).
+[5] Yan, C.H., Parking functions, Discrete Math. Appl. CRC Press, Boca Raton, FL,
+(2015), 835–893.
+Department of Mathematics, Technion—Israel Institute of Technology,
+Haifa, 32000, Israel
+Email address: pinsky@technion.ac.il
+URL: http://www.math.technion.ac.il/~pinsky/
