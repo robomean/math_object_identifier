@@ -1,0 +1,22 @@
+THE DISTRIBUTION ON PERMUTATIONS INDUCED BY
+A RANDOM PARKING FUNCTION
+ROSS G. PINSKY
+Abstract. A parking function on [n] creates a permutation in Sn via
+the order in which the n cars appear in the n parking spaces. Placing the uniform probability measure on the set of parking functions on
+[n] induces a probability measure on Sn. We initiate a study of some
+properties of this distribution.
+1. Introduction and Statement of Results
+Consider a row of n parking spaces on a one-way street. A line of n
+cars, numbered from 1 to n, attempts to park, one at a time. The ith car’s
+preferred space is spot number πi ∈ [n]. If this space is already taken, then
+car i proceeds forward and parks in the first available space, if one exists.
+If the car is unable to park, it exits the street. A sequence π = {πi}
+n
+i=1
+is called a parking function on [n] if all n cars are able to park. It is easy
+to see that π is a parking function if and only if |{i : πi ≤ j}| ≥ j, for all
+j ∈ [n]. Let Pn denote the set of parking functions. It is well-known that
+|Pn| = (n+ 1)n−1
+. There are a number of proofs of this result; a particularly
+elegant one due to Pollack can be found in [3]. There is a large literature on
+parking functions and their generalizations; see, for example, the survey [5]. 
