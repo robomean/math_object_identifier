@@ -1,0 +1,1089 @@
+ARITHMETIC PROPERTIES OF AN ANALOGUE OF t-CORE
+PARTITIONS
+PRANJAL TALUKDAR
+Abstract. An integer partition of a positive integer n is called to be t-core if none of
+its hook lengths are divisible by t. Recently, Gireesh, Ray and Shivashankar [‘A new
+analogue of t-core partitions’, Acta Arith. 199 (2021), 33-53] introduced an analogue
+at(n) of the t-core partition function ct(n). They obtained certain multiplicative
+formulas and arithmetic identities for at(n) where t ∈ {3, 4, 5, 8} and studied the
+arithmetic density of at(n) modulo p
+j
+i where t = p
+a1
+1
+· · · p
+amm and pi ≥ 5 are primes.
+Very recently, Bandyopadhyay and Baruah [‘Arithmetic identities for some analogs
+of the 5-core partition function’, J. Integer Seq. 27 (2024), # 24.4.5] proved new
+arithmetic identities satisfied by a5(n). In this article, we study the arithmetic densities of at(n) modulo arbitrary powers of 2 and 3 for t = 3αm where gcd(m, 6)=1.
+Also, employing a result of Ono and Taguchi on the nilpotency of Hecke operators,
+we prove an infinite family of congruences for a3(n) modulo arbitrary powers of 2.
+Key words: t-core partition, analogue of t-core partition, theta functions, modular forms, arithmetic
+density
+2010 Mathematical Reviews Classification Numbers: 11P83, 05A17, 11F11
+1. Introduction and statement of results
+A partition π = {π1, π2, · · · , πk} of a positive integer n is a non-increasing sequence
+of natural numbers such that X
+k
+i=1
+πi = n. The number of partitions of n is denoted by
+p(n). The Ferrers–Young diagram of π is an array of nodes with πi nodes in the ith
+row. The (i, j) hook is the set of nodes directly to the right of (i, j) node, together with
+the set of nodes directly below it, as well as the (i, j) node itself. The hook number,
+H(i, j), is the total number of nodes on the (i, j) hook. For a positive integer t ≥ 2, a
+partition of n is said to be t-core if none of the hook numbers are divisible by t. We
+illustrate the Ferrers-Young diagram of the partition 4 + 3 + 1 of 8 with hook numbers
+as follows:
+•
+6 •
+4 •
+3 •
+1
+•
+4 •
+2 •
+1
+•
+1
+It is clear that for t ≥ 7, the partition 4 + 3 + 1 of 8 is a t-core partition.
+1
+2 P. TALUKDAR
+Suppose that ct(n) counts the t-core partitions of n, then the generating function of
+ct(n) is given by (see [6, Eq 2.1])
+X∞
+n=0
+ct(n)q
+n =
+(q
+t
+; q
+t
+)
+t
+∞
+(q; q)∞
+=
+f
+t
+t
+f1
+, (1.1)
+where here and throughout the paper, for |q| < 1, we define (a; q)∞ := Y∞
+k=0
+(1 − aqk
+)
+and for convenience, we set fk := (q
+k
+; q
+k
+)∞ for integers k ≥ 1.
+In an existence result, Granville and Ono [9] proved that if t ≥ 4, then ct(n) > 0 for
+every nonnegative integer n. A brief survey of t-core partitions can be found in [5].
+Again, for an integral power series F(q) := X∞
+n=0
+a(n)q
+n
+and 0 ≤ r < M, we define the
+arithmetic density δr(F, M; X) as
+δr(F, M; X) := # {0 ≤ n ≤ X : a(n) ≡ r (mod M)}
+X
+.
+An integral power series F is called lacunary modulo M if
+lim
+X→∞
+δ0(F, M; X) = 1,
+that is, almost all of the coefficients of F are divisible by M.
+Arithmetic densities of ct(n) modulo arbitrary powers of 2, 3 and primes greater
+than or equal to 5 are recently studied by Jindal and Meher [11].
+Recall that for |ab| < 1, Ramanujan’s general theta function f(a, b) is given by
+f(a, b) = X∞
+n=−∞
+a
+n(n+1)/2
+b
+n(n−1)/2
+.
+In Ramanujan’s notation, the Jacobi triple product identity [3, p. 35, Entry 19] takes
+the shape
+f(a, b) = (−a; ab)∞(−b; ab)∞(ab; ab)∞.
+Consider the following two special cases of f(a, b):
+ϕ(−q) := f(−q, −q) = X∞
+n=−∞
+(−1)n
+q
+n
+2
+=
+f
+2
+1
+f2
+, (1.2)
+f(−q) := f(−q, −q
+2
+) = X∞
+n=−∞
+(−1)n
+q
+n(3n−1)/2 = f1. (1.3)
+In the notation of Ramanujan’s theta functions, the generating function of ct(n) may
+be rewritten as
+X∞
+n=0
+ct(n)q
+n =
+f
+t
+(−q
+t
+)
+f(−q)
+. (1.4)
+ARITHMETIC PROPERTIES OF AN ANALOGUE OF t-CORE PARTITIONS 3
+Recently, Gireesh, Ray and Shivashankar [7] considered a new function at(n) by
+substituting ϕ(−q) in place of f(−q) in the generating function of ct(n) (in (1.4)),
+namely
+X∞
+n=0
+at(n)q
+n =
+ϕ
+t
+(−q
+t
+)
+ϕ(−q)
+=
+f2f
+2t
+t
+f
+2
+1 f
+t
+2t
+. (1.5)
+They proved several multiplicative formulas and arithmetic identities for at(n) for t =
+2, 3, 4 and 8 using Ramanujan’s theta functions and q-series techniques. Using the
+theory of modular forms, they studied the divisibility of at(n) modulo arbitrary powers
+of primes greater than 5. More precisely, they proved the following theorem.
+Theorem 1.1. Let t = p
+a1
+1
+· · · p
+am
+m where pi
+’s are prime numbers greater than or equal
+to 5. Then for every positive integer j, we have
+lim
+X→∞
+#
+
+0 ≤ n ≤ X : at(n) ≡ 0 (mod p
+j
+i
+)
+	
+X
+= 1.
+They also deduced a Ramanujan type congruence for a5(n) modulo 5 by using an
+algorithm developed by Radu and Sellers [15]. Bandyopadhyay and Baruah [2] proved
+some new identities connecting a5(n) and c5(n). They also found a reccurence relation
+for a5(n).
+Recently, Cotron et. al. [4, Theorem 1.1] proved a strong result regarding lacunarity of eta-quotients modulo arbitrary powers of primes under certain conditions. We
+observe that the eta-quotients associated with at(n) do not satisfy these conditions,
+which makes the problem of studying lacunarity of at(n) more interesting. In this
+article, we study the arithmetic densities of at(n) modulo arbitrary powers of 2 and 3
+where t = 3αm. To be specific, we prove the following theorems.
+Theorem 1.2. Let k ≥ 1, α ≥ 0 and m ≥ 1 be integers with gcd(m, 6) = 1. Then the
+set
+
+n ∈ N : a3αm(n) ≡ 0 (mod 2k
+)
+	
+has arithmetic density 1.
+Theorem 1.3. Let k ≥ 1, α ≥ 0 and m ≥ 1 be integers with gcd(m, 6) = 1. Then the
+set
+
+n ∈ N : a3αm(n) ≡ 0 (mod 3k
+)
+	
+has arithmetic density 1.
+The fact that the action of Hecke algebras on spaces of modular forms of level 1
+modulo 2 is locally nilpotent was first observed by Serre and proved by Tate (see [16],
+[17], [18]). Later, this result was generalized to higher levels by Ono and Taguchi [14].
+In this article, we observe that the eta-quotient associated to a3(n) is a modular form
+whose level is in the list of Ono and Taguchi. Thus, we use a result of Ono and Taguchi
+to prove the following congruences for a3(n).
+4 P. TALUKDAR
+Theorem 1.4. Let n be a nonnegative integer. Then there exists an integer c ≥ 0 such
+that for every d ≥ 1 and distinct primes p1, . . . , pc+d coprime to 6, we have
+a3
+p1 · · · pc+d · n
+24
+
+≡ 0 (mod 2d
+)
+whenever n is coprime to p1, . . . , pc+d.
+The paper is organized as follows. In Section 2, we state some preliminaries of the
+theory of modular forms. Then we prove Theorems 1.2-1.4 using the properties of
+modular forms in Sections 3-5 respectively. And finally, we mention some directions
+for future study in the concluding section.
+2. Preliminaries
+In this section, we recall some basic facts and definitions on modular forms. For
+more details, one can see [12] and [13].
+Firstly, we define the matrix groups
+SL2(Z) := a b
+c d
+: a, b, c, d ∈ Z, ad − bc = 1,
+Γ0(N) := a b
+c d
+∈ SL2(Z) : c ≡ 0 (mod N)
+,
+Γ1(N) := a b
+c d
+∈ Γ0(N) : a ≡ d ≡ 1 (mod N)
+,
+and
+Γ(N) := a b
+c d
+∈ SL2(Z) : a ≡ d ≡ 1 (mod N), and b ≡ c ≡ 0 (mod N)
+,
+where N is a positive integer. A subgroup Γ of SL2(Z) is called a congruence subgroup
+if Γ(N) ⊆ Γ for some N and the smallest N with this property is called the level of Γ.
+For instance, Γ0(N) and Γ1(N) are congruence subgroups of level N.
+Let H denote the upper half of the complex plane. The group
+GL+
+2
+(R) := a b
+c d
+∈ SL2(Z) : a, b, c, d ∈ R and ad − bc > 0
+acts on H by 
+a b
+c d
+z =
+az + b
+cz + d
+. We identify ∞ with 1
+0
+and define 
+a b
+c d
+r
+s
+=
+ar + bs
+cr + ds,
+where r
+s
+∈ Q∪ {∞}. This gives an action of GL+
+2
+(R) on the extended upper half plane
+H∗ = H ∪ Q ∪ {∞}. Suppose that Γ is a congruence subgroup of SL2(Z). A cusp of Γ
+is an equivalence class in P
+1 = Q ∪ {∞} under the action of Γ.
+The group GL+
+2
+(R) also acts on functions f : H → C. In particular, suppose that
+γ =
+
+a b
+c d
+∈ GL+
+2
+(R). If f(z) is a meromorphic function on H and ℓ is an integer,
+ARITHMETIC PROPERTIES OF AN ANALOGUE OF t-CORE PARTITIONS 5
+then define the slash operator |ℓ by
+(f|ℓγ)(z) := (det(γ))ℓ/2
+(cz + d)
+−ℓ
+f(γz).
+Definition 2.1. Let Γ be a congruence subgroup of level N. A holomorphic function
+f : H → C is called a modular form with integer weight ℓ on Γ if the following hold:
+(1) We have
+f
+
+az + b
+cz + d
+
+= (cz + d)
+ℓ
+f(z)
+for all z ∈ H and and all 
+a b
+c d
+∈ Γ.
+(2) If γ ∈ SL2(Z), then (f|ℓγ)(z) has a Fourier expansion of the form
+(f|ℓγ)(z) = X
+n≥0
+aγ(n)q
+n
+N ,
+where q := e
+2πiz/N .
+For a positive integer ℓ, the complex vector space of modular forms of weight ℓ with
+respect to a congruence subgroup Γ is denoted by Mℓ(Γ).
+Definition 2.2. [13, Definition 1.15] If χ is a Dirichlet character modulo N, then we
+say that a modular form f ∈ Mℓ(Γ1(N)) has Nebentypus character χ if
+f
+
+az + b
+cz + d
+
+= χ(d)(cz + d)
+ℓ
+f(z)
+for all z ∈ H and all 
+a b
+c d
+∈ Γ0(N). The space of such modular forms is denoted by
+Mℓ(Γ0(N), χ).
+The relevant modular forms for the results of this paper arise from eta-quotients.
+Recall that the Dedekind eta-function η(z) is defined by
+η(z) := q
+1/24(q; q)∞ = q
+1/24 Y∞
+n=1
+(1 − q
+n
+),
+where q := e
+2πiz and z ∈ H. A function f(z) is called an eta-quotient if it is of the
+form
+f(z) = Y
+δ|N
+η(δz)
+rδ
+,
+where N is a positive integer and rδ is an integer. Now, we recall two important
+theorems from [13, p. 18] which will be used later.
+6 P. TALUKDAR
+Theorem 2.1. [13, Theorem 1.64] If f(z) = Y
+δ|N
+η(δz)
+rδ
+is an eta-quotient such that
+ℓ =
+1
+2
+X
+δ|N
+rδ ∈ Z,
+X
+δ|N
+δrδ ≡ 0 (mod 24) and X
+δ|N
+N
+δ
+rδ ≡ 0 (mod 24),
+then f(z) satisfies
+f
+
+az + b
+cz + d
+
+= χ(d)(cz + d)
+ℓ
+f(z)
+for every 
+a b
+c d
+∈ Γ0(N). Here the character χ is defined by χ(d) := 
+(−1)ℓ
+s
+d
+
+,
+where s := Y
+δ|N
+δ
+rδ
+.
+Consider f to be an eta-quotient which satisfies the conditions of Theorem 2.1 and
+that the associated weight ℓ is a positive integer. If f(z) is holomorphic at all the cusps
+of Γ0(N), then f(z) ∈ Mℓ (Γ0(N), χ). The necessary criterion for determining orders
+of an eta-quotient at cusps is given by the following theorem.
+Theorem 2.2. [13, Theorem 1.64] Let c, d and N be positive integers with d|N and
+gcd(c, d)=1. If f is an eta-quotient satisfying the conditions of Theorem 2.1 for N,
+then the order of vanishing of f(z) at the cusp (c/d) is
+N
+24
+X
+δ|N
+gcd(d, δ)
+2
+rδ
+gcd(d, N/d)dδ .
+We now recall a deep theorem of Serre [13, Page 43] which will be used in proving
+Theorems 1.2 and 1.3.
+Theorem 2.3. [13, p. 43] Let g(z) ∈ Mk(Γ0(N), χ) has Fourier expansion
+g(z) = X∞
+n=0
+b(n)q
+n ∈ Z[[q]].
+Then for a positive integer r, there is a constant α > 0 such that
+#{0 < n ≤ X : b(n) 6≡ 0 (mod r)} = O
+
+X
+(logX)
+α
+
+.
+Equivalently
+lim
+X→∞
+#{0 < n ≤ X : b(n) 6≡ 0 (mod r)}
+X
+= 0.
+ARITHMETIC PROPERTIES OF AN ANALOGUE OF t-CORE PARTITIONS 7
+Finally, we recall the definition of Hecke operators. Let m be a positive integer and
+f(z) = X∞
+n=0
+a(n)q
+n ∈ Mℓ(Γ0(N), χ). Then the action of Hecke operator Tm on f(z) is
+defined by
+f(z)|Tm := X∞
+n=0
+
+
+X
+d|gcd(n,m)
+χ(d)d
+ℓ−1
+a
+nm
+d
+2
+
+
+ q
+n
+.
+In particular, if m = p is prime, then we have
+f(z)|Tp := X∞
+n=0
+
+a(pn) + χ(p)p
+ℓ−1
+a
+
+n
+p
+ q
+n
+. (2.1)
+We note that a(n) = 0 unless n is a nonnegative integer.
+3. Proof of Theorem 1.2
+Putting t = 3αm in (1.5), we have
+X∞
+n=0
+a3αm(n)q
+n =
+f2f
+2·3
+αm
+3αm
+f
+2
+1 f
+3αm
+2·3αm
+. (3.1)
+We define
+Aα,m(z) := η
+2
+(233
+α+1mz)
+η (243
+α+1mz)
+.
+For any prime p and positive integer j, we have
+(q; q)
+p
+j
+∞ ≡ (q
+p
+; q
+p
+)
+p
+j−1
+∞ (mod p
+j
+).
+Using the above relation, for any integer k ≥ 1, we get
+A
+2
+k
+α,m(z) = η
+2
+k+1 (233
+α+1mz)
+η
+2
+k
+(243
+α+1mz)
+≡ 1 (mod 2k+1). (3.2)
+Next we define
+Bα,m,k(z) := η(48z)η
+2·3
+αm (233
+α+1mz)
+η
+2
+(24z)η
+3αm (243
+α+1mz)
+A
+2
+k
+α,m(z)
+=
+η(48z)η
+2·3
+αm+2k+1 (233
+α+1mz)
+η
+2
+(24z)η
+3αm+2k
+(243
+α+1mz)
+.
+In view of (3.1) and (3.2), we have
+Bα,m,k(z) ≡
+η(48z)η
+2·3
+αm (233
+α+1mz)
+η
+2(24z)η
+3αm (243
+α+1mz)
+≡
+f48f
+2·3
+αm
+2
+33α+1m
+f
+2
+24f
+3αm
+2
+4·3α+1m
+≡
+X∞
+n=0
+a3αm(n)q
+24n
+(mod 2k+1). (3.3)
+8 P. TALUKDAR
+Next, we will show that Bα,m,k(z) is a modular form. Applying Theorem 2.1, we find
+that the level of Bα,m,k(z) is N = 243
+α+1mM, where M is the smallest positive integer
+such that
+2
+4
+3
+α+1mM 
+−2
+24
++
+1
+48
++
+2 · 3
+αm + 2k+1
+2
+33
+α+1m
++
+−3
+αm − 2
+k
+2
+43
+α+1m
+
+≡ 0 (mod 24),
+which implies
+3 · 2
+kM ≡ 0 (mod 24).
+Therefore M = 4 and the level of Bα,m,k(z) is N = 263
+α+1m.
+The representatives for the cusps of Γ0 (263
+α+1m) are given by fractions c/d where
+d|2
+63
+α+1m and gcd(c, 2
+63
+α+1m) = 1 (see [4, Proposition 2.1]). By Theorem 2.2,
+Bα,m,k(z) is holomorphic at a cusp c/d if and only if
+−2
+gcd(d, 24)2
+24
++
+gcd(d, 48)2
+48
++
+
+3
+αm + 2k
+
+
+2
+gcd (d, 2
+33
+α+1m)
+2
+2
+33
+α+1m
+−
+gcd (d, 2
+43
+α+1m)
+2
+2
+43
+α+1m
+!
+≥ 0.
+Equivalently, Bα,m,k(z) is holomorphic at a cusp c/d if and only if
+L := 3αm(−4G1 + G2 + 4G3 − 1) + 2k
+(4G3 − 1) ≥ 0,
+where G1 =
+gcd(d, 24)2
+gcd (d, 2
+43
+α+1m)
+2
+, G2 =
+gcd(d, 48)2
+gcd (d, 2
+43
+α+1m)
+2
+and G3 =
+gcd(d, 2
+33
+α+1m)
+2
+gcd (d, 2
+43
+α+1m)
+2
+.
+Let d be a divisor of 263
+α+1m. We can write d = 2r1 3
+r2
+t where 0 ≤ r1 ≤ 6,
+0 ≤ r2 ≤ α + 1 and t|m. We now consider the following two cases depending on r1.
+Case 1: Let 0 ≤ r1 ≤ 3, 0 ≤ r2 ≤ α+ 1. Then G1 = G2,
+1
+3
+2αt
+2
+≤ G1 ≤ 1 and G3 = 1.
+Therefore L = 3α+1m(1 − G1) + 3 · 2
+k ≥ 3 · 2
+k
+.
+Case 2: Let 4 ≤ r1 ≤ 6, 0 ≤ r2 ≤ α + 1. Then G2 = 4G1,
+1
+4 · 3
+2αt
+2
+≤ G1 ≤
+1
+4
+and
+G3 =
+1
+4
+which implies L = 0.
+Hence, Bα,m,k(z) is holomorphic at every cusp c/d. The weight of Bα,m,k(z) is ℓ =
+1
+2
+
+3
+αm + 2k − 1
+
+which is a positive integer and the associated character is given by
+χ1(•) =
+(−1)ℓ3
+(α+1)(3
+αm+2k
+)−1
+m3
+αm+2k
+•
+!
+.
+Thus, Bα,m,k(z) ∈ Mℓ (Γ0(N), χ) where ℓ, N and χ are as above. Therefore by
+Theorem 2.3, the Fourier coefficients of Bα,m,k(z) are almost divisible by r = 2k
+. Due
+to (3.3), this holds for a3αm(n) also. This completes the proof of Theorem 1.
+ARITHMETIC PROPERTIES OF AN ANALOGUE OF t-CORE PARTITIONS 9
+4. Proof of Theorem 1.3
+We proceed along the same lines as in the proof of Theorem 1.2. Here we define
+Cα,m(z) := η
+3
+(243
+α+1mz)
+η (243
+α+2mz)
+.
+Using the binomial theorem, for any integer k ≥ 1, we have
+C
+3
+k
+α,m(z) = η
+3
+k+1 (243
+α+1mz)
+η
+3
+k
+(243
+α+2mz)
+≡ 1 (mod 3k+1). (4.1)
+Next we define
+Dα,m,k(z) := η(48z)η
+2·3
+αm (233
+α+1mz)
+η
+2
+(24z)η
+3αm (243
+α+1mz)
+C
+3
+k
+α,m(z)
+=
+η(48z)η
+2·3
+αm (233
+α+1mz) η
+3
+k+1−3
+αm (243
+α+1mz)
+η
+2
+(24z)η
+3
+k
+(243
+α+2mz)
+.
+From (3.1) and (4.1), we have
+Dα,m,k(z) ≡
+η(48z)η
+2·3
+αm (233
+α+1mz)
+η
+2
+(24z)η
+3αm (243
+α+1mz)
+≡
+f48f
+2·3
+αm
+2
+33α+1m
+f
+2
+24f
+3αm
+2
+4·3α+1m
+≡
+X∞
+n=0
+a3αm(n)q
+24n
+(mod 3k+1). (4.2)
+We now prove that Dα,m,k(z) is a modular form. Applying Theorem 2.1, we find
+that the level of Dα,m,k(z) is N = 243
+α+2mM, where M is the smallest positive integer
+such that
+2
+4
+3
+α+2mM 
+−2
+24
++
+1
+48
++
+2 · 3
+αm
+2
+33
+α+1m
++
+3
+k+1 − 3
+αm
+2
+43
+α+1m
++
+−3
+k
+2
+43
+α+2m
+
+≡ 0 (mod 24),
+which gives
+8 · 3
+kM ≡ 0 (mod 24).
+Therefore M = 1 and the level of Dα,m,k(z) is N = 243
+α+2m.
+The representatives for the cusps of Γ0 (243
+α+2m) are given by fractions c/d where
+d|2
+43
+α+2m and gcd(c, 2
+43
+α+2m) = 1. By using Theorem 2.2, Dα,m,k(z) is holomorphic
+at a cusp c/d if and only if
+− 2
+gcd(d, 24)2
+24
++
+gcd(d, 48)2
+48
++ 2 · 3
+αm
+gcd (d, 2
+33
+α+1m)
+2
+2
+33
+α+1m
++
+
+3
+k+1 − 3
+αm
+ gcd (d, 2
+43
+α+1m)
+2
+2
+43
+α+1m
+− 3
+k
+gcd (d, 2
+43
+α+2m)
+2
+2
+43
+α+2m
+≥ 0.
+Equivalently, Dα,m,k(z) is holomorphic at a cusp c/d if and only if
+L := 3α+1m (−4G1 + G2 + 4G3 − G4) + 3k
+(9G4 − 1) ≥ 0
+10 P. TALUKDAR
+where G1 =
+gcd(d, 24)2
+gcd (d, 2
+43
+α+2m)
+2
+, G2 =
+gcd(d, 48)2
+gcd (d, 2
+43
+α+2m)
+2
+, G3 =
+gcd(d, 2
+33
+α+1m)
+2
+gcd (d, 2
+43
+α+2m)
+2
+and G4 =
+gcd(d, 2
+4
+3
+α+1m)
+2
+gcd (d, 2
+43
+α+2m)
+2
+.
+Let d be a divisor of 243
+α+2m. We write d = 2r1 3
+r2
+t where 0 ≤ r1 ≤ 4, 0 ≤ r2 ≤ α+2
+and t|m. We now consider the following four cases depending on the values of r1 and
+r2.
+Case 1: Let 0 ≤ r1 ≤ 3, 0 ≤ r2 ≤ α + 1. Then G1 = G2,
+1
+3
+2αt
+2
+≤ G1 ≤ 1 and
+G3 = G4 = 1. Hence, we have L = 3α+2m(1 − G1) + 8 · 3
+k ≥ 8 · 3
+k
+.
+Case 2: Let 0 ≤ r1 ≤ 3, r2 = α + 2. Then G1 = G2,
+1
+3
+2(α+1)t
+2
+≤ G1 ≤
+1
+3
+2(α+1) and
+G3 = G4 =
+1
+9
+. Therefore L = 3α+2m
+
+1
+9
+− G1
+
+≥ 0.
+Case 3: Let r1 = 4, 0 ≤ r2 ≤ α + 1. Then G2 = 4G1,
+1
+4 · 3
+(α+1)t
+2
+≤ G1 ≤
+1
+4
+,
+G4 = 4G3 and G3 =
+1
+4
+. Hence, we have L = 8 · 3
+k
+.
+Case 4: Let r1 = 4, r2 = α + 2. Then G2 = 4G1,
+1
+4 · 3
+(α+1)t
+2
+≤ G1 ≤
+1
+4 · 3
+2(α+1) ,
+G4 = 4G3 and G3 =
+1
+36
+. Therefore L = 0.
+Therefore Dα,m,k(z) is holomorphic at every cusp c/d. The weight of Dα,m,k(z) is
+ℓ =
+3
+αm − 1
+2
++ 3k which is a positive integer and the associated character is given by
+χ2(•) =
+(−1)ℓ3
+2α3
+k+3ααm+3αm+3k−1m3
+αm+2·3
+k
+•
+!
+.
+Thus, Dα,m,k(z) ∈ Mℓ (Γ0(N), χ) where ℓ, N and χ are as above. Therefore by
+Theorem 2.3, the Fourier coefficients of Dα,m,k(z) are almost divisible by r = 3k
+. Due
+to (4.2), this holds for a3αm(n) also. This completes the proof of Theorem 1.3.
+5. Proof of Theorem 1.4
+First we recall the following result of Ono and Taguchi [14] on the nilpotency of
+Hecke operators.
+Theorem 5.1. [14, Theorem 1.3 (3)] Let n be a nonnegative integer and k be a positive
+integer. Let χ be a quadratic Dirichlet character of conductor 9 · 2
+a
+. Then there is an
+integer c ≥ 0 such that for every f(z) ∈ Mk(Γ0(9 · 2
+a
+), χ) ∩ Z[[q]] and every t ≥ 1,
+f(z)|Tp1
+|Tp2
+| · · · |Tpc+t ≡ 0 (mod 2t
+)
+whenever the primes p1, . . . , pc+t are coprime to 6.
+Now, we apply the above theorem to the modular form B1,1,k(z) to prove Theorem
+1.4.
+ARITHMETIC PROPERTIES OF AN ANALOGUE OF t-CORE PARTITIONS 11
+Putting α = 1 and m = 1 in (3.3), we find that
+B1,1,k(z) ≡
+X∞
+n=0
+a3(n)q
+24n
+(mod 2k+1),
+which yields
+B1,1,k(z) := X∞
+n=0
+Fk (n) q
+n ≡
+X∞
+n=0
+a3
+ n
+24
+
+q
+n
+(mod 2k+1). (5.1)
+Now, B1,1,k(z) ∈ M2
+k−1+1 (Γ0(9 · 2
+6
+), χ3) for k ≥ 1 where χ3 is the associated character (which is χ1 evaluated at α = 1 and m = 1). In view of Theorem 5.1, we find that
+there is an integer c ≥ 0 such that for any d ≥ 1,
+B1,1,k(z) | Tp1
+| Tp2
+| · · · | Tpc+d ≡ 0 (mod 2d
+)
+whenever p1, . . . , pc+d are coprime to 6. It follows from the definition of Hecke operators
+that if p1, . . . , pc+d are distinct primes and if n is coprime to p1 · · · pc+d, then
+Fk (p1 · · · pc+d · n) ≡ 0 (mod 2d
+). (5.2)
+Combining (5.1) and (5.2), we complete the proof of the theorem.
+6. Concluding Remarks
+(1) Theorems 1.2 and 1.3 of this paper and Theorem 1.8 of [7] give us the arithmetic
+densities of at(n) for odd t and similar techniques can not be used to obtain the
+arithmetic density of at(n) when t is even. It would be interesting to study the
+arithmetic density of at(n) for even values of t.
+(2) Computational evidence suggests that there are Ramanujan type congruences
+for at(n) modulo powers of 2, 3 and other primes ≥ 5 for various t which are
+not covered by the results of [2] and [7]. We encourage the readers to find new
+congruences for at(n).
+(3) Asymptotic formulas for partition functions and other related functions have
+been widely studied in the literature. For instance, the asymptotic formulas for
+p(n) and ct(n) were obtained by Hardy and Ramanujan [10] and Anderson [1]
+respectively. It will be desirable to find an asymptotic formula for at(n).
+(4) Some relations connecting at(n) and ct(n) have been discussed in [2]. A combinatorial treatment to at(n) might reveal more interesting partition theoretic
+connections of at(n).
+7. Acknowledgement
+The author is extremely grateful to his Ph.D. supervisor, Prof. Nayandeep Deka
+Baruah, for his guidance and encouragement. The author is indebted to Prof. Rupam
+Barman for many helpful comments and suggestions. The author was partially supported by the Council of Scientific & Industrial Research (CSIR), Government of India
+12 P. TALUKDAR
+under the CSIR-JRF scheme (Grant No. 09/0796(12991)/2021-EMR-I). The author
+thanks the funding agency.
