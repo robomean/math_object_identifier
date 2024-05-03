@@ -1,0 +1,32 @@
+A FINITELY PRESENTED GROUP WITH
+TRANSCENDENTAL SPECTRAL RADIUS
+Corentin Bodart
+April 30, 2024
+Abstract
+In this short note, we prove the existence of a finitely presented group with
+transcendental spectral radius. The proof relies on links between decidability of
+the Word Problem and semi-computability of the spectral radius.
+Throughout the paper, we consider marked groups, that is, pairs (G, S) with G a finitely
+generated group and S a finite symmetric generating set (i.e., S = S
+−1
+). We define the
+cogrowth sequence1 and the spectral radius of (G, S) as
+c(n) = #{w ∈ S
+∗
+: ℓ(w) = n and ¯w = eG},
+ρ(G, S) = lim sup
+n→∞
+1
+|S|
+pn
+c(n).
+Our main result is the following:
+Theorem 1. There exists a finitely presented group G such that, for all finite symmetric
+generating sets S, the spectral radius ρ(G, S) is transcendental.
+This answers a question of Kassabov and Pak [KP24, Question 7.2]. Our proof uses
+crucially that G has undecidable Word Problem. (In particular, balls in its Cayley graph
+are not “explicit” in the sense of [HLW06, §2.1].) We propose the refined question:
+Question. Does there exist a finitely presented (or recursively presented) group (G, S)
+with decidable Word Problem and transcendental spectral radius ρ(G, S)?
+Of course, we still expect a positive answer, starting with G = π1(Σ2) a surface group.
+1. Semi-computable numbers

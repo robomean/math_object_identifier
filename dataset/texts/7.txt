@@ -1,0 +1,216 @@
+A FINITELY PRESENTED GROUP WITH
+TRANSCENDENTAL SPECTRAL RADIUS
+Corentin Bodart
+April 30, 2024
+Abstract
+In this short note, we prove the existence of a finitely presented group with
+transcendental spectral radius. The proof relies on links between decidability of
+the Word Problem and semi-computability of the spectral radius.
+Throughout the paper, we consider marked groups, that is, pairs (G, S) with G a finitely
+generated group and S a finite symmetric generating set (i.e., S = S
+−1
+). We define the
+cogrowth sequence1 and the spectral radius of (G, S) as
+c(n) = #{w ∈ S
+∗
+: ℓ(w) = n and ¯w = eG},
+ρ(G, S) = lim sup
+n→∞
+1
+|S|
+pn
+c(n).
+Our main result is the following:
+Theorem 1. There exists a finitely presented group G such that, for all finite symmetric
+generating sets S, the spectral radius ρ(G, S) is transcendental.
+This answers a question of Kassabov and Pak [KP24, Question 7.2]. Our proof uses
+crucially that G has undecidable Word Problem. (In particular, balls in its Cayley graph
+are not “explicit” in the sense of [HLW06, §2.1].) We propose the refined question:
+Question. Does there exist a finitely presented (or recursively presented) group (G, S)
+with decidable Word Problem and transcendental spectral radius ρ(G, S)?
+Of course, we still expect a positive answer, starting with G = π1(Σ2) a surface group.
+1. Semi-computable numbers
+The first ingredient in our proof is the following definition:
+Definition 2. A number x ∈ R is lower semi-computable (resp. upper semi-computable)
+if there exists an algorithm enumerating an increasing (resp. decreasing) sequence (xk)
+of real algebraic numbers2
+such that xk → x.
+1The “cogrowth sequence” usually refers to cn = #{w ∈ FS | ℓ(w) = n, w¯ = eG} where ¯·: FS ։ G
+2Real algebraic numbers xk can be specified as triplets (Pk(X), ak, bk) ∈ Q[X] × Q × Q such that
+xk is the only root of Pk(X) in the interval [ak, bk].
+1
+Lemma 3. Let G be a recursively presented group, then ρ(G, S) is lower semi-computable.
+Moreover, the result is effective: there exists an algorithm with specifications
+Input: A recursively presented marked group (G, S), specified via a finite set S and
+an algorithm enumerating a set of defining relations.
+Output: An algorithm enumerating an increasing sequence of real algebraic numbers
+(xk) such that xk → ρ(G, S).
+Proof. Note that c(m + n) > c(m) · c(n), therefore Fekete’s lemma ensures that
+ρ(G, S) = sup
+n>1
+1
+|S|
+pn
+c(n).
+As G is recursively presented, its Word Problem (i.e., the set of words w ∈ S
+∗
+such
+that ¯w = eG) is recursively enumerable. Let (vi)i>1 ⊆ S
+∗ be a computable enumeration
+of the Word Problem, and let us define the “partial cogrowth sequence”
+ck(n) = #{vi
+: ℓ(vi) = n and 1 6 i 6 k}.
+Observe that ck(n) ր c(n) pointwise as k → ∞. In particular
+xk = max
+16n6k
+1
+|S|
+pn
+ck(n)
+is a computable increasing sequence such that xk → ρ(G, S), as promised.
+Remark 4. The analogous result for “upper semi-computable” doesn’t hold, even
+under the additional assumption that the Word Problem is decidable (with a Word
+Problem algorithm as part of the input). Indeed, this would imply that amenability is
+a co-semi-decidable property, contradicting [Rau23, Theorem 10.6].
+As will become clear in the proof of Theorem 1, there exists finitely presented groups
+(with undecidable Word Problem) whose spectral radius is not upper semi-computable.
+2. From computable spectral radius to decidable Word Problem
+Our main observation is the following:
+Theorem 5. Let (G, S) be a recursively presented group such that the spectral radius
+ρ(G, S) is upper semi-computable. Consider a subset W ⊆ S
+∗
+such that, for each
+w ∈ W, either w¯ = eG or the normal subgroup generated hhw¯iiG
+is non-amenable. Then
+there exists an algorithm which, given a word w ∈ W, decides whether w¯ = eG or not.
+(In particular, if W = S
+∗
+, then G has decidable word problem.) This theorem relies
+crucially on a classical result due to Kesten.
+Theorem 6 ([Kes59]). Let (G, S) be a marked group and N E G a non-amenable
+normal subgroup, then we have ρ(G, S) < ρ(G/N, S).
+2
+Proof of Theorem 5. Suppose that G is presented as hS | Ri. Take w ∈ W, we run two
+parallel processes to decide whether ¯w = eG or not.
+• As G is recursively presented, we can enumerate all words v ∈ S
+∗
+such that ¯v = eG.
+If at any point v = w, we stop the algorithm and conclude that ¯w = eG.
+• The group Gw = G/ hhw¯iiG = hS | R, wi is recursively presented, hence ρ(Gw, S) is
+lower semi-computable. We can compute two sequences (xk) and (yk) such that
+xk ց ρ(G, S) and yk ր ρ(Gw, S).
+As xk and yk are real algebraic, we can compare them. If at any point xk < yk, we
+stop the algorithm and conclude that ¯w 6= eG. It should be noted that, if ¯w 6= eG,
+then the inequality xk < yk will hold eventually as hhw¯iiG
+is non-amenable and
+therefore ρ(G, S) < ρ(G/hhw¯iiG
+, S) = ρ(Gw, S).
+In both cases, the algorithm finishes and decides correctly if ¯w = eG or not.
+3. Proof of Theorem 1
+We propose two different constructions, relying both on Theorem 5.
+1. We recall a family of groups introduced by Higman [Hig61]: for each I ⊆ Z,
+HI
+:=
+
+
+a, b, c, d | a
+i
+ba−i = c
+i
+dc−i
+(i ∈ I)
+
+.
+This is an amalgamated free product A ∗C B with A = F(a, b), B = F(c, d) and
+C = F({gi}i∈I ) (with injections gi
+7→ a
+i
+ba−i and gi
+7→ c
+idc−i
+respectively). We define
+wi = a
+i
+ba−i
+c
+i
+d
+−1
+c
+−i
+.
+Lemma 7. If i /∈ I, then hhw¯iiiHI
+contains a non-abelian free group.
+Proof. The subgroup hwi
+, bwib
+−1
+i is non-abelian free. This follows directly from the
+Normal Form Theorem for amalgamated free products, see eg. [LS77, p. 186-187].
+Consider I ⊂ Z which is recursively enumerable (hence HI is recursively presented),
+but not recursive. Using Higman’s embedding theorem [Hig61], we can embed HI into
+a finitely presented group G (as Higman did). For any finite symmetric generating
+set S of G, we consider a monoid homomorphism ϕ: {a
+±, b±, c±, d±}
+∗ → S
+∗
+such that
+ϕ(v) = ¯v for all v ∈ {a
+±, b±, c±, d±}, and let W = {ϕ(wi) : i ∈ Z} ⊂ S
+∗
+.
+• Using the lemma, either ¯wi = eG or hhw¯iiiG > hhw¯iiiHI
+is non-amenable.
+• As I is not recursive, there does not exist any algorithm which, given ϕ(wi) ∈ W
+(equivalently i ∈ Z) decides whether ¯wi = eG or not (equivalently i ∈ I or not).
+Therefore ρ(G, S) cannot be upper semi-computable, hence cannot be algebraic.
+Remark 8. Using Karrass-Solitar theorem on amalgamated free products [KS70], one
+should be able to prove that hhgiiHI
+contains a non-abelian free group for all g ∈ HI \{e}.
+3
+Remark 9. The family (HI )I⊆Z satisfies the conclusions of Lemma 1.11 of [KP24]. In
+particular, we recover that the set of values {f(HI , S) : I ⊆ Z} is a continuum for every
+strictly monotone parameter f, simplifying part of the proof of [KP24, Theorem 1.1].
+That being said, it doesn’t allow to reprove their Theorem 1.2 (“No isolated point”).
+2. Consider H = hS0 | Ri a finitely presented group with unsolvable Word Problem.
+We consider G = H ∗ hti with generating set S = S0 ⊔ {t
+±}, and W = S
+∗
+0
+.
+For all w ∈ W, either ¯w is trivial, or the normal subgroup it generates satisfies
+hhw¯iiG >
+
+
+w, t ¯ wt ¯
+−1
+, t2wt ¯
+−2
+
+≃ Cn ∗ Cn ∗ Cn > F2
+where n ∈ {2, 3, . . .} ∪ {∞} is the order of ¯w. Again, Theorem 5 implies that ρ(G, S)
+cannot be upper semi-computable, hence is transcendental.
+In particular, we can take H defined by 10 generators and 27 relators [Col86], and
+therefore G defined by as little as 11 generators and 27 relators.
+Acknowledgments. I’d like to Tatiana Nagnibeda and Igor Pak for comments and
+encouragements. The author was supported by the Swiss NSF grant 200020-200400.
+References
+[Col86] Donald J. Collins. “A simple presentation of a group with unsolvable word problem”. In: Illinois Journal of Mathematics 30.2 (1986), pp. 230 –234.
+[Hig61] Graham Higman. “Subgroups of finitely presented groups”. In: Proceedings of the
+Royal Society of London. Series A. Mathematical and Physical Sciences 262.1311
+(1961), pp. 455–475.
+[HLW06] Shlomo Hoory, Nathan Linial, and Avi Wigderson. “Expander Graphs and their
+Applications”. In: Bulletin of the American Math. Society 43 (2006), pp. 439–561.
+[KS70] Abraham Karrass and Donald Solitar. “The Subgroups of a Free Product of Two
+Groups with an Amalgamated Subgroup”. In: Transactions of the American Mathematical Society 150.1 (1970), pp. 227–255.
+[KP24] Martin Kassabov and Igor Pak. Monotone parameters on Cayley graphs of finitely
+generated groups. Preprint at https://arxiv.org/abs/2404.10870. (2024).
+[Kes59] Harry Kesten. “Symmetric Random Walks on Groups”. In: Transactions of the
+American Mathematical Society 92.2 (1959), pp. 336–354.
+[LS77] Roger C. Lyndon and Paul E. Schupp. Combinatorial Group Theory. Classics in
+Mathematics. Springer Berlin Heidelberg, (1977).
+[Rau23] Emmanuel Rauzy. Computable analysis on the space of marked groups. Preprint
+at https://arxiv.org/abs/2111.01179. (2023).
+Section de Math´ematiques, Universit´e de Gen`eve, Switzerland
+E-mail address: corentin.bodart@unige.ch
+URL: https://sites.google.com/view/corentin-bodart
+4
