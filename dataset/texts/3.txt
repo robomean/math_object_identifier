@@ -1,0 +1,26 @@
+BEST POLYNOMIAL APPROXIMATION FOR NON-AUTONOMOUS
+LINEAR ODES IN THE ⋆-PRODUCT FRAMEWORK∗
+STEFANO POZZA†
+Abstract. We present the first formulation of the optimal polynomial approximation of the
+solution of linear non-autonomous systems of ODEs in the framework of the so-called ⋆-product.
+This product is the basis of new approaches for the solution of such ODEs, both in the analytical
+and the numerical sense. The paper shows how to formally state the problem and derives upper
+bounds for its error.
+Key words. Non-autonomous linear ODEs, polynomial approximation, error analysis,
+AMS subject classifications. 46F10, 37C60, 65L05
+1. Introduction. Recently, a new approach has been introduced for the solution
+of systems of linear non-autonomous ordinary differential equations based on the socalled ⋆-product [6, 7, 12, 16]. Such an approach has proved to be valuable and
+effective analytically, by producing new explicit expressions for the solution of certain
+problems [5, 6, 8], and numerically, being the basis of new efficient algorithms in
+quantum chemistry problems [3, 13, 14, 15].
+Given a Hermitian matrix-valued function A˜(t) ∈ C
+N×N analytic on the bounded
+interval I, and the nonzero vector ˜v ∈ C
+N×N we consider the initial value problem
+∂
+∂tu˜(t) = A˜(t)˜u(t), u˜(a) = ˜v, t ∈ I = [a, b]. (1.1)
+The ⋆-product is defined over a Fr´echet-Lie group on distributions [16]. In such a
+group, the initial value problem becomes a ⋆-linear system. Thanks to this “linearization” of the ODE, new techniques can be applied to solve the problem. Here, we
+focus on the polynomial approximation approach, which can be used both in numerical approaches and in the theoretical framework. In particular, in the latter one,
+a symbolic algorithm named ⋆-Lanczos [8] is able to produce a Krylov-like subspace
+approximation, that is, a polynomial approximation in the ⋆-product sense.

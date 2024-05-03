@@ -1,0 +1,866 @@
+BEST POLYNOMIAL APPROXIMATION FOR NON-AUTONOMOUS
+LINEAR ODES IN THE ⋆-PRODUCT FRAMEWORK∗
+STEFANO POZZA†
+Abstract. We present the first formulation of the optimal polynomial approximation of the
+solution of linear non-autonomous systems of ODEs in the framework of the so-called ⋆-product.
+This product is the basis of new approaches for the solution of such ODEs, both in the analytical
+and the numerical sense. The paper shows how to formally state the problem and derives upper
+bounds for its error.
+Key words. Non-autonomous linear ODEs, polynomial approximation, error analysis,
+AMS subject classifications. 46F10, 37C60, 65L05
+1. Introduction. Recently, a new approach has been introduced for the solution
+of systems of linear non-autonomous ordinary differential equations based on the socalled ⋆-product [6, 7, 12, 16]. Such an approach has proved to be valuable and
+effective analytically, by producing new explicit expressions for the solution of certain
+problems [5, 6, 8], and numerically, being the basis of new efficient algorithms in
+quantum chemistry problems [3, 13, 14, 15].
+Given a Hermitian matrix-valued function A˜(t) ∈ C
+N×N analytic on the bounded
+interval I, and the nonzero vector ˜v ∈ C
+N×N we consider the initial value problem
+∂
+∂tu˜(t) = A˜(t)˜u(t), u˜(a) = ˜v, t ∈ I = [a, b]. (1.1)
+The ⋆-product is defined over a Fr´echet-Lie group on distributions [16]. In such a
+group, the initial value problem becomes a ⋆-linear system. Thanks to this “linearization” of the ODE, new techniques can be applied to solve the problem. Here, we
+focus on the polynomial approximation approach, which can be used both in numerical approaches and in the theoretical framework. In particular, in the latter one,
+a symbolic algorithm named ⋆-Lanczos [8] is able to produce a Krylov-like subspace
+approximation, that is, a polynomial approximation in the ⋆-product sense.
+In this work, we will show that it is possible to formulate the problem of a best
+polynomial approximation for ˜u in the ⋆-framework. Moreover, we will show that its
+error can be bounded by the best uniform norm polynomial approximation error for
+the exponential [11]. This result is crucial to understand the numerical behavior of
+polynomial-based numerical methods when solving linear systems derived by using
+the ⋆-approach. Indeed, the polynomial approximation is central in the analysis of
+standard Krylov subspace methods (e.g., [10]), and its extension to the ⋆-framework
+will also allow extending this kind of numerical analysis.
+In Section 2, we introduce the basics of the ⋆-product, and we state the main
+result. Section 3 shows how to extend matrix analysis results to the ⋆-framework. The
+prove of the main result is given in Section 4 and Section 5 draw some conclusions.
+∗This work was supported by Charles University Research Centre program No.
+PRIMUS/21/SCI/009 and UNCE/24/SCI/005, and by the Magica project ANR-20-CE29-0007
+funded by the French National Research Agency.
+†Faculty of Mathematics and Physics, Charles University, Sokolovsk´a 83, 186 75 Praha 8, Czech
+Republic,(pozza@karlin.mff.cun.cz).
+1
+2 S. Pozza
+Table 1.1
+List of the main ⋆-definitions and related objects, f, g, x are generally from A(I).
+Name Symbol Definition Comments / Properties
+⋆-product f ⋆ g R
+I
+f(t, τ)g(τ, s)dτ
+⋆-identity δ f ⋆ δ = δ ⋆ f = f δ(t − s): Dirac delta
+⋆-inverse f−⋆ f ⋆ f−⋆ = f−⋆ ⋆ f = δ Existence [7, 16]
+Heaviside function Θ Θ(t − s) = 1, t ≥ s, 0 otherwise
+Analytic Θ-set AΘ(I) {f˜(t, s)Θ(t − s): f˜ analytic on I
+2} ⋆-product-closed set
+Dirac 1st derivative δ
+′
+δ
+′
+(t − s) δ
+′ ⋆ Θ = Θ ⋆ δ′ = δ
+Dirac derivatives δ
+(j) δ
+(j)
+(t − s) δ
+(j) ⋆ δ(i) = δ
+(i+j)
+⋆-powers f
+⋆j f ⋆ f ⋆ · · · ⋆ f, j times f
+⋆0
+:= δ, by convention
+⋆-resolvent R⋆(x)
+P∞
+j=0 x
+⋆j , x ∈ AΘ(I) R⋆(x) = (δ − x)−⋆
+⋆-polynomial p
+⋆(x)
+Pn
+j=0 αjx
+⋆j
+, αj ∈ C if αn 6= 0, n is the degree
+Table 1.2
+Useful properties of ⋆-product actions on AΘ(I) elements.
+Description Definition Property
+“Integration” in t F˜Θ, F˜(t, s) primitive of f˜ in t, F(s, s) = 0 F˜Θ = Θ ⋆ f˜Θ
+“Integration” in s F˜Θ, F˜(t, s) primitive of ˜f in s, F˜(t, t) = 0 F˜Θ = ˜fΘ ⋆ Θ
+“Differentiation” in t f˜(1,0)Θ, f˜(1,0)(t, s) derivative of f˜ in t δ
+′ ⋆ f˜Θ = f˜(1,0)Θ + fδ˜
+“Differentiation” in s
+˜f
+(0,1)Θ, ˜f
+(0,1)(t, s) derivative of ˜f in s
+˜fΘ ⋆ δ′ = − ˜f
+(0,1)Θ + ˜f δ
+2. Basics and main result. In order to state the main result, we first summarize the ⋆-product basics. Refer to [16] for the general definition of this product and
+the related properties. Given a bounded interval I, let us denote with A(I) the set of
+the bivariate distributions of the kind
+f(t, s) = ˜f−1(t, s)Θ(t − s) + ˜f0(t)δ(t − s) + ˜f1(t)δ
+′
+(t − s) + · · · + ˜fk(t)δ
+(k)
+(t − s),
+where ˜f−1, . . . ,
+˜fk are analytic functions over I both in t and s, Θ is the Heaviside
+function (Θ(t − s) = 1 for t ≥ s, and 0 otherwise), and δ, δ′
+, . . . , δ(k) are the Dirac
+delta and its derivatives. Then, the ⋆-product of f1, f2 ∈ A(I) is
+(f1 ⋆ f2)(t, s) := Z
+I
+f1(t, τ)f2(τ, s) dτ ∈ A(I).
+Some of the important properties, definitions, and facts about the ⋆-product can be
+found in Tables 1.1 and 1.2. Specifically, it is easy to see that δ(t−s) is the ⋆-product
+identity. Moreover, since A(I) is closed under ⋆-product, we can define the ⋆-powers
+of f ∈ A(I), denoted as f
+⋆n with the convention f
+⋆0 = δ. Therefore, for x ∈ A(I),
+we can define the ⋆-polynomial of degree n as
+p
+⋆
+(t, s) := α0δ(t − s) + α1x(t, s) + α2x(t, s)
+⋆2 + · · · + αnx(t, s)
+⋆n
+, (2.1)
+with constants α0, . . . , αn ∈ C, αn 6= 0. We call P
+⋆
+n the set of all such ⋆-polynomials.
+We define the subset AΘ(I) ⊂ A(I) of the distributions of the form f(t, s) =
+˜f(t, s)Θ(t − s), with ˜f a function analytic over I
+2
+. The ⋆-resolvent is defined as
+R
+⋆
+(x) := X∞
+j=0
+x
+⋆j
+.
+POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 3
+Note that R⋆
+(x) is well-defined (i.e., convergent) for every x ∈ AΘ [6].
+When A, B are matrices with compatible sizes composed of elements from A(I),
+the ⋆-product straightforwardly extends to a matrix-matrix (or matrix-vector) ⋆-
+product. In the following, we denote with AN×M (I) and A
+N×M
+Θ (I) the spaces of
+N × M matrices with elements from those sets. We denote with I⋆ = ˜Iδ(t − s) the
+identity matrix in AN×N (I), with ˜I the standard N × N identity matrix.
+Setting I = [a, b], the solution ˜u(t) of the ODE (1.1) can be expressed by
+u˜(t) = U(t, a)˜v, t ∈ I, U(t, s) = Θ(t − s) ⋆ R⋆
+
+A˜(t)Θ(t − s)
+
+; (2.2)
+as proven in [6]. From now on, we will skip the distribution arguments t, s whenever
+it is useful and clear from the context. Since R⋆
+(A˜Θ) is the ⋆-inverse of I⋆ −A˜Θ (e.g.,
+[12]), then solving (2.2) means solving the system of ⋆-linear equations
+(I⋆ − A˜Θ) ⋆ x = ˜vδ, u˜(t) = (Θ ⋆ x)(t, a) t ∈ I.
+Note that this is not just a theoretical result since there is an efficient way to transform
+the ⋆-linear system into a usual linear system that can be solved numerically [13, 14,
+15].
+It is reasonable to consider a ⋆-polynomial approximation p
+⋆
+(A˜Θ)˜v ≈ R⋆
+(A˜Θ)˜v.
+Specifically, we aim at finding the best ⋆-polynomial p
+⋆
+(t, s) of degree n that approximates the ⋆-resolvent R⋆
+(A)˜v in the L2 norm sense, i.e., the polynomial q
+⋆
+that
+minimizes the error
+ku˜(t) − (Θ ⋆ q⋆
+(A)˜v)(t, a)kL2
+:= Z b
+a
+|u˜(τ) − (Θ ⋆ q⋆
+(A))(τ, a)˜v|
+2
+!1
+2
+, t ∈ I.
+Note that Θ ⋆ q⋆
+(A) ∈ AN×N
+Θ , while q
+⋆
+(A) ∈ AN×N .
+Theorem 2.1 (Main result). Consider the initial value problem (1.1) and let
+λ˜
+1(t), . . . , λ˜N (t) be the eigenvalues of A˜(t) ∈ C
+N×N . We define the interval
+J := 
+min
+t∈I,i=1,...,N
+λ˜
+i(t), max
+t∈I,i=1,...,N
+λ˜
+i(t)
+
+× length(I),
+and denote with En(J) the minimal uniform error of the polynomial approximation
+of the exponential over J, i.e.,
+En(J) := min
+p∈Pn
+max
+t∈J
+| exp(t) − p(t)|.
+Define A(t, s) = A˜(t)Θ(t−s). Then the error of the L2-best ⋆-polynomial approximant
+q
+⋆
+can be bounded by
+ku˜(t) − (Θ ⋆ q⋆
+(A)˜v)(t, a)kL2 ≤ En(J) ≤ M ρn+1, t ∈ I
+for some constant M > 0 and 0 < ρ < 1 depending on J.
+The proof of this Theorem will be the outcome of the rest of the paper. The first
+step towards the proof is to derive an explicit form for the ⋆-monomials f
+⋆n in the
+case in which f(t, s) = ˜f(t)Θ(t − s) ∈ AΘ(I).
+4 S. Pozza
+Lemma 2.2. Consider the function f(t, s) = ˜f(t)Θ(t − s) ∈ AΘ and let F˜(t) be a
+primitive of ˜f(t). Then, for n = 1, 2, . . .,
+f(t, s)
+⋆n =
+˜f(t)
+(n − 1)!
+
+F˜(t) − F˜(s)
+n−1
+Θ(t − s), (2.3)
+Θ(t − s) ⋆ f(t, s)
+⋆n =
+1
+n!
+
+F˜(t) − F˜(s)
+n
+Θ(t − s). (2.4)
+Moreover, Θ(t − s) ⋆ f(t, s)
+⋆0 = Θ(t − s) since f(t, s)
+⋆0 = δ(t − s) by convention.
+Proof. For n = 2, the expression (2.3) is trivially obtained by
+f(t, s)
+⋆2 = ˜f(t)Θ(t − s)
+Z t
+s
+˜f(τ) dτ = ˜f(t)
+
+F˜(t) − F˜(s)
+
+Θ(t − s).
+Now, by induction, assuming (2.3) we get
+f(t, s)
+⋆n+1 =
+˜f(t)
+(n − 1)!Θ(t − s)
+Z t
+s
+˜f(τ)
+
+F˜(τ) − F˜(s)
+n−1
+dτ. (2.5)
+Integrating by part gives
+Z t
+s
+˜f(τ)
+
+F˜(τ) − F˜(s)
+n−1
+dτ = (F˜(t) − F˜(s))n−
+(n − 1) Z t
+s
+˜f(τ)
+
+F˜(τ) − F˜(s)
+n−1
+dτ.
+Therefore,
+n
+Z t
+s
+˜f(τ)
+
+F˜(τ) − F˜(s)
+n−1
+dτ = (F˜(t) − F˜(s))n
+.
+Together with (2.5), this proves (2.3). Eq. (2.4) comes from observing that
+Θ(t − s) ⋆ f(t, s)
+⋆n = Θ(t − s) ⋆
+˜f(t)
+(n − 1)!
+
+F˜(t) − F˜(s)
+n−1
+Θ(t − s)
+=
+Θ(t − s)
+(n − 1)! Z t
+s
+˜f(τ)
+
+F˜(τ) − F˜(s)
+n−1
+dτ
+=
+1
+n!
+(F˜(t) − F˜(s))nΘ(t − s),
+which concludes the proof.
+An immediate consequence of Lemma 2.2 is that
+exp 
+F˜(t) − F˜(s)
+
+= Θ(t − s) ⋆ R⋆
+(f)(t, s),
+a well-known result; see, e.g., [6].
+3. Matrix spectral decomposition and the ⋆-product. Consider a timedependent N × N Hermitian matrix-valued function A˜(t) analytic over the closed
+interval I. Then, for every t ∈ I there exist matrix-valued functions Q˜(t) and Λ( ˜ t)
+analytic over I such that:
+A˜(t) = Q˜(t)Λ( ˜ t)Q˜(t)
+H , with Λ( ˜ t) = diag(λ˜
+1(t), . . . , λ˜
+n(t)), Q˜(t)
+H Q˜(t) = I, (3.1)
+POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 5
+for every t ∈ I; see [9, Chapter II, Section 6] (we refer to [4] for extensions to the
+non-analytic case). The elements of the diagonal matrix Λ( ˜ t) are analytic functions
+and, for every t ∈ I, the λ˜
+j (t) are the eigenvalues (eigencurves) of A˜(t). The columns
+of Q˜(t), denoted ˜q1(t), . . . , q˜N (t), are the corresponding eigenvectors (analytic over I).
+Given A(t, s) ∈ AN×N
+Θ (I), the ⋆-eigenproblem is to find the ⋆-eigenvalues λ(t, s) ∈
+AΘ(I) and the ⋆-eigenvector q(t, s) ∈ AN×1
+(I) such that
+A(t, s) ⋆ q(t, s) = λ(t, s) ⋆ q(t, s). (3.2)
+If λ(t, s) and q(t, s) exist, then q(t, s)⋆a(t, s) is also a ⋆-eigenvector, for every a(t, s) 6≡ 0
+from A(I). For the specific case of interest, where A(t, s) = A˜(t)Θ(t−s), the solution
+to the ⋆-eigenproblem is in the following theorem.
+Theorem 3.1. Let A(t, s) = A˜(t)Θ(t−s) be in AΘ(I), and let λ˜
+i(t) and q˜i(t), be
+the (analytic) eigencurves and the corresponding eigenvectors as defined in (3.1) for
+i = 1, . . . , N. Then, the solution to the ⋆-eigenvalue problem (3.2) is given by
+λi(t, s) = λ˜
+i(t)Θ(t − s), qi(t, s) = ˜q
+′
+i
+(t)Θ(t − s) + ˜qi(t)δ(t − s), i = 1, . . . , N.
+where q˜
+′
+i
+(t) is the derivative of q˜i(t).
+Proof. First, note that
+λ˜
+i(t)δ(t − s) ⋆ q˜i(t)Θ(t − s) = λ˜
+i(t)
+Z
+I
+δ(t − τ)˜qi(τ)Θ(τ − s) dτ
+= λ˜
+i(t)˜qi(t)Θ(t − s) = A˜(t)˜qi(t)Θ(t − s)
+= A˜(t)δ(t − s) ⋆ q˜i(t)Θ(t − s).
+Using the fact that λ˜
+i(t)δ(t−s)⋆Θ(t−s) = λ˜
+i(t)Θ(t−s), and that δ
+′
+(t−s)⋆Θ(t−s) =
+Θ(t − s) ⋆ δ′
+(t − s) = δ(t − s), see Table 1.1, we obtain (we omit the variables for the
+sake of readability)
+λ˜
+iδ ⋆ q˜iΘ = λ˜
+iδ ⋆ Θ ⋆ δ′
+⋆ q˜iΘ = λ˜
+iΘ ⋆ δ′
+⋆ q˜iΘ = λ˜
+iΘ ⋆ qi
+,
+where qi(t, s) := δ
+′
+(t − s) ⋆ q˜i(t)Θ(t − s). Similarly, Aδ ⋆ ˜ q˜iΘ = A˜Θ ⋆ qi
+. Combining
+these results, we get
+λ˜
+iΘ ⋆ qi = λ˜
+iδ ⋆ q˜iΘ = λ˜
+iq˜iΘ = A˜q˜iΘ = Aδ ⋆ ˜ q˜iΘ = A˜Θ ⋆ qi
+.
+Finally, we obtain the following expression for the ⋆-eigenvectors:
+qi(t, s) = δ
+′
+(t − s) ⋆ q˜i(t)Θ(t − s)
+= ˜q
+′
+i
+(t)Θ(t − s) + ˜qi(t)δ(t − s);
+see Table 1.2. As a final remark, note that all the ⋆-products are well-defined thanks
+to the fact that the λ˜
+i(t) and ˜qi(t) are analytic functions.
+Consider the matrix
+A(t, s) = A˜−1(t, s)Θ(t − s) +X
+k
+j=0
+A˜
+j (t)δ
+(j)
+(t − s) ∈ AN×M (I) (3.3)
+we define the Hermitian transpose of A as
+A
+H(t, s) = A˜H
+−1
+(t, s)Θ(t − s) +X
+k
+j=0
+A˜H
+j
+(t)δ
+(j)
+(t − s) ∈ AM×N (I), (3.4)
+6 S. Pozza
+with A˜H
+j
+the usual Hermitian transpose of a matrix. As an immediate consequence
+of Theorem 3.1, we have the following ⋆-factorization of A(t, s).
+Corollary 3.2. Under the same assumption of Theorem 3.1, we have
+A(t, s) = Q(t, s) ⋆ Λ(t, s) ⋆ Q(t, s)
+H,
+with Λ(t, s) = Λ( ˜ t)Θ(t − s) and Q(t, s) = [q1(t, s), . . . , qN (t, s)]. Moreover, it holds
+Q(t, s) ⋆ Q(t, s)
+H = Q(t, s)
+H ⋆ Q(t, s) = I⋆,
+that is, Q(t, s)
+H is the matrix ⋆-inverse of Q(t, s).
+Proof. We first show that for every i, j = 1, . . . , N we have
+qi(t, s)
+H ⋆ qj (t, s) = δij δ(t − s),
+with δij the Kronecker delta. Since qk(t, s) = δ
+′
+(t − s) ⋆ q˜kΘ(t − s), for k = 1, . . . , N,
+then
+qi(t, s)
+H ⋆ qj (t, s) =
+δ
+′
+(t − s) ⋆ q˜
+H
+i
+(t)Θ(t − s)
+
+⋆
+
+δ
+′
+(t − s) ⋆ q˜j (t)Θ(t − s)
+
+= δ
+′
+(t − s) ⋆
+
+q˜
+H
+i
+(t)Θ(t − s) ⋆ δ′
+(t − s)
+
+⋆ q˜j (t)Θ(t − s)
+= δ
+′
+(t − s) ⋆
+
+q˜
+H
+i
+(t)δ(t − s) ⋆ q˜j (t)Θ(t − s)
+
+= δ
+′
+(t − s) ⋆ q˜
+H
+i
+(t)˜qj (t)Θ(t − s) = δ
+′
+(t − s) ⋆ δijΘ(t − s)
+= δij δ(t − s).
+From Theorem 3.1 we get the equality
+A(t, s) ⋆ Q(t, s) = Q(t, s) ⋆ Λ(t, s).
+The conclusion follows from ⋆-multiplying from the right by Q(t, s)
+H.
+Since our final goal is to measure an error, we need to introduce a ⋆-inner product
+and the relative ⋆-norm. To this aim, we take inspiration from the results in [16], but
+we develop them in a different direction. Following [16], we define the ⋆-Hermitiantranspose of A(t, s) in (3.3) as
+A
+⋆H(t, s) := A
+H(s, t) = A˜H
+−1
+(s, t)Θ(s − t) +X
+k
+j=0
+A˜H
+j
+(s)δ
+(j)
+(s − t) ∈ AM×N (I).
+Roughly speaking, one has to take the usual Hermitian transpose and then swap the
+variable t, s. Note the difference with the Hermitian transpose (3.4). Now, setting
+I = [a, b], and given v, w such that Θ ⋆ v, Θ ⋆ w ∈ AN×1
+Θ (I), for any fixed s ∈ [a, b) we
+can define the inner product:
+hv, wi⋆(s) :=
+(Θ ⋆ v)
+⋆H ⋆ Θ ⋆ w
+(s, s) = Z
+I
+v
+H (τ, s)w(τ, s) dτ.
+Note that, denoting Θ(t − s) ⋆ v(t, s) = V˜ (t, s)Θ(t − s) and Θ(t − s) ⋆ w(t, s) =
+W˜ (t, s)Θ(t − s), then
+hv, wi⋆(s) = Z b
+s
+V˜ H(τ, s)W˜ (τ, s
+POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 7
+which, for the fixed s, is the classical inner product of the functions V˜ (·, s) and W˜ (·, s)
+on the interval [s, b] (note that v, w ≡ 0 if and only if V , ˜ W˜ ≡ 0). The inner product
+hv, wi⋆(s) is, in fact, a family of inner products depending on the parameter s ∈ [a, b).
+With an abuse of notation, we refer to the function hv, wi⋆ : [a, b) → C as the ⋆-inner
+product of v and w. Thus, again with a notation abuse, we define the ⋆-norm as
+kvk⋆(s) := p
+hv, vi⋆(s), s ∈ [a, b).
+The definition is justified by the following theorem.
+Theorem 3.3 (Properties of the ⋆-norm). Given v, w such that Θ ⋆ v, Θ ⋆ w ∈
+A
+N×1
+Θ (I), with I = [a, b], then the following properties hold for every s ∈ [a, b):
+1. kvk⋆(s) ≥ 0;
+2. kvk⋆(s) ≡ 0 if and only if v ≡ 0;
+3. kαvk⋆(s) = kαδ ⋆ vk⋆(s) = |α|kvk⋆(s) for any scalar α ∈ C;
+4. kv + wk⋆(s) ≤ kvk⋆(s) + kwk⋆(s).
+Hence kvk⋆(s) is a norm for every fixed s ∈ [a, b).
+Proof. Since Θ ⋆ v = V˜ Θ, with V˜ an analytic function over I
+2
+, then
+kvk
+2
+⋆
+(s) = Z b
+s
+V˜ H(τ, s)V˜ (τ, s) dτ,
+is the classical norm of the function V˜ (·, s) over the interval [s, b]. Thus Item 1. is
+trivial. Item 2. is true since V˜ (t, s) ≡ 0 over I
+2
+if and only if v ≡ 0 over I
+2
+. Item 3.
+and 4. hold since Θ ⋆ αv = α(Θ ⋆ v) and Θ ⋆ (v + w) = Θ ⋆ v + Θ ⋆ w.
+Lemma 3.4. Let Q(t, s) as in Corollary 3.2, then for every v, w ∈ AN×1
+Θ (I), it
+holds
+hQ ⋆ v, Q ⋆ wi⋆(s) = hQ
+H ⋆ v, QH ⋆ wi⋆(s) = hv, wi⋆(s), s ∈ [a, b),
+that is Q and QH are unitary with respect to h·, ·i⋆ (note that QH 6= Q⋆H).
+Proof. Recalling that Q(t, s) = δ
+′
+(t − s) ⋆ Q˜(t)Θ(t − s), we get Θ(t − s) ⋆ Q(t, s) =
+Q˜(t)Θ(t − s). Therefore,
+hQ ⋆ v, Q ⋆ wi⋆(s) = h
+(Q˜Θ ⋆ v)
+⋆H ⋆ Q˜Θ ⋆ wi
+(s, s).
+Now, denoting V˜ (t, s)Θ(t−s) := Θ(t−s)⋆v(t, s) and W˜ (t, s)Θ(t−s) := Θ(t−s)⋆v(t, s),
+we observe
+Q˜(t)Θ(t − s) ⋆ v(t, s) = Q˜(t) (Θ(t − s) ⋆ v(t, s)) = Q˜(t)V˜ (t, s)Θ(t − s),
+Q˜(t)Θ(t − s) ⋆ w(t, s) = Q˜(t) (Θ(t − s) ⋆ w(t, s)) = Q˜(t)W˜ (t, s)Θ(t − s).
+Therefore,
+h
+(Q˜Θ ⋆ v)
+⋆H ⋆ Q˜Θ ⋆ wi
+(s, s) = Z b
+s
+V˜ H(τ, s)Q˜H(τ)Q˜(τ)W˜ (τ, s) dτ
+=
+Z b
+s
+V˜ H(τ, s)W˜ (τ, s) dτ
+=
+
+(Θ ⋆ v)
+⋆H ⋆ Θ ⋆ w
+(s, s) = hv, wi⋆(s).
+8 S. Pozza
+Analogous arguments show that hQH ⋆ v, QH ⋆ wi⋆ = hv, wi⋆.
+Finally, given a matrix A so that Θ⋆ A ∈ AN×N
+Θ (I), we define the induced matrix
+⋆-norm of A as
+kAk⋆(s) := sup
+v6≡0 : Θ⋆v∈AN×1
+Θ (I)
+kA ⋆ vk⋆(s)
+kvk⋆(s)
+, s ∈ [a, b). (3.5)
+The term norm is again an abuse of notation. The following theorem explains in
+which sense kAk⋆ is a norm and provides several useful properties.
+Theorem 3.5 (Properties of the induced matrix ⋆-norm). Let A, B such that
+Θ ⋆ A, Θ ⋆ B ∈ AN×N
+Θ (I) with I = [a, b]. Then, kAk⋆ satisfies the following properties
+for every s ∈ [a, b):
+1. kAk⋆(s) ≥ 0;
+2. kAk⋆(s) ≡ 0 if and only if A ≡ 0;
+3. kαAk⋆(s) = kαδ ⋆ Ak⋆(s) = |α|kAk⋆(s) for any scalar α ∈ C;
+4. kA + Bk⋆(s) ≤ kAk⋆(s) + kBk⋆(s);
+5. kA ⋆ Bk⋆(s) ≤ kAk⋆(s) ⋆ kBk⋆(s).
+Therefore, k · k⋆(s) is a sub-multiplicative matrix norm for every fixed s ∈ [a, b).
+Proof. Items 1–4 are corollaries of Theorem 3.3. Note that
+kA ⋆ vk⋆(s) = kA ⋆ vk⋆(s)
+kvk⋆(s)
+kvk⋆(s) ≤ kAk⋆(s) kvk⋆(s), s ∈ [a, b).
+Therefore, kA ⋆ B ⋆ vk⋆(s) ≤ kAk⋆(s) ⋆ kB ⋆ vk⋆(s) ≤ kAk⋆(s) ⋆ kBk⋆(s), proving
+Item 5.
+4. Approximation of the ⋆-resolvent. Let ˜v ∈ C
+N be a (constant) vector and
+the A(t, s) = A˜(t)Θ(t−s) ∈ AN×N
+Θ (I) a matrix-valued function, with A˜(t) Hermitian
+for t ∈ I and I = [a, b]. We want to find the optimal ⋆-polynomials of degree at most
+n approximating the ⋆-resolvent R⋆
+(A)˜v in the sense of the ⋆-norm. That is, finding
+q
+⋆ ∈ P⋆
+n
+so that
+kR
+⋆
+(A)˜v − q
+⋆
+(A)˜vk⋆(s) = min
+p⋆∈P⋆
+n
+kR
+⋆
+(A)˜v − p
+⋆
+(A)˜vk⋆(s), s ∈ [a, b). (4.1)
+By Corollary 3.2, A(t, s) = Q(t, s) ⋆ Λ(t, s) ⋆ Q(t, s)
+H, where the diagonal elements of
+Λ are the ⋆-eigenvalues λj (t, s) = λ˜
+j (t)Θ(t−s), j = 1, . . . , n. Since QH ⋆ Q = I⋆, then
+we have A⋆2 = Q ⋆ Λ ⋆ QH ⋆ Q ⋆ Λ ⋆ QH = Q ⋆ Λ
+⋆2 ⋆ QH, and hence
+A
+⋆k = Q ⋆ Λ
+⋆k ⋆ QH, k = 0, 1, 2, . . . . (4.2)
+Theorem 4.1. Let w = QH ⋆ vδ˜ = QHv˜. Then, the problem (4.1) is equivalent
+to finding the n-degree ⋆-polynomial q
+⋆
+such that
+kR
+⋆
+(A)˜v − q
+⋆
+(A)˜vk⋆(s) = min
+p⋆∈P⋆
+n
+kR
+⋆
+(Λ) ⋆ w − p
+⋆
+(Λ) ⋆ wk⋆(s), s ∈ [a, b).
+Moreover, for a fixed s ∈ [a, b), the error can be bounded by
+kR⋆
+(A)˜v − q
+⋆
+(A)˜vk⋆(s)
+kvδ˜ k⋆(s)
+≤ min
+p⋆∈P⋆
+n
+max
+i=1,...,N
+kR
+⋆
+(λi) − p
+⋆
+(λi)k⋆(s), s ∈ [a, b),
+where λ1(t, s), . . . λN (t, s) are the ⋆-eigenvalues of A(t, s).
+POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 9
+Proof. Every ⋆-polynomial can be expanded in the ⋆-monomial basis, i.e., p
+⋆
+(x) =
+α0δ + α1x + · · · + αnx
+⋆n. Therefore, by using (4.2), we get
+p
+⋆
+(A) = Q ⋆ p⋆
+(Λ) ⋆ QH, R⋆
+(A) = Q ⋆ R⋆
+(Λ) ⋆ QH.
+Hence, by Lemma 3.4 and Theorem 3.5, for every fixed s ∈ [a, b), we get
+kR
+⋆
+(A)˜v − p
+⋆
+(A)˜vk⋆(s) = kQ ⋆ (R
+⋆
+(Λ) − p
+⋆
+(Λ)) ⋆ QH ⋆ vδ˜ k⋆(s)
+= k(R
+⋆
+(Λ) − p
+⋆
+(Λ)) ⋆ QH ⋆ vδ˜ k⋆(s)
+≤ kR
+⋆
+(Λ) − p
+⋆
+(Λ)k⋆(s) kQ
+H ⋆ vδ˜ k⋆(s)
+≤ kR
+⋆
+(Λ) − p
+⋆
+(Λ)k⋆(s) kvδ˜ k⋆(s)
+≤ max
+i=1,...,N
+kR
+⋆
+(λi) − p
+⋆
+(λi)k⋆(s) kvδ˜ k⋆(s),
+concluding the proof.
+Now we can prove the main result of this paper.
+4.1. Proof of Theorem 2.1. Denote p
+⋆
+(x) = Pn
+k=0 αkx
+⋆k. By Lemma 2.2 and
+Theorem 4.1, for s ∈ [a, b) we get
+kR
+⋆
+(λi) − p
+⋆
+(λi)k
+2
+⋆
+(s) = Z b
+s
+
+
+
+
+
+X∞
+k=0
+(Li(τ, s))k
+k!
+−
+Xn
+k=0
+αk
+(Li(τ, s))k
+k!
+
+
+
+
+
+2
+dτ
+=
+Z b
+s
+|exp(Li(τ, s)) − p(Li(τ, s))|
+2
+dτ,
+where Li(·, s) is the primitive of λ˜
+i(·) so that Li(s, s) = 0 and p(t) = Pn
+k=0
+αk
+k!
+t
+k
+is a
+(usual) polynomial. Note that Li(τ, s) is a real function with values in the interval
+Ji(s) = 
+min
+τ∈[s,b]
+Li(τ, s), max
+τ∈[s,b]
+Li(τ, s)
+
+.
+Therefore,
+kR
+⋆
+(λi) − p
+⋆
+(λi)k⋆(s) ≤ En(Ji(s))p
+(b − s).
+Under the assumptions of the Theorem, the interval Ji(s) ⊂ J for every s ∈ [a, b).
+By the classical Bernstein’s Theorem (see, e.g., [11, page 91]), there exist constant
+M > 0 and 0 < ρ < 1 such that
+En(J)
+p
+(b − a) ≤ M ρn+1
+.
+Now, note that
+ Z b
+s
+|U(τ, s)˜v − (Θ ⋆ q⋆
+(A))(τ, s)˜v|
+2
+!1
+2
+= kR
+⋆
+(A)˜v − q
+⋆
+(A)˜vk⋆(s) kvδ˜ k⋆(s).
+Therefore,
+ Z b
+s
+|U(τ, s)˜v − (Θ ⋆ q⋆
+(A))(τ, s)˜v|
+2
+!1
+2
+≤ M ρn+1kvδ˜ k⋆(s).
+Setting s = a concludes the proof.
+10 S. Pozza
+5. Conclusion. The results presented are a first step in the direction of a new
+approach for the analysis of ⋆-product approximations of the solution of linear nonautonomous ordinary differential equations. The error analysis can affect the study
+of the related analytic expression and symbolic algorithms [5, 8] as well as their
+numerical counterparts [3] opening the way to the use of efficient Krylov subspace
+methods. Moreover, they can open the way to the analysis of the localization (or
+decay) phenomenon of the time-ordered exponential [2, 6] by extending the techniques
+presented, e.g., in [1]. Finally, future works will try to derive more refined bounds for
+the error than the one in Theorem 2.1. This will be possible by using more information
+on the eigecurves’ behavior.
+REFERENCES
+[1] M. Benzi and P. Boito, Decay properties for functions of matrices over C∗-algebras, Linear
+Algebra Appl., 456 (2014), pp. 174–198.
+[2] M. Benzi, V. Simoncini, editors, Exploiting hidden structure in matrix computations: Algorithms and applications, Springer; 2016.
+[3] C. Bonhomme, S. Pozza, and N. V. Buggenhout, A new fast numerical method for the
+generalized Rosen-Zener model, arXiv preprint arXiv:2311.04144, (2023).
+[4] L. Dieci and T. Eirola, On smooth decompositions of matrices, SIAM J. Matrix Anal. Appl.,
+20 (1999), pp. 800–19.
+[5] P.-L. Giscard and C. Bonhomme, Dynamics of quantum systems driven by time-varying
+Hamiltonians: Solution for the Bloch-Siegert Hamiltonian and applications to NMR, Phys.
+Rev. Research, 2 (2020), p. 023081.
+[6] P.-L. Giscard, K. Lui, S. J. Thwaite, and D. Jaksch, An exact formulation of the timeordered exponential using path-sums, J. Math. Phys., 56 (2015), p. 053503.
+[7] P.-L. Giscard and S. Pozza, Lanczos-like algorithm for the time-ordered exponential: The
+∗-inverse problem, Appl. Math., 65 (2020), pp. 807–827.
+[8] P.-L. Giscard and S. Pozza, A Lanczos-like method for non-autonomous linear ordinary
+differential equations, Boll. Unione Mat. Ital., 16 (2023), pp. 81–102.
+[9] T. Kato, Perturbation Theory for Linear Operators, Second ed., Springer-Verlag, Berlin, 1976.
+[10] J. Liesen and Z. Strakos, Krylov subspace methods: principles and analysis, Oxford University Press, 2012.
+[11] G. Meinardus, Approximation of Functions: Theory and Numerical Methods, Springer Tracts
+Natur. Philos., vol. 13, Springer, New York, 1967.
+[12] S. Pozza, A new closed-form expression for the solution of ODEs in a ring of distributions and its connection with the matrix algebra, Linear Multilinear Algebra, to appear.
+arXiv:2302.11375 [math.NA]
+[13] S. Pozza and N. Van Buggenhout, A new Legendre polynomial-based approach for nonautonomous linear ODEs, Electron. Trans. Numer. Anal., to appear. arXiv:2303.11284
+[math.NA]
+[14] S. Pozza and N. Van Buggenhout, A new matrix equation expression for the solution of nonautonomous linear systems of ODEs, Proc. Appl. Math. Mech., 22 (2023), p. e202200117.
+[15] , A ⋆-product solver with spectral accuracy for non-autonomous ordinary differential
+equations, Proc. Appl. Math. Mech., 23 (2023), p. e202200050.
+[16] M. Ryckebusch, A Fr´echet-Lie group on distributions, arXiv preprint arXiv:2307.09037,
+(2023).
