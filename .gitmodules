@@ -1,0 +1,3 @@
+[submodule "code/vscode_extension"]
+	path = code/vscode_extension
+	url = https://github.com/robomean/object_identification_vscode_extension.git
