@@ -1,0 +1,11 @@
+\begin{enumerate}
+    \item Given $A(t, s) \in \mathcal{A}_0^{N \times N}(I)$, the *-eigenproblem is to find the *-eigenvalues $\lambda(t, s) \in \mathcal{A}_0(I)$ and the *-eigenvector $q(t, s) \in \mathcal{A}_0^{N \times 1}(I)$ such that
+    \[
+    A(t, s) * q(t, s) = \lambda(t, s) * q(t, s).
+    \] 
+    \item Let $A(t, s) = \hat{A}(t) \Theta(t-s)$ be in $\mathcal{A}_0(I)$, and let $\hat{\lambda}_i(t)$ and $\hat{q}_i(t)$, be the (analytic) eigencurves and the corresponding eigenvectors as defined in for $i = 1, \ldots, N$. Then, the solution to the *-eigenvalue problem is given by
+    \[
+    \lambda_i(t, s) = \hat{\lambda}_i(t) \Theta(t-s), \quad q_i(t, s) = \hat{q}_i'(t) \Theta(t-s) + \hat{q}_i(t) \delta(t-s), \quad i = 1, \ldots, N.
+    \]
+    where $\hat{q}_i'(t)$ is the derivative of $\hat{q}_i(t)$.
+\end{enumerate}

@@ -1,0 +1,14 @@
+Let's assume that N is even if N2 is odd.
+
+In that case, we can write:
+
+N = 2K  [our assumption]
+where K is a whole number.
+
+Now that we have an equation to work with, let’s begin to derive a contradiction:
+
+N = 2K  [our assumption]
+N2 = (2K)2  [square both sides of the equation]
+N2 = 4K2
+N2 = 2(2K2)  [4 = 2*2]
+From the equation in this last line, we can see that N2 is even (K is an integer, so K2 is also an integer, as is 2K2 and 2 times an integer is an even number).

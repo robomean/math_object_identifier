@@ -1,0 +1,1 @@
+\item A partition \( \pi \) of \( n \) is said to be \( t \)-core if none of the hook numbers in the Ferrers-Young diagram of \( \pi \) are divisible by \( t \), for \( t \geq 2 \).

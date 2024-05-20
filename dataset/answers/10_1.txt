@@ -1,0 +1,1 @@
+\item $N$ Is Odd If $N^2$ Is Odd

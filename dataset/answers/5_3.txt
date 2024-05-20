@@ -1,0 +1,7 @@
+\begin{enumerate}
+    \item Eigenvalues $\lambda(t, s) \in \mathcal{A}_0(I)$ from *-eigenproblem 
+    \item Let \(A(t, s) = \hat{A}(t)\Theta(t-s)\) be in \(\mathcal{A}_\Theta(I)\), and let \(\hat{\lambda}_i(t)\) and \(\hat{q}_i(t)\), be the (analytic) eigencurves and the corresponding eigenvectors as defined in for \(i = 1, \ldots, N\). Then
+    \[
+    \lambda_i(t, s) = \hat{\lambda}_i(t)\Theta(t-s), \quad i = 1, \ldots, N.
+    \]
+\end{enumerate}

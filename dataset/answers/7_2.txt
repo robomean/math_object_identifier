@@ -1,0 +1,2 @@
+\item Is equal to \limsup_{n \to \infty} \frac{1}{|S|} \sqrt[n]{c(n)}.
+\item There exists a finitely presented group \(G\) such that, for all finite symmetric generating sets \(S\), the spectral radius \(\rho(G, S)\) is transcendental.

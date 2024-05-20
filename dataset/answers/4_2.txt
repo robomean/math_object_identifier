@@ -1,0 +1,3 @@
+\begin{enumerate}
+    \item A hermitian matrix-valued function \in \mathbb{C}^{N \times N}$ 
+\end{enumerate}

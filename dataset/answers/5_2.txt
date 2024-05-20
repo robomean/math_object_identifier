@@ -1,0 +1,13 @@
+\begin{enumerate}
+    \item \[
+    \|v\|_*(s) := \sqrt{\langle v, v \rangle_*(s)}, \quad s \in [a, b].
+    \]
+    \item Given $v, w$ such that $\Theta * v, \Theta * w \in \mathcal{A}_{\Theta}^{N \times 1}(I)$, with $I = [a, b]$, then the following properties hold for every $s \in [a, b]$:
+    \begin{enumerate}
+        \item $\|v\|_*(s) \geq 0$;
+        \item $\|v\|_*(s) = 0$ if and only if $v = 0$;
+        \item $\|\alpha v\|_*(s) = |\alpha| \|v\|_*(s)$ for any scalar $\alpha \in \mathbb{C}$;
+        \item $\|u + w\|_*(s) \leq \|u\|_*(s) + \|w\|_*(s)$.
+    \end{enumerate}
+    Hence $\|v\|_*(s)$ is a norm for every fixed $s \in [a, b]$.
+\end{enumerate}
