@@ -1,4 +1,2 @@
-\begin{enumerate}
-    \item Set of parking functions on $[n]$
-    \item $\lvert P_n \rvert = (n + 1)^{n - 1}$
-\end{enumerate}
+\item Set of parking functions on $[n]$
+\item $\lvert P_n \rvert = (n + 1)^{n - 1}$

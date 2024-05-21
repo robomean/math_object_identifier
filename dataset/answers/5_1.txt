@@ -1,10 +1,8 @@
-\begin{enumerate}
-    \item An approach to solve linear non-autonomous ordinary differential equations
-    \item Is defined over a Frechet-Lie group on distributions
-    \item Definition: $\int_I f(t, \tau) g(\tau, s) \, d\tau$
-    \item If \(\widetilde{F}\Theta\), \(\widetilde{F}(t, s) \) primitive of \(\widetilde{f} \) in \( t \), \( F(s, s) = 0 \), then \( \widetilde{F}\Theta = \Theta * \widetilde{f}\Theta \)
-    \item If \(\widetilde{F}\Theta\), \(\widetilde{F}(t, s) \) primitive of \(\widetilde{f} \) in \( s \), \( \widetilde{F}(t, t) = 0 \), then \( \widetilde{F}\Theta = \widetilde{f}\Theta * \Theta \)
-    \item If \( \widetilde{f}^{(1,0)}\Theta \), \( \widetilde{f}^{(1,0)}(t, s) \) derivative of \( \widetilde{f} \) in \( t \), then \( \delta' * \widetilde{f}\Theta = \widetilde{f}^{(1,0)}\Theta + \widetilde{f}\delta \)
-    \item If \( \widetilde{f}^{(1,0)}\Theta \), \( \widetilde{f}^{(1,0)}(t, s) \) derivative of \( \widetilde{f} \) in \( s \), then \( \widetilde{f}\Theta * \delta'   = - \widetilde{f}^{(0,1)}\Theta + \widetilde{f}\delta \) 
-    \item When \(A, B\) are matrices with compatible sizes composed of elements from \(A(I)\), the \(*\)-product straightforwardly extends to a matrix-matrix (or matrix-vector) \(*\)-product.
-\end{enumerate}
+\item An approach to solve linear non-autonomous ordinary differential equations
+\item Is defined over a Frechet-Lie group on distributions
+\item Definition: $\int_I f(t, \tau) g(\tau, s) \, d\tau$
+\item If \(\widetilde{F}\Theta\), \(\widetilde{F}(t, s) \) primitive of \(\widetilde{f} \) in \( t \), \( F(s, s) = 0 \), then \( \widetilde{F}\Theta = \Theta * \widetilde{f}\Theta \)
+\item If \(\widetilde{F}\Theta\), \(\widetilde{F}(t, s) \) primitive of \(\widetilde{f} \) in \( s \), \( \widetilde{F}(t, t) = 0 \), then \( \widetilde{F}\Theta = \widetilde{f}\Theta * \Theta \)
+\item If \( \widetilde{f}^{(1,0)}\Theta \), \( \widetilde{f}^{(1,0)}(t, s) \) derivative of \( \widetilde{f} \) in \( t \), then \( \delta' * \widetilde{f}\Theta = \widetilde{f}^{(1,0)}\Theta + \widetilde{f}\delta \)
+\item If \( \widetilde{f}^{(1,0)}\Theta \), \( \widetilde{f}^{(1,0)}(t, s) \) derivative of \( \widetilde{f} \) in \( s \), then \( \widetilde{f}\Theta * \delta'   = - \widetilde{f}^{(0,1)}\Theta + \widetilde{f}\delta \) 
+\item When \(A, B\) are matrices with compatible sizes composed of elements from \(A(I)\), the \(*\)-product straightforwardly extends to a matrix-matrix (or matrix-vector) \(*\)-product.

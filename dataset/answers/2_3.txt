@@ -1,80 +1,75 @@
-\begin{enumerate}
-    \item The probability measure on $S_n$, denoted as $P^{\text{park}}_n$, is induced by a random parking function in $P_n$.
-    \item $P^{\text{park}}_n(\sigma) = P_n(T_n^{-1}(\sigma))$.
-    \item $P^{\text{park}}_n (\sigma) = \frac{L_n(\sigma)}{(n+1)^{n-1}}$, for $\sigma \in S_n$.
-    \item For any $\epsilon \in (0,2]$, the random variable $L_n = L_n(\sigma)$ on $(S_n, P_n)$ satisfies $\lim_{n \to \infty} P_n((2 - \epsilon)^n \leq L_n \leq (2 + \epsilon)^n) = 1$.
-    \item The expectation of the random variable $p^{\text{park}}_n = P^{\text{park}}_n (\sigma)$ on $(S_n, P_n)$ is given by $E_{n, P_n^{\text{park}}} = \frac{1}{n!} \sim \frac{e^n}{\sqrt{2\pi n^{n+\frac{1}{2}}}}$.
-    \item Most permutations in $S_n$ have a $P_n^{\text{park}}$-probability around $\frac{2^n}{(n+1)^{n-1}}$. The average $P_n^{\text{park}}$-probability is asymptotically equivalent to $\frac{e^n}{\sqrt{2\pi n^{n+\frac{1}{2}}}}$.
-    \item There exists a set $A_n \subseteq S_n$ where $P_n^{\text{park}}(A_n)$ is approximately $(2^n)$ and $P_n(A_n) \to 1$. This set has permutations with $P_n^{\text{park}}$ probabilities exponentially larger than the average, and yet is considered negligible by $P_n$.
-    \item The maximum value of $P_n^{\text{park}} = \frac{n!}{(n+1)^{n-1}}$ is uniquely attained at $\sigma = 1 \ldots n$. The minimum value of $P_n^{\text{park}} = \frac{1}{(n+1)^{n-1}}$ is uniquely attained at $\sigma = n \ldots 1$.
-    \item The probability $P_n^{\text{park}}$ for a permutation $\sigma$ with indices $i_1, i_2, \ldots, i_j$ rearranged into decreasing order from $\sigma^{-1}(i_1), \sigma^{-1}(i_2), \ldots, \sigma^{-1}(i_j) = i_j$ is given by:
-    \[
-    P_n^{\text{park}}(\sigma^{-1}(\sigma_{n-j+1} = i_1, \sigma_{n-j+2} = i_2, \ldots, \sigma_n = i_j)) = \frac{(n - j)! \prod_{l=1}^j (k_l - k_{l-1} - 1)^{k_l - k_{l-1} - 2} (n - k_j + 1)^{n - k_j - 1} \prod_{l=1}^j l_{n, n-j+l}(\sigma)}{(n+1)^{n-1} \prod_{l=1}^j (k_{l}-k_{l-1}-1)! (n-k_j)!}
-    \]
-    where $\{k_l\}_{l=1}^j$ is the increasing rearrangement of $\{i_l\}_{l=1}^n$, $k_0 = 0$.
-    \item The probability $P_n^{\text{park}}$ that a permutation $\sigma$ places the last element in position $k$ is given by $P_n^{\text{park}}(\sigma_n^{-1} = k) = \frac{1}{n} k^k \binom{n}{k} (n-k+1)^{n-k-1} \frac{1}{(n+1)^{n-1}}$, where $k \in [n]$.
-    \item 
-        \begin{itemize}
-            \item For a fixed $m \in \mathbb{N}$, the limit as $n \to \infty$ of $P_n^{\text{park}}(\sigma_n^{-1} = n+1-m)$ converges to $\frac{m^{m-1} e^{-m}}{m!}$, hence, the random variable $n+1-\sigma_n^{-1}$ under $P_n^{\text{park}}$ converges in distribution to a variable X with the Borel distribution.
-            \item For a fixed $k \in \mathbb{N}$, $P_n^{\text{park}}(\sigma_n^{-1} = k) \sim \frac{k^k e^{-k}}{k! \cdot n}$, as $n \to \infty$.
-            \item For $c_n$, an integer such that $\lim_{n \to \infty} c_n = c \in (0,1)$, $P_n^{\text{park}}(\sigma_n^{-1} = c_n) \sim \frac{1}{\sqrt{2\pi c} (1 - c)^{3/2} n^{3/2}}$, as $n \to \infty$.
-        \end{itemize}
-        \item Define $A_n(a, b)$ for $1 \leq a < b \leq n$ as follows
-    \[
-    A_n(a, b) = \frac{(n-2)! a^{a-2} (b-a)^{b-a-2} (n - b + 1)^{n-b-1}}{(a-1)! (b-a-1)! (n-b)!} (n+1)^{n-1}.
-    \]
-    Then, the probability $P_n^{\text{park}}(\sigma_{n-1}^{-1} = l, \sigma_{n}^{-1} = m)$ is given by
-    \[
-    P_p^{\text{park}}(\sigma_{n-1}^{-1} = l, \sigma_{n}^{-1} = m) = 
-    \begin{cases} 
-    (l-m)A_n(l, m), & \text{if } 1 \leq l < m \leq n; \\
-    (m-l)A_n(m, l), & \text{if } 1 \leq m < l \leq n. 
-    \end{cases}
-    \]
-    \item
-        \begin{enumerate}
-            \item For fixed $l, m$ with $m < l$:
-            \[
-            \lim_{n \to \infty} P_n^{\text{park}}(\sigma_{n-1}^{-1} = n+1-l, \sigma_{n}^{-1} = n+1-m) = \frac{(l - m)^{l-m-1} m^{m-1} e^{-l}}{(l - m)! m!}.
-            \]
-            \item For fixed $l, m$ with $l < m$:
-            \[
-            P_n^{\text{park}}(\sigma_{n-1}^{-1} = n+1-l, \sigma_{n}^{-1} = n+1-m) \sim \frac{(m - l)^{m-l-1} l^{l-1} e^{-m}}{(m-l)! l! n}.
-            \]
-            The random vector $(n+1-\sigma_{n-1}^{-1}, n+1-\sigma_{n}^{-1})$ under $P_n^{\text{park}}$ converges in distribution to a random vector $(X_1 + X_2, X_2)$ where $X_1$ and $X_2$ are IID with the Borel distribution.
-            \item For fixed $l, m$:
-            \[
-            P_n^{\text{park}}(\sigma_{n-1}^{-1} = l, \sigma_{n}^{-1} = m) \sim 
-            \begin{cases}
-                \frac{l^{m-l} (m-l)^{m-l-1} m^{m-1} e^{-m}}{l! (m-l)! n^2}, & \text{if } l < m; \\
-                \frac{m^{l-m} (l-m)^{l-m-1} l^{l-1} e^{-l}}{m! (l-m)! n^2}, & \text{if } m < l.
-            \end{cases}
-            \]
-        \end{enumerate}
-    \item Let $j \in \mathbb{N}$. The $j$-dimensional random vector 
-    \[
-    (n+1-\sigma_{n-1+j}^{-1}, n+1-\sigma_{n-1+j+2}^{-1}, \ldots, n+1-\sigma_n^{-1})
-    \]
-    under $P_n^{\text{park}}$ converges in distribution to a random vector 
-    \[
-    (\sum_{r=1}^j X_r, \sum_{r=1}^{j-1} X_r, \ldots, X_j)
-    \]
-    where $\{X_r\}_{r=1}^j$ are IID with the Borel distribution. Furthermore, the last $j$ cars from among the $n$ cars will park in increasing order with probability approaching 1 as $n \to \infty$:
-    \[
-    \lim_{n \to \infty} P_n^{\text{park}}(\sigma_{n-1+j}^{-1} < \sigma_{n-1+j+1}^{-1} < \ldots < \sigma_n^{-1}) = 1.
-    \]
-
-    \item For $j_n = o(n^{\frac{1}{6}})$, the last $j_n$ cars from among the $n$ cars will park in increasing order with probability approaching 1 as $n \to \infty$:
-    \[
-    \lim_{n \to \infty} P_n^{\text{park}}(\sigma_{n-1-j_n}^{-1} < \sigma_{n-1-j_n+1}^{-1} < \ldots < \sigma_n^{-1}) = 1.
-    \]
-
-    \item For any $m \in [n]$, the probability that a specific set of cars $\{\sigma_1, \ldots, \sigma_m\}$ is equal to $[m]$ is given by:
-    \[
-    P_n^{\text{park}}(\{\sigma_1, \ldots, \sigma_m\} = [m]) = \frac{(m+1)^m}{(n+1)^m}.
-    \]
-    \item For any $m \in \mathbb{N}$, the limit of the probability as $n$ approaches infinity that the set of the first $n-m$ permutations is equal to the set of numbers from $[n-m]$ is given by:
-    \[
-    \lim_{n \to \infty} P_n^{\text{park}}(\{\sigma_1, \ldots, \sigma_{n-m}\} = [n-m]) = e^{-m}.
-    \]
-\end{enumerate}
+\item The probability measure on $S_n$, denoted as $P^{\text{park}}_n$, is induced by a random parking function in $P_n$.
+\item $P^{\text{park}}_n(\sigma) = P_n(T_n^{-1}(\sigma))$.
+\item $P^{\text{park}}_n (\sigma) = \frac{L_n(\sigma)}{(n+1)^{n-1}}$, for $\sigma \in S_n$.
+\item The expectation of the random variable $p^{\text{park}}_n = P^{\text{park}}_n (\sigma)$ on $(S_n, P_n)$ is given by $E_{n, P_n^{\text{park}}} = \frac{1}{n!} \sim \frac{e^n}{\sqrt{2\pi n^{n+\frac{1}{2}}}}$.
+\item Most permutations in $S_n$ have a $P_n^{\text{park}}$-probability around $\frac{2^n}{(n+1)^{n-1}}$. The average $P_n^{\text{park}}$-probability is asymptotically equivalent to $\frac{e^n}{\sqrt{2\pi n^{n+\frac{1}{2}}}}$.
+\item There exists a set $A_n \subseteq S_n$ where $P_n^{\text{park}}(A_n)$ is approximately $(2^n)$ and $P_n(A_n) \to 1$. This set has permutations with $P_n^{\text{park}}$ probabilities exponentially larger than the average, and yet is considered negligible by $P_n$.
+\item The maximum value of $P_n^{\text{park}} = \frac{n!}{(n+1)^{n-1}}$ is uniquely attained at $\sigma = 1 \ldots n$. The minimum value of $P_n^{\text{park}} = \frac{1}{(n+1)^{n-1}}$ is uniquely attained at $\sigma = n \ldots 1$.
+\item The probability $P_n^{\text{park}}$ for a permutation $\sigma$ with indices $i_1, i_2, \ldots, i_j$ rearranged into decreasing order from $\sigma^{-1}(i_1), \sigma^{-1}(i_2), \ldots, \sigma^{-1}(i_j) = i_j$ is given by:
+\[
+P_n^{\text{park}}(\sigma^{-1}(\sigma_{n-j+1} = i_1, \sigma_{n-j+2} = i_2, \ldots, \sigma_n = i_j)) = \frac{(n - j)! \prod_{l=1}^j (k_l - k_{l-1} - 1)^{k_l - k_{l-1} - 2} (n - k_j + 1)^{n - k_j - 1} \prod_{l=1}^j l_{n, n-j+l}(\sigma)}{(n+1)^{n-1} \prod_{l=1}^j (k_{l}-k_{l-1}-1)! (n-k_j)!}
+\]
+where $\{k_l\}_{l=1}^j$ is the increasing rearrangement of $\{i_l\}_{l=1}^n$, $k_0 = 0$.
+\item The probability $P_n^{\text{park}}$ that a permutation $\sigma$ places the last element in position $k$ is given by $P_n^{\text{park}}(\sigma_n^{-1} = k) = \frac{1}{n} k^k \binom{n}{k} (n-k+1)^{n-k-1} \frac{1}{(n+1)^{n-1}}$, where $k \in [n]$.
+\item
+    \begin{itemize}
+        \item For a fixed $m \in \mathbb{N}$, the limit as $n \to \infty$ of $P_n^{\text{park}}(\sigma_n^{-1} = n+1-m)$ converges to $\frac{m^{m-1} e^{-m}}{m!}$, hence, the random variable $n+1-\sigma_n^{-1}$ under $P_n^{\text{park}}$ converges in distribution to a variable X with the Borel distribution.
+        \item For a fixed $k \in \mathbb{N}$, $P_n^{\text{park}}(\sigma_n^{-1} = k) \sim \frac{k^k e^{-k}}{k! \cdot n}$, as $n \to \infty$.
+        \item For $c_n$, an integer such that $\lim_{n \to \infty} c_n = c \in (0,1)$, $P_n^{\text{park}}(\sigma_n^{-1} = c_n) \sim \frac{1}{\sqrt{2\pi c} (1 - c)^{3/2} n^{3/2}}$, as $n \to \infty$.
+    \end{itemize}
+\item Define $A_n(a, b)$ for $1 \leq a < b \leq n$ as follows
+\[
+A_n(a, b) = \frac{(n-2)! a^{a-2} (b-a)^{b-a-2} (n - b + 1)^{n-b-1}}{(a-1)! (b-a-1)! (n-b)!} (n+1)^{n-1}.
+\]
+Then, the probability $P_n^{\text{park}}(\sigma_{n-1}^{-1} = l, \sigma_{n}^{-1} = m)$ is given by
+\[
+P_p^{\text{park}}(\sigma_{n-1}^{-1} = l, \sigma_{n}^{-1} = m) =
+\begin{cases}
+(l-m)A_n(l, m), & \text{if } 1 \leq l < m \leq n; \\
+(m-l)A_n(m, l), & \text{if } 1 \leq m < l \leq n.
+\end{cases}
+\]
+\item
+    \begin{enumerate}
+        \item For fixed $l, m$ with $m < l$:
+        \[
+        \lim_{n \to \infty} P_n^{\text{park}}(\sigma_{n-1}^{-1} = n+1-l, \sigma_{n}^{-1} = n+1-m) = \frac{(l - m)^{l-m-1} m^{m-1} e^{-l}}{(l - m)! m!}.
+        \]
+        \item For fixed $l, m$ with $l < m$:
+        \[
+        P_n^{\text{park}}(\sigma_{n-1}^{-1} = n+1-l, \sigma_{n}^{-1} = n+1-m) \sim \frac{(m - l)^{m-l-1} l^{l-1} e^{-m}}{(m-l)! l! n}.
+        \]
+        The random vector $(n+1-\sigma_{n-1}^{-1}, n+1-\sigma_{n}^{-1})$ under $P_n^{\text{park}}$ converges in distribution to a random vector $(X_1 + X_2, X_2)$ where $X_1$ and $X_2$ are IID with the Borel distribution.
+        \item For fixed $l, m$:
+        \[
+        P_n^{\text{park}}(\sigma_{n-1}^{-1} = l, \sigma_{n}^{-1} = m) \sim
+        \begin{cases}
+            \frac{l^{m-l} (m-l)^{m-l-1} m^{m-1} e^{-m}}{l! (m-l)! n^2}, & \text{if } l < m; \\
+            \frac{m^{l-m} (l-m)^{l-m-1} l^{l-1} e^{-l}}{m! (l-m)! n^2}, & \text{if } m < l.
+        \end{cases}
+        \]
+    \end{enumerate}
+\item Let $j \in \mathbb{N}$. The $j$-dimensional random vector
+\[
+(n+1-\sigma_{n-1+j}^{-1}, n+1-\sigma_{n-1+j+2}^{-1}, \ldots, n+1-\sigma_n^{-1})
+\]
+under $P_n^{\text{park}}$ converges in distribution to a random vector
+\[
+(\sum_{r=1}^j X_r, \sum_{r=1}^{j-1} X_r, \ldots, X_j)
+\]
+where $\{X_r\}_{r=1}^j$ are IID with the Borel distribution. Furthermore, the last $j$ cars from among the $n$ cars will park in increasing order with probability approaching 1 as $n \to \infty$:
+\[
+\lim_{n \to \infty} P_n^{\text{park}}(\sigma_{n-1+j}^{-1} < \sigma_{n-1+j+1}^{-1} < \ldots < \sigma_n^{-1}) = 1.
+\]
+\item For $j_n = o(n^{\frac{1}{6}})$, the last $j_n$ cars from among the $n$ cars will park in increasing order with probability approaching 1 as $n \to \infty$:
+\[
+\lim_{n \to \infty} P_n^{\text{park}}(\sigma_{n-1-j_n}^{-1} < \sigma_{n-1-j_n+1}^{-1} < \ldots < \sigma_n^{-1}) = 1.
+\]
+\item For any $m \in [n]$, the probability that a specific set of cars $\{\sigma_1, \ldots, \sigma_m\}$ is equal to $[m]$ is given by:
+\[
+P_n^{\text{park}}(\{\sigma_1, \ldots, \sigma_m\} = [m]) = \frac{(m+1)^m}{(n+1)^m}.
+\]
+\item For any $m \in \mathbb{N}$, the limit of the probability as $n$ approaches infinity that the set of the first $n-m$ permutations is equal to the set of numbers from $[n-m]$ is given by:
+\[
+\lim_{n \to \infty} P_n^{\text{park}}(\{\sigma_1, \ldots, \sigma_{n-m}\} = [n-m]) = e^{-m}.
+\]

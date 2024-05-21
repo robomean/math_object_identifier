@@ -1,4 +1,2 @@
-\begin{enumerate}
-    \item A parking function on $[n]$ if all $n$ cars are able to park.
-    \item $\pi$ is a parking function if and only if $\lvert\{i : \pi_i \leq j\}\rvert \geq j$, for all $j \in [n]$.
-\end{enumerate}
+\item A parking function on $[n]$ if all $n$ cars are able to park.
+\item $\pi$ is a parking function if and only if $\lvert\{i : \pi_i \leq j\}\rvert \geq j$, for all $j \in [n]$.
