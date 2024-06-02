@@ -1,4 +1,1 @@
-P
-park
-n
-(σ)
+P_n^{\text{park}}(\sigma)

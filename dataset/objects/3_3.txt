@@ -1,1 +1,1 @@
-⋆-polynomial of degree n
+$\star$-polynomial of degree n

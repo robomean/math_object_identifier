@@ -1,1 +1,1 @@
- ⋆-eigenvalue problem
+$\star$-eigenvalue problem

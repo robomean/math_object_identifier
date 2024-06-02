@@ -1,2 +1,1 @@
-ARITHMETIC PROPERTIES OF AN ANALOGUE OF t-CORE
-PARTITIONS
+\title[Arithmetic properties of an analogue of $t$-core partitions] {Arithmetic properties of an analogue of $t$-core partitions}

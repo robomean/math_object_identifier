@@ -1,216 +1,177 @@
-A FINITELY PRESENTED GROUP WITH
-TRANSCENDENTAL SPECTRAL RADIUS
-Corentin Bodart
-April 30, 2024
-Abstract
-In this short note, we prove the existence of a finitely presented group with
-transcendental spectral radius. The proof relies on links between decidability of
-the Word Problem and semi-computability of the spectral radius.
-Throughout the paper, we consider marked groups, that is, pairs (G, S) with G a finitely
-generated group and S a finite symmetric generating set (i.e., S = S
-−1
-). We define the
-cogrowth sequence1 and the spectral radius of (G, S) as
-c(n) = #{w ∈ S
-∗
-: ℓ(w) = n and ¯w = eG},
-ρ(G, S) = lim sup
-n→∞
-1
-|S|
-pn
-c(n).
+\documentclass[12pt]{article}
+
+\usepackage[indentafter]{titlesec}
+\titleformat{name=\section}{}{\thetitle.}{0.8em}{\centering\scshape}
+\titleformat{name=\subsection}[runin]{}{\thetitle.}{0.5em}{\bfseries}[.]
+\titleformat{name=\subsubsection}[runin]{}{\thetitle.}{0.5em}{\itshape}[.]
+\titleformat{name=\paragraph,numberless}[runin]{}{}{0em}{}[.]
+\titlespacing{\paragraph}{0em}{0em}{0.5em}
+\titleformat{name=\subparagraph,numberless}[runin]{}{}{0em}{}[.]
+\titlespacing{\subparagraph}{0em}{0em}{0.5em}
+
+\usepackage{url}
+\makeatletter
+\newcommand{\address}[1]{\gdef\@address{#1}}
+\newcommand{\email}[1]{\gdef\@email{\url{#1}}}
+\newcommand{\sites}[1]{\gdef\@sites{\url{#1}}}
+\newcommand{\@endstuff}{\par\vspace{\baselineskip}\noindent\small
+\begin{tabular}{@{}l}\scshape\@address\\\textit{E-mail address:} \@email \\ \textit{URL:} \@sites \end{tabular}}
+\AtEndDocument{\@endstuff}
+\makeatother
+
+\usepackage{titling}
+\title{\normalsize\textbf{{\large A F}INITELY {\large P}RESENTED {\large G}ROUP WITH \\ {\large T}RANSCENDENTAL {\large S}PECTRAL {\large R}ADIUS}}
+\author{Corentin Bodart}
+\date{\today}
+
+\address{Section de Mathématiques, Université de Genève, Switzerland}
+\email{corentin.bodart@unige.ch}
+\sites{https://sites.google.com/view/corentin-bodart}
+
+\usepackage{import}
+
+\usepackage[backend=bibtex, style=alphabetic, sorting=nyt, %sorting=none,
+    doi=false,isbn=false,url=false,eprint=false, maxnames=50]{biblatex}
+\addbibresource{bibliography.bib}
+
+%\usepackage{algpseudocode}
+
+\import{Packages/}{custom_packages.tex}
+\import{Packages/}{custom_macros.tex}
+\import{Packages/}{custom_theorem.tex}
+
+% ----------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	In this short note, we prove the existence of a finitely presented group with transcendental spectral radius. The proof relies on links between decidability of the Word Problem and semi-computability of the spectral radius.
+\end{abstract}
+
+Throughout the paper, we consider \emph{marked groups}, that is, pairs $(G,S)$ with $G$ a finitely generated group and $S$ a finite symmetric generating set (i.e., $S=S^{-1}$). We define the \emph{cogrowth sequence}\footnote{The \say{cogrowth sequence} usually refers to $c_n=\#\{w\in F_S\mid \ell(w)=n,\,\bar w=e_G\}$ where $\bar\cdot\colon F_S\onto G$} and the \emph{spectral radius} of $(G,S)$ as
+\[ c(n) = \# \{ w\in S^* : \ell(w)=n \text{ and } \bar w=e_G\}, \]
+\[ \rho(G,S) = \limsup_{n\to\infty} \frac1{\abs S}\sqrt[n]{c(n)}. \vspace*{-2mm}\]
+
 Our main result is the following:
-Theorem 1. There exists a finitely presented group G such that, for all finite symmetric
-generating sets S, the spectral radius ρ(G, S) is transcendental.
-This answers a question of Kassabov and Pak [KP24, Question 7.2]. Our proof uses
-crucially that G has undecidable Word Problem. (In particular, balls in its Cayley graph
-are not “explicit” in the sense of [HLW06, §2.1].) We propose the refined question:
-Question. Does there exist a finitely presented (or recursively presented) group (G, S)
-with decidable Word Problem and transcendental spectral radius ρ(G, S)?
-Of course, we still expect a positive answer, starting with G = π1(Σ2) a surface group.
-1. Semi-computable numbers
+\begin{thm}
+	There exists a finitely presented group $G$ such that, for all finite symmetric generating sets $S$, the spectral radius $\rho(G,S)$ is transcendental.
+\end{thm}
+This answers a question of Kassabov and Pak \cite[Question 7.2]{kassabov2024monotone}. Our proof uses crucially that $G$ has undecidable Word Problem. (In particular, balls in its Cayley graph are not \say{explicit} in the sense of \cite[\S 2.1]{Linial_Wigderson}.) We propose the refined question:
+
+\textbf{Question.} Does there exist a finitely presented (or recursively presented) group $(G,S)$ with decidable Word Problem and transcendental spectral radius $\rho(G,S)$?
+
+Of course, we still expect a positive answer, starting with $G=\pi_1(\Sigma_2)$ a surface group. \vspace*{-1mm}
+%For instance, Sarnak asked the question of the transcendence of the spectral radius for $G=\pi_1(\Sigma_2)$ a surface group. 
+%\footnote{Kontsevitch suggests that, in order to prove that a real number is transcendental, it should be constructed in that purpose (eg.\ Liouville numbers), or it should be a \emph{period} (i.e., the integral of an algebraic function over an algebraic domain). No such formula is known for $\rho(\pi_1(\Sigma_2))$.}
+
+\section{Semi-computable numbers}
+
 The first ingredient in our proof is the following definition:
-Definition 2. A number x ∈ R is lower semi-computable (resp. upper semi-computable)
-if there exists an algorithm enumerating an increasing (resp. decreasing) sequence (xk)
-of real algebraic numbers2
-such that xk → x.
-1The “cogrowth sequence” usually refers to cn = #{w ∈ FS | ℓ(w) = n, w¯ = eG} where ¯·: FS ։ G
-2Real algebraic numbers xk can be specified as triplets (Pk(X), ak, bk) ∈ Q[X] × Q × Q such that
-xk is the only root of Pk(X) in the interval [ak, bk].
-1
-Lemma 3. Let G be a recursively presented group, then ρ(G, S) is lower semi-computable.
-Moreover, the result is effective: there exists an algorithm with specifications
-Input: A recursively presented marked group (G, S), specified via a finite set S and
-an algorithm enumerating a set of defining relations.
-Output: An algorithm enumerating an increasing sequence of real algebraic numbers
-(xk) such that xk → ρ(G, S).
-Proof. Note that c(m + n) > c(m) · c(n), therefore Fekete’s lemma ensures that
-ρ(G, S) = sup
-n>1
-1
-|S|
-pn
-c(n).
-As G is recursively presented, its Word Problem (i.e., the set of words w ∈ S
-∗
-such
-that ¯w = eG) is recursively enumerable. Let (vi)i>1 ⊆ S
-∗ be a computable enumeration
-of the Word Problem, and let us define the “partial cogrowth sequence”
-ck(n) = #{vi
-: ℓ(vi) = n and 1 6 i 6 k}.
-Observe that ck(n) ր c(n) pointwise as k → ∞. In particular
-xk = max
-16n6k
-1
-|S|
-pn
-ck(n)
-is a computable increasing sequence such that xk → ρ(G, S), as promised.
-Remark 4. The analogous result for “upper semi-computable” doesn’t hold, even
-under the additional assumption that the Word Problem is decidable (with a Word
-Problem algorithm as part of the input). Indeed, this would imply that amenability is
-a co-semi-decidable property, contradicting [Rau23, Theorem 10.6].
-As will become clear in the proof of Theorem 1, there exists finitely presented groups
-(with undecidable Word Problem) whose spectral radius is not upper semi-computable.
-2. From computable spectral radius to decidable Word Problem
+\begin{defi}
+	A number $x\in\R$ is \emph{lower semi-computable} (resp.\ \emph{upper semi-computable}) if there exists an algorithm enumerating an increasing (resp.\ decreasing)  sequence $(x_k)$ of real algebraic numbers\footnote{Real algebraic numbers $x_k$ can be specified as triplets $(P_k(X),a_k,b_k)\in\Q[X]\times\Q\times\Q$ such that $x_k$ is the only root of $P_k(X)$ in the interval $[a_k,b_k]$.} such that $x_k\to x$. \vspace*{2mm}
+	%We say $x$ is \emph{computable} if it is both lower and upper semi-computable.
+\end{defi}
+%An algebraic numbers $r$ can be described as 
+%By definition, real algebraic numbers are both lower and upper semi-computable. \vspace*{1mm}
+
+\newpage
+
+\begin{lemma}
+	Let $G$ be a recursively presented group, then $\rho(G,S)$ is lower semi-computable. Moreover, the result is effective: there exists an algorithm with specifications
+	\begin{itemize}[leftmargin=18mm, rightmargin=2mm]
+		\item[{\normalfont Input:}\hspace*{3mm}] A recursively presented marked group $(G,S)$, specified via a finite set $S$ and an algorithm enumerating a set of defining relations.
+		\item[{\normalfont Output:}] An algorithm enumerating an increasing sequence of real algebraic numbers $(x_k)$ such that $x_k\to \rho(G,S)$.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	Note that $c(m+n)\ge c(m)\cdot c(n)$, therefore Fekete's lemma ensures that
+	\[ \rho(G,S) =  \sup_{n\ge 1} \frac1{\abs S}\sqrt[n]{c(n)}. \]
+	As $G$ is recursively presented, its Word Problem (i.e., the set of words $w\in S^*$ such that $\bar w=e_G$) is recursively enumerable. Let $(v_i)_{i\ge 1}\subseteq S^*$ be a computable enumeration of the Word Problem, and let us define the \say{partial cogrowth sequence}
+	\[ c_k(n) = \#\{v_i : \ell(v_i)=n \text{ and } 1\le i\le k\}. \]
+	Observe that $c_k(n)\nearrow c(n)$ pointwise  as $k\to\infty$. In particular
+	\[ x_k = \max_{1\le n\le k}\frac1{\abs S}\sqrt[n]{c_k(n)}\]
+	is a computable increasing sequence such that $x_k\to \rho(G,S)$, as promised.
+\end{proof}
+
+\begin{rem}
+	The analogous result for \say{upper semi-computable} doesn't hold, even under the additional assumption that the Word Problem is decidable (with a Word Problem algorithm as part of the input). Indeed, this would imply that amenability is a co-semi-decidable property, contradicting \cite[Theorem 10.6]{Rauzy}.
+	
+	As will become clear in the proof of Theorem 1, there exists finitely presented groups (with undecidable Word Problem) whose spectral radius is not upper semi-computable.
+\end{rem}
+
+\section{From computable spectral radius to decidable Word Problem}
+
 Our main observation is the following:
-Theorem 5. Let (G, S) be a recursively presented group such that the spectral radius
-ρ(G, S) is upper semi-computable. Consider a subset W ⊆ S
-∗
-such that, for each
-w ∈ W, either w¯ = eG or the normal subgroup generated hhw¯iiG
-is non-amenable. Then
-there exists an algorithm which, given a word w ∈ W, decides whether w¯ = eG or not.
-(In particular, if W = S
-∗
-, then G has decidable word problem.) This theorem relies
-crucially on a classical result due to Kesten.
-Theorem 6 ([Kes59]). Let (G, S) be a marked group and N E G a non-amenable
-normal subgroup, then we have ρ(G, S) < ρ(G/N, S).
-2
-Proof of Theorem 5. Suppose that G is presented as hS | Ri. Take w ∈ W, we run two
-parallel processes to decide whether ¯w = eG or not.
-• As G is recursively presented, we can enumerate all words v ∈ S
-∗
-such that ¯v = eG.
-If at any point v = w, we stop the algorithm and conclude that ¯w = eG.
-• The group Gw = G/ hhw¯iiG = hS | R, wi is recursively presented, hence ρ(Gw, S) is
-lower semi-computable. We can compute two sequences (xk) and (yk) such that
-xk ց ρ(G, S) and yk ր ρ(Gw, S).
-As xk and yk are real algebraic, we can compare them. If at any point xk < yk, we
-stop the algorithm and conclude that ¯w 6= eG. It should be noted that, if ¯w 6= eG,
-then the inequality xk < yk will hold eventually as hhw¯iiG
-is non-amenable and
-therefore ρ(G, S) < ρ(G/hhw¯iiG
-, S) = ρ(Gw, S).
-In both cases, the algorithm finishes and decides correctly if ¯w = eG or not.
-3. Proof of Theorem 1
-We propose two different constructions, relying both on Theorem 5.
-1. We recall a family of groups introduced by Higman [Hig61]: for each I ⊆ Z,
-HI
-:=
+\begin{thm}\label{thm:comp_to_deci}
+	Let $(G,S)$ be a recursively presented group such that the spectral radius $\rho(G,S)$ is upper semi-computable.
+	Consider a subset $W\subseteq S^*$ such that, for each $w\in W$, either $\bar w=e_G$ or the normal subgroup generated $\lla \bar w\rra_G$ is non-amenable. Then there exists an algorithm which, given a word $w\in W$, decides whether $\bar w=e_G$ or not.
+\end{thm}
+
+(In particular, if $W=S^*$, then $G$ has decidable word problem.) This theorem relies crucially on a classical result due to Kesten.
+\begin{thm}[{\cite{Kesten}}]
+	Let $(G,S)$ be a marked group and $N\len G$ a non-amenable normal subgroup, then we have $\rho(G,S) < \rho(G/N,S)$.
+\end{thm}
+
+\begin{proof}[Proof of Theorem \ref*{thm:comp_to_deci}]
+	Suppose that $G$ is presented as $\la S\mid R\ra$. Take $w\in W$, we run two parallel processes to decide whether $\bar w=e_G$ or not.
+	\begin{itemize}[leftmargin=8mm]
+		\item As $G$ is recursively presented, we can enumerate all words $v\in S^*$ such that $\bar v=e_G$. If at any point $v=w$, we stop the algorithm and conclude that $\bar w=e_G$.
+		\item The group $G_w=G/\lla \bar w\rra_G=\la S\mid R,w\ra$ is recursively presented, hence $\rho(G_w,S)$ is lower semi-computable. We can compute two sequences $(x_k)$ and $(y_k)$ such that
+		\[ x_k\searrow \rho(G,S) \quad\text{and}\quad  y_k\nearrow \rho(G_w,S). \]
+		As $x_k$ and $y_k$ are real algebraic, we can compare them. If at any point $x_k<y_k$, we stop the algorithm and conclude that $\bar w\ne e_G$. It should be noted that, if $\bar w\ne e_G$, then the inequality $x_k<y_k$ will hold eventually as $\lla \bar w\rra_G$ is non-amenable and therefore $\rho(G,S)<\rho(G/\!\lla \bar w\rra_G,S)=\rho(G_w,S)$.
+	\end{itemize}
+	In both cases, the algorithm finishes and decides correctly if $\bar w=e_G$ or not.
+\end{proof}
+
+\section{Proof of Theorem 1}
+
+We propose two different constructions, relying both on Theorem \ref*{thm:comp_to_deci}.
+
+\textbf{1.} We recall a family of groups introduced by Higman \cite{Higman}: for each $I\subseteq \Z$,
+	\[ H_I \coloneqq \la a,b,c,d \mid a^iba^{-i}=c^idc^{-i} \;\;(i\in I)\ra. \]
+This is an amalgamated free product $A*_CB$ with $A=F(a,b)$, $B=F(c,d)$ and $C=F(\{g_i\}_{i\in I})$ (with injections $g_i\mapsto a^ib a^{-i}$ and $g_i\mapsto c^idc^{-i}$ respectively). We define
+\[ w_i=a^iba^{-i}c^id^{-1}c^{-i}. \vspace*{-2mm}\]
+\begin{lemma}
+	If $i\notin I$, then $\lla \bar w_i\rra_{H_I}$ contains a non-abelian free group. \vspace*{-2mm}
+\end{lemma}
+\begin{proof}
+	The subgroup $\la w_i,bw_ib^{-1}\ra$ is non-abelian free. This follows directly from the Normal Form Theorem for amalgamated free products, see eg.\ \cite[p. 186-187]{Lyndon_Schupp}.
+\end{proof}
+
+Consider $I\subset\Z$ which is recursively enumerable (hence $H_I$ is recursively presented), but not recursive. Using Higman's embedding theorem \cite{Higman}, we can embed $H_I$ into a finitely presented group $G$ (as Higman did). For any finite symmetric generating set $S$ of $G$, we consider a monoid homomorphism $\varphi\colon \{a^\pm,b^\pm,c^\pm,d^\pm\}^*\to S^*$ such that $\overline{\varphi(v)}=\bar v$ for all $v\in\{a^\pm,b^\pm,c^\pm,d^\pm\}$, and let $W=\{\varphi(w_i):i\in\Z\}\subset S^*$.
+\begin{itemize}[leftmargin=8mm]
+	\item Using the lemma, either $\bar w_i=e_G$ or $\lla \bar w_i\rra_G\ge \lla \bar w_i\rra_{H_I}$ is non-amenable.
+	\item As $I$ is not recursive, there does not exist any algorithm which, given $\varphi(w_i)\in W$ (equivalently $i\in \Z$) decides whether $\bar w_i=e_G$ or not (equivalently $i\in I$ or not).
+\end{itemize}
+Therefore $\rho(G,S)$ cannot be upper semi-computable, hence cannot be algebraic. \vspace*{2mm} \hfill$\square$
+
+\begin{rem}
+	Using Karrass-Solitar theorem on amalgamated free products \cite{Karrass_Solitar}, one should be able to prove that $\lla g\rra_{H_I}$ contains a non-abelian free group for all $g\in H_I\setminus \{e\}$.
+\end{rem}
+
+\newpage
+
+\begin{rem} The family $(H_I)_{I\subseteq\Z}$ satisfies the conclusions of Lemma 1.11 of \cite{kassabov2024monotone}. In particular, we recover that the set of values $\{f(H_I,S):I\subseteq \Z\}$ is a continuum for every strictly monotone parameter $f$, simplifying part of the proof of \cite*[Theorem 1.1]{kassabov2024monotone}. That being said, it doesn't allow to reprove their Theorem 1.2 (\say{No isolated point}).
+\end{rem}
 
 
-a, b, c, d | a
-i
-ba−i = c
-i
-dc−i
-(i ∈ I)
-
-.
-This is an amalgamated free product A ∗C B with A = F(a, b), B = F(c, d) and
-C = F({gi}i∈I ) (with injections gi
-7→ a
-i
-ba−i and gi
-7→ c
-idc−i
-respectively). We define
-wi = a
-i
-ba−i
-c
-i
-d
-−1
-c
-−i
-.
-Lemma 7. If i /∈ I, then hhw¯iiiHI
-contains a non-abelian free group.
-Proof. The subgroup hwi
-, bwib
-−1
-i is non-abelian free. This follows directly from the
-Normal Form Theorem for amalgamated free products, see eg. [LS77, p. 186-187].
-Consider I ⊂ Z which is recursively enumerable (hence HI is recursively presented),
-but not recursive. Using Higman’s embedding theorem [Hig61], we can embed HI into
-a finitely presented group G (as Higman did). For any finite symmetric generating
-set S of G, we consider a monoid homomorphism ϕ: {a
-±, b±, c±, d±}
-∗ → S
-∗
-such that
-ϕ(v) = ¯v for all v ∈ {a
-±, b±, c±, d±}, and let W = {ϕ(wi) : i ∈ Z} ⊂ S
-∗
-.
-• Using the lemma, either ¯wi = eG or hhw¯iiiG > hhw¯iiiHI
-is non-amenable.
-• As I is not recursive, there does not exist any algorithm which, given ϕ(wi) ∈ W
-(equivalently i ∈ Z) decides whether ¯wi = eG or not (equivalently i ∈ I or not).
-Therefore ρ(G, S) cannot be upper semi-computable, hence cannot be algebraic.
-Remark 8. Using Karrass-Solitar theorem on amalgamated free products [KS70], one
-should be able to prove that hhgiiHI
-contains a non-abelian free group for all g ∈ HI \{e}.
-3
-Remark 9. The family (HI )I⊆Z satisfies the conclusions of Lemma 1.11 of [KP24]. In
-particular, we recover that the set of values {f(HI , S) : I ⊆ Z} is a continuum for every
-strictly monotone parameter f, simplifying part of the proof of [KP24, Theorem 1.1].
-That being said, it doesn’t allow to reprove their Theorem 1.2 (“No isolated point”).
-2. Consider H = hS0 | Ri a finitely presented group with unsolvable Word Problem.
-We consider G = H ∗ hti with generating set S = S0 ⊔ {t
-±}, and W = S
-∗
-0
-.
-For all w ∈ W, either ¯w is trivial, or the normal subgroup it generates satisfies
-hhw¯iiG >
+\bigbreak
+
+\textbf{2.} Consider $H=\la S_0\mid R\ra$ a finitely presented group with unsolvable Word Problem. We consider $G=H*\la t\ra$ with generating set $S=S_0\sqcup\{t^\pm\}$, and $W=S_0^*$.
+
+For all $w\in W$, either $\bar w$ is trivial, or the normal subgroup it generates satisfies
+\[ \lla \bar w\rra_G \ge \la \bar w,\, t\bar wt^{-1},\, t^2\bar wt^{-2}\ra \simeq C_n * C_n * C_n \ge F_2 \]
+where $n\in\{2,3,\ldots\}\cup\{\infty\}$ is the order of $\bar w$. Again, Theorem \ref*{thm:comp_to_deci} implies that $\rho(G,S)$ cannot be upper semi-computable, hence is transcendental.
+
+In particular, we can take $H$ defined by $10$ generators and $27$ relators \cite{Collins}, and therefore $G$ defined by as little as $11$ generators and $27$ relators. \vspace*{2mm} \hfill$\square$
+
+%\todo{Under which condition are spectral radii upper semi-computable? Is is true for hyperbolic groups? This could be useful to construct an alternate recursively presented example (potentially with solvable word problem) and transcendental spectral radius, via small cancelation theory.}
 
 
-w, t ¯ wt ¯
-−1
-, t2wt ¯
-−2
-
-≃ Cn ∗ Cn ∗ Cn > F2
-where n ∈ {2, 3, . . .} ∪ {∞} is the order of ¯w. Again, Theorem 5 implies that ρ(G, S)
-cannot be upper semi-computable, hence is transcendental.
-In particular, we can take H defined by 10 generators and 27 relators [Col86], and
-therefore G defined by as little as 11 generators and 27 relators.
-Acknowledgments. I’d like to Tatiana Nagnibeda and Igor Pak for comments and
-encouragements. The author was supported by the Swiss NSF grant 200020-200400.
-References
-[Col86] Donald J. Collins. “A simple presentation of a group with unsolvable word problem”. In: Illinois Journal of Mathematics 30.2 (1986), pp. 230 –234.
-[Hig61] Graham Higman. “Subgroups of finitely presented groups”. In: Proceedings of the
-Royal Society of London. Series A. Mathematical and Physical Sciences 262.1311
-(1961), pp. 455–475.
-[HLW06] Shlomo Hoory, Nathan Linial, and Avi Wigderson. “Expander Graphs and their
-Applications”. In: Bulletin of the American Math. Society 43 (2006), pp. 439–561.
-[KS70] Abraham Karrass and Donald Solitar. “The Subgroups of a Free Product of Two
-Groups with an Amalgamated Subgroup”. In: Transactions of the American Mathematical Society 150.1 (1970), pp. 227–255.
-[KP24] Martin Kassabov and Igor Pak. Monotone parameters on Cayley graphs of finitely
-generated groups. Preprint at https://arxiv.org/abs/2404.10870. (2024).
-[Kes59] Harry Kesten. “Symmetric Random Walks on Groups”. In: Transactions of the
-American Mathematical Society 92.2 (1959), pp. 336–354.
-[LS77] Roger C. Lyndon and Paul E. Schupp. Combinatorial Group Theory. Classics in
-Mathematics. Springer Berlin Heidelberg, (1977).
-[Rau23] Emmanuel Rauzy. Computable analysis on the space of marked groups. Preprint
-at https://arxiv.org/abs/2111.01179. (2023).
-Section de Math´ematiques, Universit´e de Gen`eve, Switzerland
-E-mail address: corentin.bodart@unige.ch
-URL: https://sites.google.com/view/corentin-bodart
-4
+\textbf{Acknowledgments.} I'd like to Tatiana Nagnibeda and Igor Pak for comments and encouragements. The author was supported by the Swiss NSF grant 200020-200400.
+
+\AtNextBibliography{\small}
+\printbibliography
+\end{document}

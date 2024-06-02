@@ -1,13 +1,33 @@
-Пусть X обозначает матрицу порядка 2 × 2. Свойства X включают:
-• X может быть выражена в виде 
-a b
-c d
-.
-• Определитель X вычисляется по формуле ad − bc.
-Пусть дана матрица X =
-
-1 2
-3 4
-. Тогда определитель X рассчитывается
-следующим образом:
-det(X) = 1 · 4 − 2 · 3 = 4 − 6 = −2
+\documentclass{article}
+\usepackage[russian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\begin{document}
+
+Пусть $X$ обозначает матрицу порядка $2 \times 2$. Свойства $X$ включают:
+\begin{itemize}
+    \item $X$ может быть выражена в виде 
+    \[
+    \begin{bmatrix}
+    a & b \\
+    c & d 
+    \end{bmatrix}
+    \]
+    \item Определитель $X$ вычисляется по формуле $ad - bc$.
+\end{itemize}
+
+Пусть дана матрица $X$:
+\[
+X = \begin{bmatrix}
+1 & 2 \\
+3 & 4 
+\end{bmatrix}
+\]
+Тогда определитель $X$ рассчитывается следующим образом:
+\[
+\det(X) = 1 \cdot 4 - 2 \cdot 3 = 4 - 6 = -2
+\]
+
+\end{document}

@@ -1,866 +1,752 @@
-BEST POLYNOMIAL APPROXIMATION FOR NON-AUTONOMOUS
-LINEAR ODES IN THE ⋆-PRODUCT FRAMEWORK∗
-STEFANO POZZA†
-Abstract. We present the first formulation of the optimal polynomial approximation of the
-solution of linear non-autonomous systems of ODEs in the framework of the so-called ⋆-product.
-This product is the basis of new approaches for the solution of such ODEs, both in the analytical
-and the numerical sense. The paper shows how to formally state the problem and derives upper
-bounds for its error.
-Key words. Non-autonomous linear ODEs, polynomial approximation, error analysis,
-AMS subject classifications. 46F10, 37C60, 65L05
-1. Introduction. Recently, a new approach has been introduced for the solution
-of systems of linear non-autonomous ordinary differential equations based on the socalled ⋆-product [6, 7, 12, 16]. Such an approach has proved to be valuable and
-effective analytically, by producing new explicit expressions for the solution of certain
-problems [5, 6, 8], and numerically, being the basis of new efficient algorithms in
-quantum chemistry problems [3, 13, 14, 15].
-Given a Hermitian matrix-valued function A˜(t) ∈ C
-N×N analytic on the bounded
-interval I, and the nonzero vector ˜v ∈ C
-N×N we consider the initial value problem
-∂
-∂tu˜(t) = A˜(t)˜u(t), u˜(a) = ˜v, t ∈ I = [a, b]. (1.1)
-The ⋆-product is defined over a Fr´echet-Lie group on distributions [16]. In such a
-group, the initial value problem becomes a ⋆-linear system. Thanks to this “linearization” of the ODE, new techniques can be applied to solve the problem. Here, we
-focus on the polynomial approximation approach, which can be used both in numerical approaches and in the theoretical framework. In particular, in the latter one,
-a symbolic algorithm named ⋆-Lanczos [8] is able to produce a Krylov-like subspace
-approximation, that is, a polynomial approximation in the ⋆-product sense.
-In this work, we will show that it is possible to formulate the problem of a best
-polynomial approximation for ˜u in the ⋆-framework. Moreover, we will show that its
-error can be bounded by the best uniform norm polynomial approximation error for
-the exponential [11]. This result is crucial to understand the numerical behavior of
-polynomial-based numerical methods when solving linear systems derived by using
-the ⋆-approach. Indeed, the polynomial approximation is central in the analysis of
-standard Krylov subspace methods (e.g., [10]), and its extension to the ⋆-framework
-will also allow extending this kind of numerical analysis.
-In Section 2, we introduce the basics of the ⋆-product, and we state the main
-result. Section 3 shows how to extend matrix analysis results to the ⋆-framework. The
-prove of the main result is given in Section 4 and Section 5 draw some conclusions.
-∗This work was supported by Charles University Research Centre program No.
-PRIMUS/21/SCI/009 and UNCE/24/SCI/005, and by the Magica project ANR-20-CE29-0007
-funded by the French National Research Agency.
-†Faculty of Mathematics and Physics, Charles University, Sokolovsk´a 83, 186 75 Praha 8, Czech
-Republic,(pozza@karlin.mff.cun.cz).
-1
-2 S. Pozza
-Table 1.1
-List of the main ⋆-definitions and related objects, f, g, x are generally from A(I).
-Name Symbol Definition Comments / Properties
-⋆-product f ⋆ g R
-I
-f(t, τ)g(τ, s)dτ
-⋆-identity δ f ⋆ δ = δ ⋆ f = f δ(t − s): Dirac delta
-⋆-inverse f−⋆ f ⋆ f−⋆ = f−⋆ ⋆ f = δ Existence [7, 16]
-Heaviside function Θ Θ(t − s) = 1, t ≥ s, 0 otherwise
-Analytic Θ-set AΘ(I) {f˜(t, s)Θ(t − s): f˜ analytic on I
-2} ⋆-product-closed set
-Dirac 1st derivative δ
-′
-δ
-′
-(t − s) δ
-′ ⋆ Θ = Θ ⋆ δ′ = δ
-Dirac derivatives δ
-(j) δ
-(j)
-(t − s) δ
-(j) ⋆ δ(i) = δ
-(i+j)
-⋆-powers f
-⋆j f ⋆ f ⋆ · · · ⋆ f, j times f
-⋆0
-:= δ, by convention
-⋆-resolvent R⋆(x)
-P∞
-j=0 x
-⋆j , x ∈ AΘ(I) R⋆(x) = (δ − x)−⋆
-⋆-polynomial p
-⋆(x)
-Pn
-j=0 αjx
-⋆j
-, αj ∈ C if αn 6= 0, n is the degree
-Table 1.2
-Useful properties of ⋆-product actions on AΘ(I) elements.
-Description Definition Property
-“Integration” in t F˜Θ, F˜(t, s) primitive of f˜ in t, F(s, s) = 0 F˜Θ = Θ ⋆ f˜Θ
-“Integration” in s F˜Θ, F˜(t, s) primitive of ˜f in s, F˜(t, t) = 0 F˜Θ = ˜fΘ ⋆ Θ
-“Differentiation” in t f˜(1,0)Θ, f˜(1,0)(t, s) derivative of f˜ in t δ
-′ ⋆ f˜Θ = f˜(1,0)Θ + fδ˜
-“Differentiation” in s
-˜f
-(0,1)Θ, ˜f
-(0,1)(t, s) derivative of ˜f in s
-˜fΘ ⋆ δ′ = − ˜f
-(0,1)Θ + ˜f δ
-2. Basics and main result. In order to state the main result, we first summarize the ⋆-product basics. Refer to [16] for the general definition of this product and
-the related properties. Given a bounded interval I, let us denote with A(I) the set of
-the bivariate distributions of the kind
-f(t, s) = ˜f−1(t, s)Θ(t − s) + ˜f0(t)δ(t − s) + ˜f1(t)δ
-′
-(t − s) + · · · + ˜fk(t)δ
-(k)
-(t − s),
-where ˜f−1, . . . ,
-˜fk are analytic functions over I both in t and s, Θ is the Heaviside
-function (Θ(t − s) = 1 for t ≥ s, and 0 otherwise), and δ, δ′
-, . . . , δ(k) are the Dirac
-delta and its derivatives. Then, the ⋆-product of f1, f2 ∈ A(I) is
-(f1 ⋆ f2)(t, s) := Z
-I
-f1(t, τ)f2(τ, s) dτ ∈ A(I).
-Some of the important properties, definitions, and facts about the ⋆-product can be
-found in Tables 1.1 and 1.2. Specifically, it is easy to see that δ(t−s) is the ⋆-product
-identity. Moreover, since A(I) is closed under ⋆-product, we can define the ⋆-powers
-of f ∈ A(I), denoted as f
-⋆n with the convention f
-⋆0 = δ. Therefore, for x ∈ A(I),
-we can define the ⋆-polynomial of degree n as
-p
-⋆
-(t, s) := α0δ(t − s) + α1x(t, s) + α2x(t, s)
-⋆2 + · · · + αnx(t, s)
-⋆n
-, (2.1)
-with constants α0, . . . , αn ∈ C, αn 6= 0. We call P
-⋆
-n the set of all such ⋆-polynomials.
-We define the subset AΘ(I) ⊂ A(I) of the distributions of the form f(t, s) =
-˜f(t, s)Θ(t − s), with ˜f a function analytic over I
-2
-. The ⋆-resolvent is defined as
-R
-⋆
-(x) := X∞
-j=0
-x
-⋆j
-.
-POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 3
-Note that R⋆
-(x) is well-defined (i.e., convergent) for every x ∈ AΘ [6].
-When A, B are matrices with compatible sizes composed of elements from A(I),
-the ⋆-product straightforwardly extends to a matrix-matrix (or matrix-vector) ⋆-
-product. In the following, we denote with AN×M (I) and A
-N×M
-Θ (I) the spaces of
-N × M matrices with elements from those sets. We denote with I⋆ = ˜Iδ(t − s) the
-identity matrix in AN×N (I), with ˜I the standard N × N identity matrix.
-Setting I = [a, b], the solution ˜u(t) of the ODE (1.1) can be expressed by
-u˜(t) = U(t, a)˜v, t ∈ I, U(t, s) = Θ(t − s) ⋆ R⋆
-
-A˜(t)Θ(t − s)
-
-; (2.2)
-as proven in [6]. From now on, we will skip the distribution arguments t, s whenever
-it is useful and clear from the context. Since R⋆
-(A˜Θ) is the ⋆-inverse of I⋆ −A˜Θ (e.g.,
-[12]), then solving (2.2) means solving the system of ⋆-linear equations
-(I⋆ − A˜Θ) ⋆ x = ˜vδ, u˜(t) = (Θ ⋆ x)(t, a) t ∈ I.
-Note that this is not just a theoretical result since there is an efficient way to transform
-the ⋆-linear system into a usual linear system that can be solved numerically [13, 14,
-15].
-It is reasonable to consider a ⋆-polynomial approximation p
-⋆
-(A˜Θ)˜v ≈ R⋆
-(A˜Θ)˜v.
-Specifically, we aim at finding the best ⋆-polynomial p
-⋆
-(t, s) of degree n that approximates the ⋆-resolvent R⋆
-(A)˜v in the L2 norm sense, i.e., the polynomial q
-⋆
-that
-minimizes the error
-ku˜(t) − (Θ ⋆ q⋆
-(A)˜v)(t, a)kL2
-:= Z b
-a
-|u˜(τ) − (Θ ⋆ q⋆
-(A))(τ, a)˜v|
-2
-!1
-2
-, t ∈ I.
-Note that Θ ⋆ q⋆
-(A) ∈ AN×N
-Θ , while q
-⋆
-(A) ∈ AN×N .
-Theorem 2.1 (Main result). Consider the initial value problem (1.1) and let
-λ˜
-1(t), . . . , λ˜N (t) be the eigenvalues of A˜(t) ∈ C
-N×N . We define the interval
-J := 
-min
-t∈I,i=1,...,N
-λ˜
-i(t), max
-t∈I,i=1,...,N
-λ˜
-i(t)
-
-× length(I),
-and denote with En(J) the minimal uniform error of the polynomial approximation
-of the exponential over J, i.e.,
-En(J) := min
-p∈Pn
-max
-t∈J
-| exp(t) − p(t)|.
-Define A(t, s) = A˜(t)Θ(t−s). Then the error of the L2-best ⋆-polynomial approximant
-q
-⋆
-can be bounded by
-ku˜(t) − (Θ ⋆ q⋆
-(A)˜v)(t, a)kL2 ≤ En(J) ≤ M ρn+1, t ∈ I
-for some constant M > 0 and 0 < ρ < 1 depending on J.
-The proof of this Theorem will be the outcome of the rest of the paper. The first
-step towards the proof is to derive an explicit form for the ⋆-monomials f
-⋆n in the
-case in which f(t, s) = ˜f(t)Θ(t − s) ∈ AΘ(I).
-4 S. Pozza
-Lemma 2.2. Consider the function f(t, s) = ˜f(t)Θ(t − s) ∈ AΘ and let F˜(t) be a
-primitive of ˜f(t). Then, for n = 1, 2, . . .,
-f(t, s)
-⋆n =
-˜f(t)
-(n − 1)!
-
-F˜(t) − F˜(s)
-n−1
-Θ(t − s), (2.3)
-Θ(t − s) ⋆ f(t, s)
-⋆n =
-1
-n!
-
-F˜(t) − F˜(s)
-n
-Θ(t − s). (2.4)
-Moreover, Θ(t − s) ⋆ f(t, s)
-⋆0 = Θ(t − s) since f(t, s)
-⋆0 = δ(t − s) by convention.
-Proof. For n = 2, the expression (2.3) is trivially obtained by
-f(t, s)
-⋆2 = ˜f(t)Θ(t − s)
-Z t
-s
-˜f(τ) dτ = ˜f(t)
-
-F˜(t) − F˜(s)
-
-Θ(t − s).
-Now, by induction, assuming (2.3) we get
-f(t, s)
-⋆n+1 =
-˜f(t)
-(n − 1)!Θ(t − s)
-Z t
-s
-˜f(τ)
-
-F˜(τ) − F˜(s)
-n−1
-dτ. (2.5)
-Integrating by part gives
-Z t
-s
-˜f(τ)
-
-F˜(τ) − F˜(s)
-n−1
-dτ = (F˜(t) − F˜(s))n−
-(n − 1) Z t
-s
-˜f(τ)
-
-F˜(τ) − F˜(s)
-n−1
-dτ.
-Therefore,
-n
-Z t
-s
-˜f(τ)
-
-F˜(τ) − F˜(s)
-n−1
-dτ = (F˜(t) − F˜(s))n
-.
-Together with (2.5), this proves (2.3). Eq. (2.4) comes from observing that
-Θ(t − s) ⋆ f(t, s)
-⋆n = Θ(t − s) ⋆
-˜f(t)
-(n − 1)!
-
-F˜(t) − F˜(s)
-n−1
-Θ(t − s)
-=
-Θ(t − s)
-(n − 1)! Z t
-s
-˜f(τ)
-
-F˜(τ) − F˜(s)
-n−1
-dτ
-=
-1
-n!
-(F˜(t) − F˜(s))nΘ(t − s),
-which concludes the proof.
-An immediate consequence of Lemma 2.2 is that
-exp 
-F˜(t) − F˜(s)
-
-= Θ(t − s) ⋆ R⋆
-(f)(t, s),
-a well-known result; see, e.g., [6].
-3. Matrix spectral decomposition and the ⋆-product. Consider a timedependent N × N Hermitian matrix-valued function A˜(t) analytic over the closed
-interval I. Then, for every t ∈ I there exist matrix-valued functions Q˜(t) and Λ( ˜ t)
-analytic over I such that:
-A˜(t) = Q˜(t)Λ( ˜ t)Q˜(t)
-H , with Λ( ˜ t) = diag(λ˜
-1(t), . . . , λ˜
-n(t)), Q˜(t)
-H Q˜(t) = I, (3.1)
-POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 5
-for every t ∈ I; see [9, Chapter II, Section 6] (we refer to [4] for extensions to the
-non-analytic case). The elements of the diagonal matrix Λ( ˜ t) are analytic functions
-and, for every t ∈ I, the λ˜
-j (t) are the eigenvalues (eigencurves) of A˜(t). The columns
-of Q˜(t), denoted ˜q1(t), . . . , q˜N (t), are the corresponding eigenvectors (analytic over I).
-Given A(t, s) ∈ AN×N
-Θ (I), the ⋆-eigenproblem is to find the ⋆-eigenvalues λ(t, s) ∈
-AΘ(I) and the ⋆-eigenvector q(t, s) ∈ AN×1
-(I) such that
-A(t, s) ⋆ q(t, s) = λ(t, s) ⋆ q(t, s). (3.2)
-If λ(t, s) and q(t, s) exist, then q(t, s)⋆a(t, s) is also a ⋆-eigenvector, for every a(t, s) 6≡ 0
-from A(I). For the specific case of interest, where A(t, s) = A˜(t)Θ(t−s), the solution
-to the ⋆-eigenproblem is in the following theorem.
-Theorem 3.1. Let A(t, s) = A˜(t)Θ(t−s) be in AΘ(I), and let λ˜
-i(t) and q˜i(t), be
-the (analytic) eigencurves and the corresponding eigenvectors as defined in (3.1) for
-i = 1, . . . , N. Then, the solution to the ⋆-eigenvalue problem (3.2) is given by
-λi(t, s) = λ˜
-i(t)Θ(t − s), qi(t, s) = ˜q
-′
-i
-(t)Θ(t − s) + ˜qi(t)δ(t − s), i = 1, . . . , N.
-where q˜
-′
-i
-(t) is the derivative of q˜i(t).
-Proof. First, note that
-λ˜
-i(t)δ(t − s) ⋆ q˜i(t)Θ(t − s) = λ˜
-i(t)
-Z
-I
-δ(t − τ)˜qi(τ)Θ(τ − s) dτ
-= λ˜
-i(t)˜qi(t)Θ(t − s) = A˜(t)˜qi(t)Θ(t − s)
-= A˜(t)δ(t − s) ⋆ q˜i(t)Θ(t − s).
-Using the fact that λ˜
-i(t)δ(t−s)⋆Θ(t−s) = λ˜
-i(t)Θ(t−s), and that δ
-′
-(t−s)⋆Θ(t−s) =
-Θ(t − s) ⋆ δ′
-(t − s) = δ(t − s), see Table 1.1, we obtain (we omit the variables for the
-sake of readability)
-λ˜
-iδ ⋆ q˜iΘ = λ˜
-iδ ⋆ Θ ⋆ δ′
-⋆ q˜iΘ = λ˜
-iΘ ⋆ δ′
-⋆ q˜iΘ = λ˜
-iΘ ⋆ qi
-,
-where qi(t, s) := δ
-′
-(t − s) ⋆ q˜i(t)Θ(t − s). Similarly, Aδ ⋆ ˜ q˜iΘ = A˜Θ ⋆ qi
-. Combining
-these results, we get
-λ˜
-iΘ ⋆ qi = λ˜
-iδ ⋆ q˜iΘ = λ˜
-iq˜iΘ = A˜q˜iΘ = Aδ ⋆ ˜ q˜iΘ = A˜Θ ⋆ qi
-.
-Finally, we obtain the following expression for the ⋆-eigenvectors:
-qi(t, s) = δ
-′
-(t − s) ⋆ q˜i(t)Θ(t − s)
-= ˜q
-′
-i
-(t)Θ(t − s) + ˜qi(t)δ(t − s);
-see Table 1.2. As a final remark, note that all the ⋆-products are well-defined thanks
-to the fact that the λ˜
-i(t) and ˜qi(t) are analytic functions.
+%%
+%% This is file `paper.tex', 
+%% Sample file for ALGORITMY 2024 macros for use with LaTeX 2e
+%% based on SIAM macros 
+%% 
+%% Modified by Daniel Sevcovic 2015
+
+%\documentclass[final]{algoritmy}
+\documentclass{algoritmy}
+
+\usepackage{graphicx,amsmath,amssymb}
+
+% definitions used by included articles, reproduced here for 
+% educational benefit, and to minimize alterations needed to be made
+% in developing this sample file.
+
+\newcommand{\pe}{\psi}
+\def\d{\delta} 
+\def\ds{\displaystyle} 
+\def\e{{\epsilon}} 
+\def\eb{\bar{\eta}}  
+\def\enorm#1{\|#1\|_2} 
+\def\Fp{F^\prime}  
+\def\fishpack{{FISHPACK}} 
+\def\fortran{{FORTRAN}} 
+\def\gmres{{GMRES}} 
+\def\gmresm{{\rm GMRES($m$)}} 
+\def\Kc{{\cal K}} 
+\def\norm#1{\|#1\|} 
+\def\wb{{\bar w}} 
+\def\zb{{\bar z}} 
+
+% some definitions of bold math italics to make typing easier.
+% They are used in the corollary.
+
+%\def\bfE{\mbox{\boldmath$E$}}
+%\def\bfG{\mbox{\boldmath$G$}}
+
+\title{Best polynomial approximation for non-autonomous linear ODEs in the $\star$-product framework\thanks{This work was supported by Charles University Research Centre program No. PRIMUS/21/SCI/009 and UNCE/24/SCI/005, and by the Magica project ANR-20-CE29-0007 funded by the French National Research Agency.}}
+
+% The thanks line in the title should be filled in if there is
+% any support acknowledgement for the overall work to be included
+% This \thanks is also used for the received by date info, but
+% authors are not expected to provide this.
+
+\author{Stefano Pozza\thanks{Faculty of Mathematics and Physics, Charles University, Sokolovská 83, 186 75 Praha 8, Czech Republic,({\tt pozza@karlin.mff.cun.cz}).}}
+
+\begin{document}
+
+
+%% Start and end pages of the document. Do not chenge
+\AlgLogo{1}{10}
+
+
+
+\maketitle
+
+\begin{abstract}
+We present the first formulation of the optimal polynomial approximation of the solution of linear non-autonomous systems of ODEs in the framework of the so-called $\star$-product. This product is the basis of new approaches for the solution of such ODEs, both in the analytical and the numerical sense.
+The paper shows how to formally state the problem and derives upper bounds for its error.
+\end{abstract}
+
+\begin{keywords} 
+Non-autonomous linear ODEs, polynomial approximation, error analysis, 
+\end{keywords}
+
+\begin{AMS}
+46F10, 37C60, 65L05
+\end{AMS}
+
+\pagestyle{myheadings}
+\thispagestyle{plain}
+\markboth{S. Pozza}{POLYNOMIAL APPROXIMATION IN THE $\star$-FRAMEWORK}
+
+\section{Introduction}
+Recently, a new approach has been introduced for the solution of systems of linear non-autonomous ordinary differential equations based on the so-called $\star$-product \cite{GiLuThJa15,GisPozInv19,Po23,Ry23}. Such an approach has proved to be valuable and effective analytically, by producing new explicit expressions for the solution of certain problems \cite{BonGis2020,GiLuThJa15,GiPo20}, and numerically, being the basis of new efficient algorithms in quantum chemistry problems \cite{BoPoVB23,PoVB24,PoVB23_PAMM_B,PoVB23_PAMM_A}. 
+
+Given a Hermitian matrix-valued function $\tilde{A}(t) \in \mathbb{C}^{N \times N}$ analytic on the bounded interval $I$, and the nonzero vector $\tilde{v}\in \mathbb{C}^{N \times N}$ we consider the initial value problem
+    \begin{equation}\label{eq:ode}
+        \frac{\partial}{\partial t}\tilde{u}(t) = \tilde{A}(t)\tilde{u}(t), \quad \tilde{u}(a) = \tilde{v}, \quad t \in I=[a, b].
+    \end{equation} 
+The $\star$-product is defined over a Fréchet-Lie group on distributions \cite{Ry23}. In such a group, the initial value problem becomes a \emph{$\star$-linear system}. Thanks to this ``linearization'' of the ODE, new techniques can be applied to solve the problem. Here, we focus on the polynomial approximation approach, which can be used both in numerical approaches and in the theoretical framework. In particular, in the latter one, a symbolic algorithm named $\star$-Lanczos \cite{GiPo20} is able to produce a Krylov-like subspace approximation, that is, a polynomial approximation in the $\star$-product sense.
+
+In this work, we will show that it is possible to formulate the problem of a best polynomial approximation for $\tilde{u}$ in the $\star$-framework. Moreover, we will show that its error can be bounded by the best uniform norm polynomial approximation error for the exponential \cite{meinardus}. This result is crucial to understand the numerical behavior of polynomial-based numerical methods when solving linear systems derived by using the $\star$-approach. Indeed, the polynomial approximation is central in the analysis of standard Krylov subspace methods (e.g., \cite{liestr}), and its extension to the $\star$-framework will also allow extending this kind of numerical analysis.
+
+In Section~\ref{sec:basics}, we introduce the basics of the $\star$-product, and we state the main result. Section~\ref{sec:mtx} shows how to extend matrix analysis results to the $\star$-framework. The prove of the main result is given in Section~\ref{sec:app} and Section~\ref{sec:conc} draw some conclusions.
+
+\begin{table}
+\caption{List of the main $\star$-definitions and related objects, $f,g, x$ are generally from $\mathcal{A}(I)$.}
+\begin{center} \footnotesize
+\begin{tabular}{|c|c|c|c|} \hline  
+%&& Number of & Number of & Mean Run Time & Standard \\ 
+Name & Symbol & Definition & Comments / Properties \\ \hline 
+\lower 1ex\hbox{$\star$-product} & \lower 1ex\hbox{$f \star g$} &  \lower 1ex\hbox{$\int_I f(t,\tau) g(\tau,s) \text{d}\tau $} & \lower 1ex\hbox{} \\
+\lower 1ex\hbox{$\star$-identity}  &  \lower 1ex\hbox{$\delta$} & \lower 1ex\hbox{$f \star \delta = \delta \star f = f$} & \lower 1ex\hbox{$\delta(t-s)$: Dirac delta}  \\ 
+\lower 1ex\hbox{$\star$-inverse} & \lower 1ex\hbox{$f^{-\star}$} & \lower 1ex\hbox{$f \star f^{-\star} = f^{-\star} \star f = \delta$} & \lower 1ex\hbox{Existence \cite{GisPozInv19,Ry23}} \\ 
+\lower 1ex\hbox{Heaviside function} & \lower 1ex\hbox{$\Theta$} & \lower 1ex\hbox{$\Theta(t-s) = 1, t \geq s$, $0$ otherwise} &  \\ 
+\lower 1ex\hbox{Analytic $\Theta$-set} & \lower 1ex\hbox{$\mathcal{A}_\Theta(I)$} & \lower 1ex\hbox{{\{$\tilde{f}(t,s)\Theta(t-s)$:  $\tilde{f}$ analytic on $I^2$\}}} & \lower 1ex\hbox{$\star$-product-closed set}\\ 
+\lower 1ex\hbox{Dirac 1st derivative} & \lower 1ex\hbox{$\delta'$} & \lower 1ex\hbox{$\delta'(t-s)$} & \lower 1ex\hbox{$\delta'\star \Theta = \Theta \star \delta' = \delta$}  \\ 
+\lower 1ex\hbox{Dirac derivatives} & \lower 1ex\hbox{$\delta^{(j)}$} & \lower 1ex\hbox{$\delta^{(j)}(t-s)$} & \lower 1ex\hbox{$\delta^{(j)}\star \delta^{(i)} = \delta^{(i+j)}$}  \\ 
+\lower 1ex\hbox{$\star$-powers} & \lower 1ex\hbox{$f^{\star j}$} & \lower 1ex\hbox{$f \star f \star \cdots \star f$, $j$ times} & \lower 1ex\hbox{$f^{\star 0}:= \delta$, by convention}  \\ 
+\lower 1ex\hbox{$\star$-resolvent} & \lower 1ex\hbox{$R^\star(x)$} &  \lower 1ex\hbox{$\sum_{j=0}^\infty x^{\star j}, \, x \in \mathcal{A}_\Theta(I)$}  & \lower 1ex\hbox{$R^\star(x) = (\delta-x)^{-\star}$} \\ 
+\lower 1ex\hbox{$\star$-polynomial} & \lower 1ex\hbox{$p^\star(x)$} & \lower 1ex\hbox{$\sum_{j=0}^n \alpha_j x^{\star j}$, $\alpha_j \in \mathbb{C}$} & \lower 1ex\hbox{if $\alpha_n \neq 0$, $n$ is the degree} \\ 
+\hline  
+\end{tabular}
+\end{center} 
+\label{tab:stardef} 
+\end{table}  
+
+\begin{table}
+\caption{Useful properties of $\star$-product actions on $\mathcal{A}_\Theta(I)$ elements.}
+\begin{center} \footnotesize
+\begin{tabular}{|c|c|c|c|} \hline  
+ Description  & Definition & Property \\ \hline 
+\lower 1ex\hbox{``Integration'' in $t$} & \lower 1ex\hbox{$\tilde{F}\Theta$, $\tilde{F}(t,s)$ primitive of $\tilde{f}$  in $t$, $F(s,s)=0$}  & \lower 1ex\hbox{$\tilde{F}\Theta = \Theta \star \tilde{f}\Theta$}  \\ 
+\lower 1ex\hbox{``Integration'' in $s$} & \lower 1ex\hbox{$\tilde{F}\Theta$, $\tilde{F}(t,s)$ primitive of $\tilde{f}$  in $s$, $\tilde{F}(t,t)=0$}  & \lower 1ex\hbox{$\tilde{F}\Theta = \tilde{f}\Theta \star \Theta $}  \\ 
+\lower 1ex\hbox{``Differentiation'' in $t$} & \lower 1ex\hbox{$\tilde{f}^{(1,0)}\Theta$, $\tilde{f}^{(1,0)}(t,s)$ derivative of $\tilde{f}$  in $t$}  & \lower 1ex\hbox{$\delta'\star \tilde{f}\Theta = \tilde{f}^{(1,0)}\Theta + \tilde{f}\delta $}  \\ 
+\lower 1ex\hbox{``Differentiation'' in $s$} & \lower 1ex\hbox{$\tilde{f}^{(0,1)}\Theta$, $\tilde{f}^{(0,1)}(t,s)$ derivative of $\tilde{f}$  in $s$}  & \lower 1ex\hbox{$\tilde{f}\Theta \star \delta' = -\tilde{f}^{(0,1)}\Theta + \tilde{f}\delta $}  \\ 
+\hline  
+\end{tabular}
+\end{center} 
+\label{tab:starprop} 
+\end{table}  
+
+
+\section{Basics and main result}\label{sec:basics}
+In order to state the main result, we first summarize the $\star$-product basics. Refer to \cite{Ry23} for the general definition of this product and the related properties.
+Given a bounded interval $I$, let us denote with $\mathcal{A}(I)$ the set of the bivariate distributions of the kind
+\begin{equation*}
+    f(t,s) = \tilde{f}_{-1}(t,s)\Theta(t-s) + \tilde{f}_{0}(t)\delta(t-s) + \tilde{f}_{1}(t)\delta'(t-s) + \dots + \tilde{f}_{k}(t)\delta^{(k)}(t-s),
+\end{equation*}
+where $\tilde{f}_{-1}, \dots, \tilde{f}_{k}$ are analytic functions over $I$ both in $t$ and $s$, $\Theta$ is the Heaviside function ($\Theta(t-s) = 1$ for $t \geq s$, and $0$ otherwise), and $\delta, \delta', \dots, \delta^{(k)}$ are the Dirac delta and its derivatives.
+Then, the $\star$-product of $f_1, f_2 \in \mathcal{A}(I)$ is
+\begin{equation*}
+    (f_1 \star f_2)(t,s) := \int_I f_1(t,\tau) f_2(\tau,s) \,\text{d}\tau \in \mathcal{A}(I).
+\end{equation*}
+Some of the important properties, definitions, and facts about the $\star$-product can be found in Tables~\ref{tab:stardef} and \ref{tab:starprop}.
+Specifically, it is easy to see that $\delta(t-s)$ is the $\star$-product identity. Moreover, since $\mathcal{A}(I)$ is closed under $\star$-product, we can define the $\star$-powers of $f \in \mathcal{A}(I)$, denoted as $f^{\star n}$ with the convention $f^{\star 0}= \delta$. Therefore, for $x \in \mathcal{A}(I)$, we can define the \emph{$\star$-polynomial of degree $n$} as \begin{equation}
+    p^\star(t,s) := \alpha_0 \delta(t-s) + \alpha_1 x(t,s) + \alpha_2 x(t,s)^{\star 2} + \dots + \alpha_n x(t,s)^{\star n}, 
+\end{equation}
+with constants $\alpha_0, \dots, \alpha_n \in \mathbb{C}$, $\alpha_n \neq 0$. We call $\mathcal{P}^\star_n$ the set of all such $\star$-polynomials.
+
+We define the subset $\mathcal{A}_\Theta(I) \subset \mathcal{A}(I)$ of the distributions of the form $f(t,s)=\tilde{f}(t,s)\Theta(t-s)$, with $\tilde{f}$ a function analytic over $I^2$. The \emph{$\star$-resolvent} is defined as
+\begin{equation*}
+    R^\star(x) := \sum_{j=0}^\infty x^{\star j}.    
+\end{equation*}
+Note that $R^\star(x)$ is well-defined (i.e., convergent) for every $x \in \mathcal{A}_\Theta$ \cite{GiLuThJa15}.
+
+When $A, B$ are matrices with compatible sizes composed of elements from $\mathcal{A}(I)$, the $\star$-product straightforwardly extends to a matrix-matrix (or matrix-vector) $\star$-product. In the following, we denote with $\mathcal{A}^{N \times M}(I)$ and $\mathcal{A}_\Theta^{N \times M}(I)$ the spaces of $N \times M$ matrices with elements from those sets. We denote with $I_\star = \tilde{I} \delta(t-s)$ the identity matrix in $\mathcal{A}^{N \times N}(I)$, with $\tilde{I}$ the standard $N \times N$ identity matrix.
+
+Setting $I = [a,b]$, the solution $\tilde{u}(t)$ of the ODE \eqref{eq:ode} can be expressed by
+\begin{equation}\label{eq:starsolres}
+    \tilde{u}(t) = U(t,a)\tilde{v}, \; t\in I, \quad U(t,s) = \Theta(t-s) \star R^{\star}\left(\tilde{A}(t)\Theta(t-s)\right);
+\end{equation}
+as proven in \cite{GiLuThJa15}.
+From now on, we will skip the distribution arguments $t,s$ whenever it is useful and clear from the context.
+Since $R^{\star}(\tilde{A}\Theta)$ is the $\star$-inverse of $I_\star - \tilde{A}\Theta$ (e.g., \cite{Po23}), then solving \eqref{eq:starsolres} means solving the system of $\star$-linear equations
+\begin{equation*}
+    (I_\star - \tilde{A}\Theta) \star x = \tilde{v}\delta, \quad \tilde{u}(t) = (\Theta \star x)(t,a) \quad t \in I.
+\end{equation*}
+Note that this is not just a theoretical result since there is an efficient way to transform the $\star$-linear system into a usual linear system that can be solved numerically \cite{PoVB24,PoVB23_PAMM_B,PoVB23_PAMM_A}.
+
+It is reasonable to consider a $\star$-polynomial approximation $p^\star(\tilde{A}\Theta)\tilde{v} \approx R^\star(\tilde{A}\Theta)\tilde{v}$.
+Specifically, we aim at finding the best $\star$-polynomial $p^\star(t,s)$ of degree $n$ that approximates the $\star$-resolvent $R^\star(A)\tilde{v}$ in the $L_2$ norm sense, i.e., the polynomial $q^\star$ that minimizes the error
+\begin{equation*}
+        \|\tilde{u}(t) - (\Theta \star q^\star(A)\tilde{v})(t,a) \|_{L_2} := \left(\int_{a}^b | \tilde{u}(\tau) - (\Theta \star q^\star(A))(\tau, a) \tilde{v} |^2 \right)^{\frac{1}{2}}, \; t \in I.
+\end{equation*}
+Note that $\Theta \star q^\star(A) \in \mathcal{A}_\Theta^{N \times N}$, while $q^\star(A) \in \mathcal{A}^{N \times N}$.
+
+
+\begin{theorem}[Main result]\label{thm:main}
+    Consider the initial value problem \eqref{eq:ode}
+    and let $\tilde{\lambda}_1(t), \dots, \tilde{\lambda}_N(t)$ be the eigenvalues of
+    $\tilde{A}(t) \in \mathbb{C}^{N \times N}$.
+    We define the interval 
+    \begin{equation*}
+        J := \left[\min_{t \in I, i=1,\dots, N} \tilde{\lambda}_i(t), \max_{t \in I, i=1,\dots, N} \tilde{\lambda}_i(t)\right] \times \emph{length}(I),
+    \end{equation*}
+    and denote with $E_n(J)$ the minimal uniform error of the polynomial approximation of the exponential over $J$, i.e.,
+    \begin{equation*}
+        E_n(J) := \min_{p \in \mathcal{P}_n} \max_{t \in J} |\exp(t) - p(t)|.
+    \end{equation*}
+    Define $A(t,s) = \tilde{A}(t)\Theta(t-s)$. Then the error of the $L_2$-best $\star$-polynomial approximant $q^\star$ can be bounded by
+    \begin{equation*}
+        \|\tilde{u}(t) - (\Theta \star q^\star(A)\tilde{v})(t,a) \|_{L_2} \leq E_n(J) \leq M \rho^{n+1}, \; t \in I
+    \end{equation*} 
+    for some constant $M>0$ and $0<\rho<1$ depending on $J$.
+\end{theorem}
+
+
+%\subsection{$\star$-monomials}
+%Let $x(t,s)= \tilde{x}(t)\Theta(t-s) \in \mathcal{A}_\Theta$. Then, we can define the $\star$-powers $x(t,s)^{\star 0} = \delta(t-s), x(t,s)^{\star 1}, x(t,s)^{\star 2}, \dots$ which can also be interpreted as $\star$-monomials. 
+%By taking the linear combination of $\star$-monomials with respect to the usual product, we obtain the definition of a $\star$-polynomial of degree $n$ as\footnote{Note that, we can equivalently define a $\star$-polynomial as the linear combination of the $\star$-monomials with respect to the $\star$-product if we use as coefficients of the combination elements of the kind $\alpha_j\delta(t-s)$, where $\alpha_j$ is a constant.}:
+%\begin{equation}
+ %   p^\star(t,s) = \alpha_0 \delta(t-s) + \alpha_1 x(t,s) + \alpha_2 x(t,s)^{\star 2} + \dots + \alpha_2 x(t,s)^{\star n}, 
+%\end{equation}
+%where $\alpha_0, \dots, \alpha_n$ are constants. We call the set of all such $\star$-polynomials $\mathcal{P}^\star_n$.
+
+%Consider the $\star$-resolvent $R^\star(x):=(\delta - x)^{-\star}$ of the function $x(t,s)=\tilde{x}(t)\Theta(t-s)\in\mathcal{A}_\Theta$. 
+%We know that it can be equivalently given in terms of the expansion
+%$$ R^\star(x) = \sum_{j=0}^\infty x^{\star j}. $$
+%It can be approximated by the truncated series
+%$$ R^\star_n(x) := \sum_{j=0}^n x^{\star j} \approx R^\star(x), $$
+%is hence a $\star$-polynomial whose error is given by 
+%$$  \left(R^\star(x) - R^\star_n(x)\right)(t,s) = \sum_{j=n+1}^\infty x(t,s)^{\star j}. $$
+%It is, therefore, natural to wonder if there exists another $n$-degree $\star$-polynomial minimizing (in some sense) the error.
+
+\bigskip
+
+The proof of this Theorem will be the outcome of the rest of the paper. The first step towards the proof is to derive an explicit form for the $\star$-monomials $f^{\star n}$ in the case in which $f(t,s)=\tilde{f}(t)\Theta(t-s) \in \mathcal{A}_\Theta(I)$.
+\begin{lemma}\label{lemma:npower}
+  Consider the function $f(t,s)= \tilde{f}(t)\Theta(t-s) \in \mathcal{A}_\Theta$ and let $\tilde{F}(t)$ be a primitive of $\tilde{f}(t)$. Then, for $ n=1, 2, \dots$, 
+  \begin{align}\label{eq:npower:exp}
+        f(t,s)^{\star n} &= \frac{\tilde{f}(t)}{(n-1)!} \left(\tilde{F}(t)-\tilde{F}(s)\right)^{n-1} \Theta(t-s),  \\
+        \label{eq:thetanpower:exp}
+        \Theta(t-s) \star f(t,s)^{\star n} &= \frac{1}{n!} \left(\tilde{F}(t)-\tilde{F}(s)\right)^{n} \Theta(t-s).
+  \end{align}
+  Moreover, $\Theta(t-s) \star f(t,s)^{\star 0} = \Theta(t-s)$ since $f(t,s)^{\star 0}=\delta(t-s)$ by convention.
+\end{lemma}
+\begin{proof}
+     For $n=2$, the expression~\eqref{eq:npower:exp} is trivially obtained by
+    \begin{equation*}
+        f(t,s)^{\star 2} = \tilde{f}(t)\Theta(t-s) \int_s^t \tilde{f}(\tau) \,\textrm{d}\tau = \tilde{f}(t)\left(\tilde{F}(t)-\tilde{F}(s)\right)\Theta(t-s).
+    \end{equation*}
+    Now, by induction, assuming \eqref{eq:npower:exp} we get
+    \begin{align}\label{eq:lemma:npower:1}
+        f(t,s)^{\star n+1} = \frac{\tilde{f}(t)}{(n-1)!}\Theta(t-s) \int_s^t \tilde{f}(\tau)  \left(\tilde{F}(\tau)-\tilde{F}(s)\right)^{n-1} \textrm{d}\tau.
+    \end{align}
+    Integrating by part gives
+    \begin{align*}
+         \int_s^t \tilde{f}(\tau)  \left(\tilde{F}(\tau)-\tilde{F}(s)\right)^{n-1} \textrm{d}\tau &= %\Big[ (\tilde{F}(\tau)- \tilde{F}(s)) (\tilde{F}(\tau)- \tilde{F}(s))^{n-1} \Big]_s^t  - \\
+         %& (n-1) \int_s^t  \tilde{f}(\tau)\left(\tilde{F}(\tau)- \tilde{F}(s)\right)^{n-1} \,\textrm{d}\tau \\ 
+          (\tilde{F}(t)- \tilde{F}(s))^{n}  - \\ 
+         & (n-1) \int_s^t  \tilde{f}(\tau)\left(\tilde{F}(\tau)- \tilde{F}(s)\right)^{n-1} \,\textrm{d}\tau.
+    \end{align*}
+    Therefore,
+    \begin{align*}
+         n \int_s^t \tilde{f}(\tau)  \left(\tilde{F}(\tau)-\tilde{F}(s)\right)^{n-1} \textrm{d}\tau &=  (\tilde{F}(t)- \tilde{F}(s))^{n}.
+    \end{align*}
+    Together with \eqref{eq:lemma:npower:1}, this proves \eqref{eq:npower:exp}.
+    Eq.~\eqref{eq:thetanpower:exp} comes from observing that
+    \begin{align*}
+        \Theta(t-s) \star f(t,s)^{\star n} &= \Theta(t-s) \star \frac{\tilde{f}(t)}{(n-1)!} \left(\tilde{F}(t)-\tilde{F}(s)\right)^{n-1} \Theta(t-s) \\
+        &= \frac{\Theta(t-s)}{(n-1)!} \int_s^t \tilde{f}(\tau) \left(\tilde{F}(\tau)-\tilde{F}(s)\right)^{n-1} \textrm{d}\tau \\
+        &= \frac{1}{n!} (\tilde{F}(t)- \tilde{F}(s))^{n} \Theta(t-s),
+    \end{align*}
+    which concludes the proof.
+\end{proof}
+
+An immediate consequence of Lemma~\ref{lemma:npower} is that
+\begin{equation*}
+    \exp\left(\tilde{F}(t) -\tilde{F}(s)\right) = \Theta(t-s) \star R^{\star}(f)(t,s),
+\end{equation*}
+a well-known result; see, e.g., \cite{GiLuThJa15}.
+
+\section{Matrix spectral decomposition and the $\star$-product}\label{sec:mtx}
+%In this Section, we will immerse the spectral decomposition of an analytic Hermitian matrix-valued function in the $\star$-product framework.
+Consider a time-dependent $N \times N$ Hermitian matrix-valued function $\tilde{A}(t)$ analytic over the closed interval $I$. Then, for every $t \in I$ there exist matrix-valued functions $\tilde{Q}(t)$ and $\tilde{\Lambda}(t)$ analytic over $I$ such that:
+\begin{equation}\label{eq:eigedeco}
+\tilde{A}(t) = \tilde{Q}(t) \tilde{\Lambda}(t) \tilde{Q}(t)^H, \text{ with } \tilde{\Lambda}(t) = \text{diag}(\tilde{\lambda}_1(t), \dots, \tilde{\lambda}_n(t)), \; \tilde{Q}(t)^H \tilde{Q}(t) = I,    
+\end{equation}
+for every $t \in I$; see \cite[Chapter II, Section 6]{kato} (we refer to \cite{dieci99} for extensions to the non-analytic case). The elements of the diagonal matrix $\tilde{\Lambda}(t)$ are analytic functions and, for every $t\in I$, the $\tilde{\lambda}_j(t)$ are the eigenvalues (eigencurves) of $\tilde{A}(t)$.  The columns of $\tilde{Q}(t)$, denoted $\tilde{q}_1(t), \dots, \tilde{q}_N(t)$, are the corresponding eigenvectors (analytic over $I$).
+
+%Now, we aim to define the eigendecomposition in the $\star$-algebra. Generally speaking, 
+Given $A(t,s) \in \mathcal{A}_\Theta^{N \times N}(I)$, the $\star$-eigenproblem is to find the $\star$-eigenvalues $\lambda(t,s)\in \mathcal{A}_\Theta(I)$ and the $\star$-eigenvector $q(t,s) \in \mathcal{A}^{N \times 1}(I)$ such that 
+\begin{equation}\label{eq:stareig}
+    A(t,s) \star q(t,s) = \lambda(t,s) \star q(t,s).
+\end{equation}
+If $\lambda(t,s)$ and $q(t,s)$ exist, then $q(t,s) \star a(t,s)$ is also a $\star$-eigenvector, for every $a(t,s)\not\equiv 0$ from $\mathcal{A}(I)$. 
+%Moreover, note that, since the elements of $A$ are from $\mathcal{A}_\Theta(I)$ we want the $\star$-eigenvalues to be also from $\mathcal{A}_\Theta(I)$. 
+For the specific case of interest, where $A(t,s)=\tilde{A}(t)\Theta(t-s)$, the solution to the $\star$-eigenproblem is in the following theorem.
+\begin{theorem}\label{thm:stareig}
+    Let $A(t,s) = \tilde{A}(t)\Theta(t-s)$ be in $\mathcal{A}_\Theta(I)$, and let $\tilde{\lambda}_i(t)$ and $\tilde{q}_i(t)$, be the (analytic) eigencurves and the corresponding eigenvectors as defined in \eqref{eq:eigedeco} for $i=1,\dots, N$. Then, the solution to the $\star$-eigenvalue problem \eqref{eq:stareig} is given by
+    \begin{equation*}
+        \lambda_i(t,s) = \tilde{\lambda}_i(t)\Theta(t-s), \quad q_i(t,s) = \tilde{q}_i'(t)\Theta(t-s) + \tilde{q}_i(t) \delta(t-s), \quad i=1,\dots, N.
+    \end{equation*}
+    where $\tilde{q}_i'(t)$ is the derivative of $\tilde{q}_i(t)$.
+\end{theorem}
+\begin{proof}
+First, note that 
+\begin{align*}
+    \tilde{\lambda}_i(t) \delta(t-s) \star \tilde{q}_i(t) \Theta(t-s) &= \tilde{\lambda}_i(t) \int_I \delta(t-\tau) \tilde{q}_i(\tau) \Theta(\tau-s) \, \text{d}\tau \\
+        &= \tilde{\lambda}_i(t) \tilde{q}_i(t) \Theta(t-s) = \tilde{A}(t) \tilde{q}_i(t) \Theta(t-s) \\
+        &= \tilde{A}(t) \delta(t-s) \star \tilde{q}_i(t) \Theta(t-s).
+\end{align*}
+Using the fact that $\tilde{\lambda}_i(t) \delta(t-s) \star \Theta(t-s) = \tilde{\lambda}_i(t) \Theta(t-s)$, and that $\delta'(t-s) \star \Theta(t-s) = \Theta(t-s) \star \delta'(t-s) = \delta(t-s)$, see Table~\ref{tab:stardef}, we obtain (we omit the variables for the sake of readability)
+\begin{align*}
+    \tilde{\lambda}_i \delta \star \tilde{q}_i \Theta &=  \tilde{\lambda}_i \delta \star \Theta \star \delta' \star \tilde{q}_i \Theta = \tilde{\lambda}_i \Theta \star \delta' \star \tilde{q}_i \Theta = \tilde{\lambda}_i \Theta \star q_i,
+\end{align*}
+where $q_i(t,s):= \delta'(t-s) \star \tilde{q}_i(t) \Theta(t-s)$. Similarly, $\tilde{A} \delta \star \tilde{q}_i \Theta = \tilde{A}\Theta \star q_i$. Combining these results, we get
+\begin{align*}
+    \tilde{\lambda}_i \Theta \star q_i = \tilde{\lambda}_i \delta \star \tilde{q}_i \Theta = \tilde{\lambda}_i \tilde{q}_i \Theta = \tilde{A} \tilde{q}_i \Theta = \tilde{A} \delta \star \tilde{q}_i \Theta = \tilde{A}\Theta \star q_i. 
+\end{align*}
+Finally, we obtain the following expression for the $\star$-eigenvectors:
+\begin{align*}
+    q_i(t,s) &= \delta'(t-s) \star \tilde{q}_i(t)\Theta(t-s) \\
+    &= \tilde{q}_i'(t)\Theta(t-s) + \tilde{q}_i(t) \delta(t-s);
+\end{align*}
+see Table~\ref{tab:starprop}.
+As a final remark, note that all the $\star$-products are well-defined thanks to the fact that the $\tilde{\lambda}_i(t)$ and $\tilde{q}_i(t)$ are analytic functions.
+\end{proof}
+
 Consider the matrix
-A(t, s) = A˜−1(t, s)Θ(t − s) +X
-k
-j=0
-A˜
-j (t)δ
-(j)
-(t − s) ∈ AN×M (I) (3.3)
-we define the Hermitian transpose of A as
-A
-H(t, s) = A˜H
-−1
-(t, s)Θ(t − s) +X
-k
-j=0
-A˜H
-j
-(t)δ
-(j)
-(t − s) ∈ AM×N (I), (3.4)
-6 S. Pozza
-with A˜H
-j
-the usual Hermitian transpose of a matrix. As an immediate consequence
-of Theorem 3.1, we have the following ⋆-factorization of A(t, s).
-Corollary 3.2. Under the same assumption of Theorem 3.1, we have
-A(t, s) = Q(t, s) ⋆ Λ(t, s) ⋆ Q(t, s)
-H,
-with Λ(t, s) = Λ( ˜ t)Θ(t − s) and Q(t, s) = [q1(t, s), . . . , qN (t, s)]. Moreover, it holds
-Q(t, s) ⋆ Q(t, s)
-H = Q(t, s)
-H ⋆ Q(t, s) = I⋆,
-that is, Q(t, s)
-H is the matrix ⋆-inverse of Q(t, s).
-Proof. We first show that for every i, j = 1, . . . , N we have
-qi(t, s)
-H ⋆ qj (t, s) = δij δ(t − s),
-with δij the Kronecker delta. Since qk(t, s) = δ
-′
-(t − s) ⋆ q˜kΘ(t − s), for k = 1, . . . , N,
-then
-qi(t, s)
-H ⋆ qj (t, s) =
-δ
-′
-(t − s) ⋆ q˜
-H
-i
-(t)Θ(t − s)
-
-⋆
+\begin{equation}\label{eq:Adef}
+    A(t,s) = \tilde{A}_{-1}(t,s)\Theta(t-s) + \sum_{j=0}^k \tilde{A}_j(t)\delta^{(j)}(t-s) \in \mathcal{A}^{N \times M}(I)
+\end{equation}
+we define the Hermitian transpose of $A$ as
+\begin{equation}\label{eq:AH}
+    A^H(t,s) = \tilde{A}_{-1}^H(t,s)\Theta(t-s) + \sum_{j=0}^k \tilde{A}^H_j(t)\delta^{(j)}(t-s) \in \mathcal{A}^{M \times N}(I),
+\end{equation}
+with $\tilde{A}_j^H$ the usual Hermitian transpose of a matrix.
+As an immediate consequence of Theorem~\ref{thm:stareig}, we have the following $\star$-factorization of $A(t,s)$.
+%(note that in the following $q_j(t,s)^H = \tilde{q}_j(t)^H \Theta(t-s) + \tilde{q}_j(s)^H \delta(t-s)$).
+\begin{corollary}\label{cor:stareigdec}
+    Under the same assumption of Theorem~\ref{thm:stareig}, we have
+    \begin{equation*}
+    A(t,s) = Q(t,s) \star \Lambda(t,s) \star Q(t,s)^H,
+\end{equation*}
+with $\Lambda(t,s) = \tilde{\Lambda}(t)\Theta(t-s)$ and $Q(t,s)= [q_1(t,s), \dots, q_N(t,s)]$. Moreover, it holds
+\begin{equation*}
+    Q(t,s) \star Q(t,s)^H = Q(t,s)^H \star Q(t,s) = I_\star,
+\end{equation*}
+that is, $Q(t,s)^H$ is the matrix $\star$-inverse of $Q(t,s)$.
+\end{corollary}
+\begin{proof}
+    We first show that for every $i,j=1,\dots,N$ we have
+    \begin{equation*}
+        q_i(t,s)^H \star q_j(t,s) = \delta_{ij} \delta(t-s),
+    \end{equation*}
+    with $\delta_{ij}$ the Kronecker delta. Since $q_k(t,s) = \delta'(t-s) \star \tilde{q}_k \Theta(t-s)$, for $k=1,\dots,N$, then
+    \begin{align*}
+        q_i(t,s)^H \star q_j(t,s) &= \big(\delta'(t-s) \star \tilde{q}_i^H(t) \Theta(t-s)\big) \star \big(\delta'(t-s) \star \tilde{q}_j(t) \Theta(t-s)\big) \\
+            &= \delta'(t-s) \star \big( \tilde{q}_i^H(t) \Theta(t-s) \star \delta'(t-s) \big) \star \tilde{q}_j(t) \Theta(t-s) \\
+            &= \delta'(t-s) \star \big(\tilde{q}_i^H(t)\delta(t-s) \star \tilde{q}_j(t) \Theta(t-s) \big) \\
+            &= \delta'(t-s) \star \tilde{q}_i^H(t)\tilde{q}_j(t)\Theta(t-s) = \delta'(t-s) \star \delta_{ij}\Theta(t-s) \\
+            &= \delta_{ij}\delta(t-s).
+    \end{align*}
+   From Theorem~\ref{thm:stareig} we get the equality
+\begin{equation*}
+    A(t,s) \star Q(t,s) = Q(t,s) \star \Lambda(t,s).
+\end{equation*}
+The conclusion follows from $\star$-multiplying from the right by $Q(t,s)^H$. 
+\end{proof}
 
-δ
-′
-(t − s) ⋆ q˜j (t)Θ(t − s)
-
-= δ
-′
-(t − s) ⋆
+\bigskip
 
-q˜
-H
-i
-(t)Θ(t − s) ⋆ δ′
-(t − s)
-
-⋆ q˜j (t)Θ(t − s)
-= δ
-′
-(t − s) ⋆
-
-q˜
-H
-i
-(t)δ(t − s) ⋆ q˜j (t)Θ(t − s)
-
-= δ
-′
-(t − s) ⋆ q˜
-H
-i
-(t)˜qj (t)Θ(t − s) = δ
-′
-(t − s) ⋆ δijΘ(t − s)
-= δij δ(t − s).
-From Theorem 3.1 we get the equality
-A(t, s) ⋆ Q(t, s) = Q(t, s) ⋆ Λ(t, s).
-The conclusion follows from ⋆-multiplying from the right by Q(t, s)
-H.
-Since our final goal is to measure an error, we need to introduce a ⋆-inner product
-and the relative ⋆-norm. To this aim, we take inspiration from the results in [16], but
-we develop them in a different direction. Following [16], we define the ⋆-Hermitiantranspose of A(t, s) in (3.3) as
-A
-⋆H(t, s) := A
-H(s, t) = A˜H
-−1
-(s, t)Θ(s − t) +X
-k
-j=0
-A˜H
-j
-(s)δ
-(j)
-(s − t) ∈ AM×N (I).
-Roughly speaking, one has to take the usual Hermitian transpose and then swap the
-variable t, s. Note the difference with the Hermitian transpose (3.4). Now, setting
-I = [a, b], and given v, w such that Θ ⋆ v, Θ ⋆ w ∈ AN×1
-Θ (I), for any fixed s ∈ [a, b) we
-can define the inner product:
-hv, wi⋆(s) :=
-(Θ ⋆ v)
-⋆H ⋆ Θ ⋆ w
-(s, s) = Z
-I
-v
-H (τ, s)w(τ, s) dτ.
-Note that, denoting Θ(t − s) ⋆ v(t, s) = V˜ (t, s)Θ(t − s) and Θ(t − s) ⋆ w(t, s) =
-W˜ (t, s)Θ(t − s), then
-hv, wi⋆(s) = Z b
-s
-V˜ H(τ, s)W˜ (τ, s
-POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 7
-which, for the fixed s, is the classical inner product of the functions V˜ (·, s) and W˜ (·, s)
-on the interval [s, b] (note that v, w ≡ 0 if and only if V , ˜ W˜ ≡ 0). The inner product
-hv, wi⋆(s) is, in fact, a family of inner products depending on the parameter s ∈ [a, b).
-With an abuse of notation, we refer to the function hv, wi⋆ : [a, b) → C as the ⋆-inner
-product of v and w. Thus, again with a notation abuse, we define the ⋆-norm as
-kvk⋆(s) := p
-hv, vi⋆(s), s ∈ [a, b).
+Since our final goal is to measure an error, we need to introduce a $\star$-inner product and the relative $\star$-norm. To this aim, we take inspiration from the results in \cite{Ry23}, but we develop them in a different direction. 
+Following \cite{Ry23}, we define the \emph{$\star$-Hermitian-transpose} of $A(t,s)$ in \eqref{eq:Adef} as
+\begin{equation*}
+    A^{\star H}(t,s) := A^H(s,t) = \tilde{A}^H_{-1}(s,t)\Theta(s-t) + \sum_{j=0}^k\tilde{A}_{j}^H(s)\delta^{(j)}(s-t) \in \mathcal{A}^{M \times N}(I).
+\end{equation*}
+Roughly speaking, one has to take the usual Hermitian transpose and then swap the variable $t,s$. Note the difference with the Hermitian transpose \eqref{eq:AH}.
+%substantially modify them. We first introduce the injections:
+%\begin{align*}
+%    \psi_L: \mathcal{D}^{N\times 1}(I) &\rightarrow \mathcal{D}^{N\times 1}(I) &  \psi_R: \mathcal{D}^{N\times 1}(I) &\rightarrow \mathcal{D}^{N\times 1}(I) \\
+%    v(t,s) & \mapsto v(t,t) & v(t,s) & \mapsto v(s,s).
+%\end{align*}
+%Note that there exists $v \in \mathcal{D}^{N\times 1}(I)$ such that $v(t,s) \not\equiv 0$, but $v(t,t)\equiv 0$. For instance, $\Theta^{\star k}$ for $k = 2, 3, \dots$ . This constitutes a problem if we want to use the maps $\psi_L, \psi_R$ to define an inner product and a norm. We fix this problem by introducing the concept of \emph{$\star$-grade}.
+%\begin{definition}
+%    Give the non identically zero function $f \in \mathcal{A}_\Theta^{N \times M}$, we say that $f$ has \emph{$\star$-grade $d$} if
+%    \begin{equation*}
+%        (f \star \delta^{(j)})(t,t) \equiv 0, \; j= 0, \dots, d-1, \quad (f \star \delta^{(d)})(t,t) \not\equiv 0.
+%    \end{equation*}
+%\end{definition}
+%Note that $d$ is always finite since, given $f(t,s) = \tilde{f}(t,s)\Theta(t-s) \in \mathcal{A}_\Theta^{N \times M}$,
+%\begin{equation*}
+%    f(t,s) \star \delta^{j}(t-s) = \tilde{f}^{(0,j)}(t,s)\Theta(t-s), \quad  j=0, \dots, d-1,
+%\end{equation*}
+%where $\tilde{f}^{(0,j)}$ stands for the $j$th derivative in $s$ of $\tilde{f}$. Therefore, if $d$ is not finite, then $\tilde{f}^{(0,j)}(t,t)\equiv 0$ for $j=0, 1, \dots$ . Hence, fixing $t$, the function $\tilde{f}(t,\cdot)$ has all derivative null at the point $t$. Since it is an analytic function, this means that $\tilde{f}(t,\cdot) \equiv 0$ for every $t$. Then, $f(t,s)$ is null for every $t,s \in I$. Moreover, note that 
+%\begin{equation}\label{eq:gradeinAtheta}
+%    f(t,s) \star \delta^{(d)}(t-s) = \tilde{f}^{(0,d)} \Theta(t-s) \in \mathcal{A}_\Theta^{N \times M}.
+%\end{equation}
+Now, setting $I = [a,b]$, 
+%we can 
+%equip the vector space $\{\mathcal{A}_\Theta^{N\times 1}(I), \star, +\}$ with 
+%define an inner product. 
+and given $v,w$ such that  $\Theta \star v, \Theta \star w \in \mathcal{A}_\Theta^{N\times 1}(I)$, for any fixed $s \in [a,b)$ we can define the inner product:
+\begin{equation*}
+    \langle v, w \rangle_\star(s) := \left( (\Theta \star v)^{\star H} \star \Theta \star w \right)(s,s) = \int_I v^H(\tau,s) w(\tau,s) \, \text{d}\tau.
+\end{equation*}
+Note that, denoting $\Theta(t-s) \star v(t,s) = \tilde{V}(t,s)\Theta(t-s)$ and $\Theta(t-s) \star w(t,s) = \tilde{W}(t,s)\Theta(t-s)$, then
+\begin{equation*}
+    \langle v, w \rangle_\star(s) =  \int_s^b \tilde{V}^H(\tau,s) \tilde{W}(\tau,s) \, \text{d}\tau,
+\end{equation*}
+which, for the fixed $s$, is the classical inner product of the functions $\tilde{V}(\cdot,s)$ and $\tilde{W}(\cdot,s)$ on the interval $[s,b]$ (note that $v,w \equiv 0$ if and only if  $\tilde{V}, \tilde{W} \equiv 0$).
+The inner product $\langle v, w \rangle_\star(s)$ is, in fact, a family of inner products depending on the parameter $s \in [a,b)$. With an abuse of notation, we refer to the function $\langle v, w \rangle_\star: [a,b) \rightarrow \mathbb{C}$ as the \emph{$\star$-inner product} of $v$ and $w$. 
+%with $\star$-grade respectively $k, \ell$, the $\star$-inner product is defined as
+%\begin{equation*}
+%    \langle v, w \rangle_\star := \psi_R\left(v \star \delta^{(k)}\right)^H \star \psi_L\left(w \star \delta^{(\ell)}\right).
+%\end{equation*}
+%Note that, using the notation above,
+%\begin{equation*}
+%    \langle v, w \rangle_\star = (-1)^{k+\ell} \int_I \tilde{v}^{(0,k)}(\tau,\tau)^H \tilde{w}^{(0,\ell)}(\tau,\tau) \, \text{d}\tau \in \mathbb{C},
+%\end{equation*}
+%which recovers the usual inner product between functions for $\tilde{v}^{(0,k)}, \tilde{w}^{(0,\ell)}$.
+Thus, again with a notation abuse, we define the \emph{$\star$-norm} as
+\begin{equation*}
+    \| v \|_\star(s) := \sqrt{ \langle v, v \rangle_\star }(s), \quad s \in [a,b).
+\end{equation*}
 The definition is justified by the following theorem.
-Theorem 3.3 (Properties of the ⋆-norm). Given v, w such that Θ ⋆ v, Θ ⋆ w ∈
-A
-N×1
-Θ (I), with I = [a, b], then the following properties hold for every s ∈ [a, b):
-1. kvk⋆(s) ≥ 0;
-2. kvk⋆(s) ≡ 0 if and only if v ≡ 0;
-3. kαvk⋆(s) = kαδ ⋆ vk⋆(s) = |α|kvk⋆(s) for any scalar α ∈ C;
-4. kv + wk⋆(s) ≤ kvk⋆(s) + kwk⋆(s).
-Hence kvk⋆(s) is a norm for every fixed s ∈ [a, b).
-Proof. Since Θ ⋆ v = V˜ Θ, with V˜ an analytic function over I
-2
-, then
-kvk
-2
-⋆
-(s) = Z b
-s
-V˜ H(τ, s)V˜ (τ, s) dτ,
-is the classical norm of the function V˜ (·, s) over the interval [s, b]. Thus Item 1. is
-trivial. Item 2. is true since V˜ (t, s) ≡ 0 over I
-2
-if and only if v ≡ 0 over I
-2
-. Item 3.
-and 4. hold since Θ ⋆ αv = α(Θ ⋆ v) and Θ ⋆ (v + w) = Θ ⋆ v + Θ ⋆ w.
-Lemma 3.4. Let Q(t, s) as in Corollary 3.2, then for every v, w ∈ AN×1
-Θ (I), it
-holds
-hQ ⋆ v, Q ⋆ wi⋆(s) = hQ
-H ⋆ v, QH ⋆ wi⋆(s) = hv, wi⋆(s), s ∈ [a, b),
-that is Q and QH are unitary with respect to h·, ·i⋆ (note that QH 6= Q⋆H).
-Proof. Recalling that Q(t, s) = δ
-′
-(t − s) ⋆ Q˜(t)Θ(t − s), we get Θ(t − s) ⋆ Q(t, s) =
-Q˜(t)Θ(t − s). Therefore,
-hQ ⋆ v, Q ⋆ wi⋆(s) = h
-(Q˜Θ ⋆ v)
-⋆H ⋆ Q˜Θ ⋆ wi
-(s, s).
-Now, denoting V˜ (t, s)Θ(t−s) := Θ(t−s)⋆v(t, s) and W˜ (t, s)Θ(t−s) := Θ(t−s)⋆v(t, s),
-we observe
-Q˜(t)Θ(t − s) ⋆ v(t, s) = Q˜(t) (Θ(t − s) ⋆ v(t, s)) = Q˜(t)V˜ (t, s)Θ(t − s),
-Q˜(t)Θ(t − s) ⋆ w(t, s) = Q˜(t) (Θ(t − s) ⋆ w(t, s)) = Q˜(t)W˜ (t, s)Θ(t − s).
-Therefore,
-h
-(Q˜Θ ⋆ v)
-⋆H ⋆ Q˜Θ ⋆ wi
-(s, s) = Z b
-s
-V˜ H(τ, s)Q˜H(τ)Q˜(τ)W˜ (τ, s) dτ
-=
-Z b
-s
-V˜ H(τ, s)W˜ (τ, s) dτ
-=
+\begin{theorem}[Properties of the $\star$-norm]\label{thm:starvecnorm}
+  Given $v, w$ such that $\Theta \star v, \Theta \star w \in \mathcal{A}_\Theta^{N \times 1}(I)$, with $I=[a,b]$, then the following properties hold for every $s \in [a,b)$:
+  \begin{enumerate}
+    \item $\| v \|_\star(s) \geq 0$;
+    \item $\| v \|_\star(s) \equiv 0$ if and only if $v \equiv 0$;
+    \item $\| \alpha v \|_\star(s) = \| \alpha \delta \star v \|_\star(s) = |\alpha| \| v \|_\star(s)$ for any scalar $\alpha \in \mathbb{C}$;
+    \item $\| v + w \|_\star(s) \leq \| v \|_\star(s) + \| w \|_\star(s)$. %where $w$ is such that $\Theta \star w \in \mathcal{A}_\Theta^{N \times 1}(I)$.
+\end{enumerate}
+Hence $\| v \|_\star(s)$ is a norm for every fixed $s \in [a,b)$.
+\end{theorem}
+\begin{proof}
+Since $\Theta \star v = \tilde{V}\Theta$, with $\tilde{V}$ an analytic function over $I^2$, then
+\begin{equation*}
+    \| v \|_\star^2(s) = \int_s^b \tilde{V}^H(\tau,s) \tilde{V}(\tau,s) \, \text{d}\tau,
+\end{equation*}
+is the classical norm of the function $\tilde{V}(\cdot,s)$ over the interval $[s,b]$.
+Thus Item~1. is trivial. Item~2. is true since $\tilde{V}(t,s)\equiv 0$ over $I^2$ if and only if $v \equiv 0$ over $I^2$. Item~3. and 4. hold since $\Theta \star \alpha v = \alpha(\Theta \star v)$ and $\Theta \star (v + w) = \Theta \star v + \Theta \star w $.
+\end{proof}
 
-(Θ ⋆ v)
-⋆H ⋆ Θ ⋆ w
-(s, s) = hv, wi⋆(s).
-8 S. Pozza
-Analogous arguments show that hQH ⋆ v, QH ⋆ wi⋆ = hv, wi⋆.
-Finally, given a matrix A so that Θ⋆ A ∈ AN×N
-Θ (I), we define the induced matrix
-⋆-norm of A as
-kAk⋆(s) := sup
-v6≡0 : Θ⋆v∈AN×1
-Θ (I)
-kA ⋆ vk⋆(s)
-kvk⋆(s)
-, s ∈ [a, b). (3.5)
-The term norm is again an abuse of notation. The following theorem explains in
-which sense kAk⋆ is a norm and provides several useful properties.
-Theorem 3.5 (Properties of the induced matrix ⋆-norm). Let A, B such that
-Θ ⋆ A, Θ ⋆ B ∈ AN×N
-Θ (I) with I = [a, b]. Then, kAk⋆ satisfies the following properties
-for every s ∈ [a, b):
-1. kAk⋆(s) ≥ 0;
-2. kAk⋆(s) ≡ 0 if and only if A ≡ 0;
-3. kαAk⋆(s) = kαδ ⋆ Ak⋆(s) = |α|kAk⋆(s) for any scalar α ∈ C;
-4. kA + Bk⋆(s) ≤ kAk⋆(s) + kBk⋆(s);
-5. kA ⋆ Bk⋆(s) ≤ kAk⋆(s) ⋆ kBk⋆(s).
-Therefore, k · k⋆(s) is a sub-multiplicative matrix norm for every fixed s ∈ [a, b).
-Proof. Items 1–4 are corollaries of Theorem 3.3. Note that
-kA ⋆ vk⋆(s) = kA ⋆ vk⋆(s)
-kvk⋆(s)
-kvk⋆(s) ≤ kAk⋆(s) kvk⋆(s), s ∈ [a, b).
-Therefore, kA ⋆ B ⋆ vk⋆(s) ≤ kAk⋆(s) ⋆ kB ⋆ vk⋆(s) ≤ kAk⋆(s) ⋆ kBk⋆(s), proving
-Item 5.
-4. Approximation of the ⋆-resolvent. Let ˜v ∈ C
-N be a (constant) vector and
-the A(t, s) = A˜(t)Θ(t−s) ∈ AN×N
-Θ (I) a matrix-valued function, with A˜(t) Hermitian
-for t ∈ I and I = [a, b]. We want to find the optimal ⋆-polynomials of degree at most
-n approximating the ⋆-resolvent R⋆
-(A)˜v in the sense of the ⋆-norm. That is, finding
-q
-⋆ ∈ P⋆
-n
-so that
-kR
-⋆
-(A)˜v − q
-⋆
-(A)˜vk⋆(s) = min
-p⋆∈P⋆
-n
-kR
-⋆
-(A)˜v − p
-⋆
-(A)˜vk⋆(s), s ∈ [a, b). (4.1)
-By Corollary 3.2, A(t, s) = Q(t, s) ⋆ Λ(t, s) ⋆ Q(t, s)
-H, where the diagonal elements of
-Λ are the ⋆-eigenvalues λj (t, s) = λ˜
-j (t)Θ(t−s), j = 1, . . . , n. Since QH ⋆ Q = I⋆, then
-we have A⋆2 = Q ⋆ Λ ⋆ QH ⋆ Q ⋆ Λ ⋆ QH = Q ⋆ Λ
-⋆2 ⋆ QH, and hence
-A
-⋆k = Q ⋆ Λ
-⋆k ⋆ QH, k = 0, 1, 2, . . . . (4.2)
-Theorem 4.1. Let w = QH ⋆ vδ˜ = QHv˜. Then, the problem (4.1) is equivalent
-to finding the n-degree ⋆-polynomial q
-⋆
-such that
-kR
-⋆
-(A)˜v − q
-⋆
-(A)˜vk⋆(s) = min
-p⋆∈P⋆
-n
-kR
-⋆
-(Λ) ⋆ w − p
-⋆
-(Λ) ⋆ wk⋆(s), s ∈ [a, b).
-Moreover, for a fixed s ∈ [a, b), the error can be bounded by
-kR⋆
-(A)˜v − q
-⋆
-(A)˜vk⋆(s)
-kvδ˜ k⋆(s)
-≤ min
-p⋆∈P⋆
-n
-max
-i=1,...,N
-kR
-⋆
-(λi) − p
-⋆
-(λi)k⋆(s), s ∈ [a, b),
-where λ1(t, s), . . . λN (t, s) are the ⋆-eigenvalues of A(t, s).
-POLYNOMIAL APPROXIMATION IN THE ⋆-FRAMEWORK 9
-Proof. Every ⋆-polynomial can be expanded in the ⋆-monomial basis, i.e., p
-⋆
-(x) =
-α0δ + α1x + · · · + αnx
-⋆n. Therefore, by using (4.2), we get
-p
-⋆
-(A) = Q ⋆ p⋆
-(Λ) ⋆ QH, R⋆
-(A) = Q ⋆ R⋆
-(Λ) ⋆ QH.
-Hence, by Lemma 3.4 and Theorem 3.5, for every fixed s ∈ [a, b), we get
-kR
-⋆
-(A)˜v − p
-⋆
-(A)˜vk⋆(s) = kQ ⋆ (R
-⋆
-(Λ) − p
-⋆
-(Λ)) ⋆ QH ⋆ vδ˜ k⋆(s)
-= k(R
-⋆
-(Λ) − p
-⋆
-(Λ)) ⋆ QH ⋆ vδ˜ k⋆(s)
-≤ kR
-⋆
-(Λ) − p
-⋆
-(Λ)k⋆(s) kQ
-H ⋆ vδ˜ k⋆(s)
-≤ kR
-⋆
-(Λ) − p
-⋆
-(Λ)k⋆(s) kvδ˜ k⋆(s)
-≤ max
-i=1,...,N
-kR
-⋆
-(λi) − p
-⋆
-(λi)k⋆(s) kvδ˜ k⋆(s),
-concluding the proof.
-Now we can prove the main result of this paper.
-4.1. Proof of Theorem 2.1. Denote p
-⋆
-(x) = Pn
-k=0 αkx
-⋆k. By Lemma 2.2 and
-Theorem 4.1, for s ∈ [a, b) we get
-kR
-⋆
-(λi) − p
-⋆
-(λi)k
-2
-⋆
-(s) = Z b
-s
-
-
-
-
-
-X∞
-k=0
-(Li(τ, s))k
-k!
-−
-Xn
-k=0
-αk
-(Li(τ, s))k
-k!
-
-
-
-
-
-2
-dτ
-=
-Z b
-s
-|exp(Li(τ, s)) − p(Li(τ, s))|
-2
-dτ,
-where Li(·, s) is the primitive of λ˜
-i(·) so that Li(s, s) = 0 and p(t) = Pn
-k=0
-αk
-k!
-t
-k
-is a
-(usual) polynomial. Note that Li(τ, s) is a real function with values in the interval
-Ji(s) = 
-min
-τ∈[s,b]
-Li(τ, s), max
-τ∈[s,b]
-Li(τ, s)
-
-.
+\bigskip
+
+\begin{lemma}\label{lemma:unitary}
+    Let $Q(t,s)$ as in Corollary~\ref{cor:stareigdec}, then for every $v,w \in \mathcal{A}_\Theta^{N \times 1}(I)$, it holds
+    \begin{equation*}
+        \langle Q \star v, Q \star w \rangle_\star(s) = \langle Q^H \star v, Q^H \star w \rangle_\star(s) = \langle v, w \rangle_\star(s), \quad s \in [a,b),
+    \end{equation*}
+    that is $Q$ and $Q^H$ are unitary with respect to $\langle \cdot, \cdot \rangle_\star$ (note that $Q^H \neq Q^{\star H}$).
+\end{lemma}
+\begin{proof}
+%  First, we assume that both $v$ and $w$ have $\star$-grade $0$. 
+  % We recall that $Q(t,s) = \tilde{Q}'(t)\Theta(t-s) + \tilde{Q}(t)\delta(t-s)$, with $\tilde{Q}'(t)$ the derivative of $\tilde{Q}(t)$. Then, since $v(t,s)=\tilde{v}(t,s)\Theta(t-s)$, for an analytic function $\tilde{v}$, we get
+  % \begin{align*}
+  %     Q(t,s) \star v(t,s) &= \tilde{Q}'(t)\Theta(t-s) \star v(t,s) + \tilde{Q}(t)\delta(t-s) \star v(t,s) \\
+  %     &= \tilde{Q}'(t)\left(\tilde{V}(t,s) - \tilde{V}(s,s)\right)\Theta(t-s) + \tilde{Q}(t)v(t,s),
+  % \end{align*}
+  % with $\tilde{V}(t,s)$ a primitive of $\tilde{v}(t,s)$ with respect of the variable $t$.
+  % Analogously, 
+  % $$Q(t,s) \star w(t,s) = \tilde{Q}'(t)\left(\tilde{W}(t,s) - \tilde{W}(s,s)\right)\Theta(t-s) + \tilde{Q}(t)w(t,s).$$
+  %   Therefore, $Q \star v$ and $Q \star w$ are in $\mathcal{A}_\Theta^{N \times 1}(I)$ and hence $\langle Q \star v, Q \star w \rangle_\star$ is well-defined.
+Recalling that $Q(t,s) = \delta'(t-s) \star \tilde{Q}(t)\Theta(t-s)$, we get $\Theta(t-s) \star Q(t,s) = \tilde{Q}(t)\Theta(t-s)$. Therefore, 
+\begin{align*}
+    \langle Q \star v, Q \star w \rangle_\star(s) &= \left[(\tilde{Q}\Theta \star v)^{\star H} \star \tilde{Q}\Theta \star w\right](s,s).
+\end{align*}
+Now, denoting $\tilde{V}(t,s)\Theta(t-s): = \Theta(t-s) \star v(t,s)$ and $\tilde{W}(t,s)\Theta(t-s): = \Theta(t-s) \star v(t,s)$, we observe
+\begin{align*}
+    \tilde{Q}(t)\Theta(t-s) \star v(t,s) &= \tilde{Q}(t)\left(\Theta(t-s) \star v(t,s)\right) = \tilde{Q}(t)\tilde{V}(t,s)\Theta(t-s), \\
+    \tilde{Q}(t)\Theta(t-s) \star w(t,s) &= \tilde{Q}(t)\left(\Theta(t-s) \star w(t,s)\right) = \tilde{Q}(t)\tilde{W}(t,s)\Theta(t-s).
+\end{align*}
 Therefore,
-kR
-⋆
-(λi) − p
-⋆
-(λi)k⋆(s) ≤ En(Ji(s))p
-(b − s).
-Under the assumptions of the Theorem, the interval Ji(s) ⊂ J for every s ∈ [a, b).
-By the classical Bernstein’s Theorem (see, e.g., [11, page 91]), there exist constant
-M > 0 and 0 < ρ < 1 such that
-En(J)
-p
-(b − a) ≤ M ρn+1
-.
-Now, note that
- Z b
-s
-|U(τ, s)˜v − (Θ ⋆ q⋆
-(A))(τ, s)˜v|
-2
-!1
-2
-= kR
-⋆
-(A)˜v − q
-⋆
-(A)˜vk⋆(s) kvδ˜ k⋆(s).
-Therefore,
- Z b
-s
-|U(τ, s)˜v − (Θ ⋆ q⋆
-(A))(τ, s)˜v|
-2
-!1
-2
-≤ M ρn+1kvδ˜ k⋆(s).
-Setting s = a concludes the proof.
-10 S. Pozza
-5. Conclusion. The results presented are a first step in the direction of a new
-approach for the analysis of ⋆-product approximations of the solution of linear nonautonomous ordinary differential equations. The error analysis can affect the study
-of the related analytic expression and symbolic algorithms [5, 8] as well as their
-numerical counterparts [3] opening the way to the use of efficient Krylov subspace
-methods. Moreover, they can open the way to the analysis of the localization (or
-decay) phenomenon of the time-ordered exponential [2, 6] by extending the techniques
-presented, e.g., in [1]. Finally, future works will try to derive more refined bounds for
-the error than the one in Theorem 2.1. This will be possible by using more information
-on the eigecurves’ behavior.
-REFERENCES
-[1] M. Benzi and P. Boito, Decay properties for functions of matrices over C∗-algebras, Linear
-Algebra Appl., 456 (2014), pp. 174–198.
-[2] M. Benzi, V. Simoncini, editors, Exploiting hidden structure in matrix computations: Algorithms and applications, Springer; 2016.
-[3] C. Bonhomme, S. Pozza, and N. V. Buggenhout, A new fast numerical method for the
-generalized Rosen-Zener model, arXiv preprint arXiv:2311.04144, (2023).
-[4] L. Dieci and T. Eirola, On smooth decompositions of matrices, SIAM J. Matrix Anal. Appl.,
-20 (1999), pp. 800–19.
-[5] P.-L. Giscard and C. Bonhomme, Dynamics of quantum systems driven by time-varying
-Hamiltonians: Solution for the Bloch-Siegert Hamiltonian and applications to NMR, Phys.
-Rev. Research, 2 (2020), p. 023081.
-[6] P.-L. Giscard, K. Lui, S. J. Thwaite, and D. Jaksch, An exact formulation of the timeordered exponential using path-sums, J. Math. Phys., 56 (2015), p. 053503.
-[7] P.-L. Giscard and S. Pozza, Lanczos-like algorithm for the time-ordered exponential: The
-∗-inverse problem, Appl. Math., 65 (2020), pp. 807–827.
-[8] P.-L. Giscard and S. Pozza, A Lanczos-like method for non-autonomous linear ordinary
-differential equations, Boll. Unione Mat. Ital., 16 (2023), pp. 81–102.
-[9] T. Kato, Perturbation Theory for Linear Operators, Second ed., Springer-Verlag, Berlin, 1976.
-[10] J. Liesen and Z. Strakos, Krylov subspace methods: principles and analysis, Oxford University Press, 2012.
-[11] G. Meinardus, Approximation of Functions: Theory and Numerical Methods, Springer Tracts
-Natur. Philos., vol. 13, Springer, New York, 1967.
-[12] S. Pozza, A new closed-form expression for the solution of ODEs in a ring of distributions and its connection with the matrix algebra, Linear Multilinear Algebra, to appear.
-arXiv:2302.11375 [math.NA]
-[13] S. Pozza and N. Van Buggenhout, A new Legendre polynomial-based approach for nonautonomous linear ODEs, Electron. Trans. Numer. Anal., to appear. arXiv:2303.11284
-[math.NA]
-[14] S. Pozza and N. Van Buggenhout, A new matrix equation expression for the solution of nonautonomous linear systems of ODEs, Proc. Appl. Math. Mech., 22 (2023), p. e202200117.
-[15] , A ⋆-product solver with spectral accuracy for non-autonomous ordinary differential
-equations, Proc. Appl. Math. Mech., 23 (2023), p. e202200050.
-[16] M. Ryckebusch, A Fr´echet-Lie group on distributions, arXiv preprint arXiv:2307.09037,
-(2023).
+    \begin{align*}
+    \left[(\tilde{Q}\Theta \star v)^{\star H} \star \tilde{Q}\Theta \star w\right](s,s) &= \int_s^b \tilde{V}^H(\tau,s) \tilde{Q}^H(\tau) \tilde{Q}(\tau)\tilde{W}(\tau,s) \, \text{d}\tau \\
+        &= \int_s^b \tilde{V}^H(\tau,s) \tilde{W}(\tau,s) \, \text{d}\tau \\
+        &= \left[(\Theta \star v)^{\star H} \star \Theta \star w \right](s,s) = \langle v, w \rangle_\star(s).
+\end{align*}
+Analogous arguments show that $\langle Q^H \star v, Q^H \star w \rangle_\star = \langle v, w \rangle_\star$.
+    % Finally, since
+    % \begin{align*}
+    %     \psi_R(Q \star v) &= \tilde{Q}'(s)\left(\tilde{V}(s,s) - \tilde{V}(s,s)\right)\Theta(s-s) + \tilde{Q}(s)v(s,s) = \tilde{Q}(s)v(s,s) \\
+    %     \psi_L(Q \star w) &= \tilde{Q}'(t)\left(\tilde{W}(t,t) - \tilde{W}(t,t)\right)\Theta(t-t) + \tilde{Q}(t)w(t,t) = \tilde{Q}(t)w(t,t),
+    % \end{align*}
+    % we obtain
+    % \begin{align*}
+    %     \langle Q \star v, Q \star w \rangle_\star &= \int_I v(\tau,\tau)^H \left(\tilde{Q}(\tau)\right)^H \tilde{Q}(\tau)w(\tau,\tau) \, \text{d}\tau \\
+    %         &= \int_I v(\tau,\tau)^H w(\tau,\tau) \, \text{d}\tau = \langle v, w \rangle_\star ,
+    % \end{align*}
+    % concluding the proof.
+%Finally, let $k,\ell$ be respectively the $\star$-grade of $v$ and $w$. Then, by \eqref{eq:gradeinAtheta}, $\hat{v} := v \star \delta^{(k)}$ and $\hat{w} := w \star \delta^{(\ell)}$ are both in $\in \mathcal{A}_\Theta^{N \times 1}(I)$. Therefore, following the same argument as above for $\langle Q \star \hat{v}, Q \star \hat{w} \rangle_\star$, we conclude the proof.
+\end{proof}
+
+Finally, given a matrix $A$ so that $\Theta \star A \in \mathcal{A}_\Theta^{N \times N}(I)$, we define the \emph{induced matrix $\star$-norm} of $A$ as
+\begin{equation}\label{eq:defmtxnorm}
+    \| A \|_\star(s) := \sup_{v\not \equiv 0 \, : \, \Theta \star v \in \mathcal{A}_\Theta^{N \times 1}(I)} \frac{\| A \star v \|_\star(s)}{\| v \|_\star(s)}, \quad s \in [a,b).
+\end{equation}
+The term norm is again an abuse of notation. The following theorem explains in which sense $\| A \|_\star$ is a norm and provides several useful properties.
+\begin{theorem}[Properties of the induced matrix $\star$-norm]\label{thm:starmtxnorm}
+Let $A, B$ such that $\Theta \star A, \Theta \star B \in \mathcal{A}_\Theta^{N \times N}(I)$ with $I = [a,b]$. Then, $\| A \|_\star$ satisfies the following properties for every $s \in [a,b)$:
+\begin{enumerate}
+    \item $\| A \|_\star(s) \geq 0$;
+    \item $\| A \|_\star(s) \equiv 0$ if and only if $A \equiv 0$;
+    \item $\| \alpha A \|_\star(s) = \| \alpha \delta \star A \|_\star(s) = |\alpha| \| A \|_\star(s)$ for any scalar $\alpha \in \mathbb{C}$;
+    \item $\| A + B \|_\star(s) \leq \| A \|_\star(s) + \| B \|_\star(s)$;
+    \item $\| A \star B \|_\star(s) \leq \| A \|_\star(s) \star \| B \|_\star(s)$.
+\end{enumerate}
+Therefore, $\| \cdot \|_\star(s)$ is a  sub-multiplicative matrix norm for every fixed $s \in [a,b)$.
+\end{theorem}
+\begin{proof}
+  Items~1--4 are corollaries of Theorem~\ref{thm:starvecnorm}.
+  Note that 
+  \begin{equation*}
+        \| A \star v \|_\star(s) = \frac{\| A \star v \|_\star(s)}{\| v \|_\star(s)} \|v \|_\star(s) \leq \| A \|_\star(s) \, \| v \|_\star(s), \quad s \in [a,b).
+  \end{equation*}
+  Therefore, $\| A \star B \star v \|_\star(s) \leq \| A \|_\star(s) \star \| B \star v \|_\star(s) \leq \| A \|_\star(s) \star \| B \|_\star(s)$, proving Item~5.
+\end{proof}
+
+\section{Approximation of the $\star$-resolvent}\label{sec:app} 
+Let $\tilde{v} \in \mathbb{C}^N$ be a (constant) vector and the $A(t,s)=\tilde{A}(t)\Theta(t-s) \in \mathcal{A}_\Theta^{N \times N}(I)$ a matrix-valued function, with $\tilde{A}(t)$ Hermitian for $t\in I$ and $I=[a,b]$. 
+%We aim at finding the ``best'' $\star$-polynomial $p^\star(t,s)$ of degree $n$ that approximates the $\star$-resolvent $R^\star(A)\tilde{v}$. 
+We want to find the optimal $\star$-polynomials of degree at most $n$ approximating the $\star$-resolvent $R^\star(A)\tilde{v}$ in the sense of the $\star$-norm.
+That is, finding $q^\star \in \mathcal{P}_n^\star$ so that
+\begin{equation}\label{eq:minprob}
+    \| R^\star(A)\tilde{v} - q^\star(A)\tilde{v}  \|_\star(s) = \min_{p^\star \in \mathcal{P}^\star_n} \| R^\star(A)\tilde{v} - p^\star(A)\tilde{v}  \|_\star(s), \quad s \in [a,b).
+\end{equation}
+By Corollary~\ref{cor:stareigdec}, $A(t,s) = Q(t,s) \star \Lambda(t,s) \star Q(t,s)^H$, where the diagonal elements of $\Lambda$ are the $\star$-eigenvalues $\lambda_j(t,s) = \tilde{\lambda}_j(t)\Theta(t-s)$, $j=1,\dots,n$.
+Since $Q^H \star Q = I_\star$, then we have $A^{\star 2} = Q \star \Lambda \star Q^H \star Q \star \Lambda \star Q^H = Q \star \Lambda^{\star 2} \star Q^H$, and hence
+\begin{equation}\label{eq:powerdec}
+    A^{\star k} = Q \star \Lambda^{\star k} \star Q^H, \quad k=0,1,2, \dots \,.
+\end{equation}
+\begin{theorem}\label{thm:error}
+    Let $w = Q^H \star \tilde{v}\delta = Q^H\tilde{v}$. Then, the problem \eqref{eq:minprob} is equivalent to finding the $n$-degree $\star$-polynomial $q^\star$ such that
+    \begin{equation*}
+            \| R^\star(A)\tilde{v} - q^\star(A)\tilde{v}  \|_\star(s) = \min_{p^\star \in \mathcal{P}^\star_n} \| R^\star(\Lambda) \star w - p^\star(\Lambda) \star w  \|_\star(s), \quad s \in [a,b).
+    \end{equation*}
+    Moreover, for a fixed $s \in [a,b)$, the error can be bounded by
+    \begin{equation*}
+            \frac{\| R^\star(A)\tilde{v} - q^\star(A)\tilde{v}  \|_\star(s)}{\| \tilde{v}\delta \|_\star(s)} \leq \min_{p^\star \in \mathcal{P}^\star_n} \, \max_{i=1,\dots,N} \| R^\star(\lambda_i) - p^\star(\lambda_i)  \|_\star(s), \quad s \in [a,b),
+    \end{equation*}
+    where $\lambda_1(t,s), \dots \lambda_N(t,s)$ are the $\star$-eigenvalues of $A(t,s)$.
+\end{theorem}
+\begin{proof}
+    Every $\star$-polynomial can be expanded in the $\star$-monomial basis, i.e., $p^\star(x) = \alpha_0 \delta + \alpha_1 x + \dots + \alpha_n x^{\star n}$. Therefore, by using \eqref{eq:powerdec}, we get
+    \begin{equation*}
+        p^\star(A) = Q \star p^\star(\Lambda) \star Q^H, \quad R^\star(A) = Q \star R^\star(\Lambda) \star Q^H. 
+    \end{equation*}
+    Hence, by Lemma~\ref{lemma:unitary} and Theorem~\ref{thm:starmtxnorm}, for every fixed $s \in [a,b)$, we get
+    \begin{align*}
+        \| R^\star(A)\tilde{v} - p^\star(A)\tilde{v}  \|_\star(s) &= \| Q \star ( R^\star(\Lambda) - p^\star(\Lambda)) \star Q^H \star \tilde{v}\delta  \|_\star(s) \\
+        &= \| ( R^\star(\Lambda) - p^\star(\Lambda)) \star Q^H \star \tilde{v}\delta  \|_\star(s) \\
+        &\leq \| R^\star(\Lambda) - p^\star(\Lambda) \|_\star(s) \; \| Q^H \star \tilde{v}\delta  \|_\star(s) \\
+        &\leq \| R^\star(\Lambda) - p^\star(\Lambda) \|_\star(s) \; \| \tilde{v}\delta  \|_\star(s) \\
+        &\leq \max_{i=1,\dots,N} \| R^\star(\lambda_i) - p^\star(\lambda_i) \|_\star(s) \; \| \tilde{v}\delta  \|_\star(s),
+    \end{align*}
+    concluding the proof.
+\end{proof}
+
+Now we can prove the main result of this paper. \subsection{Proof of Theorem~\ref{thm:main}}
+Denote $p^\star(x) = \sum_{k=0}^n \alpha_k x^{\star k}$. By Lemma~\ref{lemma:npower} and Theorem~\ref{thm:error}, for $s \in [a,b)$ we get 
+\begin{align*}
+    \| R^\star(\lambda_i) - p^\star(\lambda_i)  \|_\star^2(s) &= \int_s^b \left| \sum_{k=0}^\infty \frac{(L_i(\tau, s))^k}{k!} - \sum_{k=0}^n \alpha_k\frac{(L_i(\tau, s))^k}{k!} \right|^2 \, \text{d}\tau \\
+        &= \int_s^b \left| \exp(L_i(\tau, s)) - p(L_i(\tau, s)) \right|^2 \, \text{d}\tau,
+\end{align*}
+where $L_i(\cdot,s)$ is the primitive of $\tilde{\lambda}_i(\cdot)$ so that $L_i(s,s)=0$ and $p(t) = \sum_{k=0}^n \frac{\alpha_k}{k!}t^k$ is a (usual) polynomial. 
+%\begin{theorem}
+    %Consider the initial value problem
+    %\begin{equation*}
+    %    \frac{\partial}{\partial t}\tilde{u}(t) = \tilde{A}(t)\tilde{u}(t), \quad \tilde{u}(0) = \tilde{v}, \quad t\in[0,1].
+    %\end{equation*}
+    %where $\tilde{A}(t) \in \mathbb{C}^{N \times N}$ is a Hermitian analytic matrix-valued function with eigenvalues $\tilde{\lambda}_1(t), \dots, \tilde{\lambda}_N(t)$, and $\tilde{v}\in \mathbb{C}^{N \times N}$ is a nonzero vector. 
+    %Let us assume that $\tilde{\lambda}_i(t)$ have values contained in the bounded interval $J$, for $t \in [0,1]$.
+    %Moreover, we denote with $E_n(J)$ the minimal uniform error of the polynomial approximation of the exponential over $J$, i.e.,
+    %\begin{equation*}
+    %    E_n(J) := \min_{p \in \mathcal{P}_n} \max_{t \in J} |\exp(t) - p(t)|.
+    %\end{equation*}
+    %Let us define $A(t,s) = \tilde{A}(t)\Theta(t-s)$, $q^\star$ as the solution of the problem~\eqref{eq:minprob}, and the $L_2$ norm of the error as
+    %\begin{equation*}
+    %    \|\tilde{u}(t) - (\Theta \star q^\star(A)\tilde{v})(t,0) \|_{L_2}^2 := \int_s^b | \tilde{u}(\tau) - (\Theta \star q^\star(A))(\tau, 0) \tilde{v} |^2.
+    %\end{equation*}
+    %Then, 
+    %\begin{equation*}
+    %    \|\tilde{u}(t) - (\Theta \star R^\star(A)\tilde{v})(t,0) \|_{L_2} \leq E_n([J]) \leq M \rho^{n+1},
+    %\end{equation*} 
+    %for some constant $M>0$ and $0<\rho<1$.
+%\end{theorem}
+%    Given a real interval $J$ and denoted with $\mathcal{P}_n$ the space of the (usual) polynomials of maximal degree $n$, the best uniform approximation of $\exp$ over $J$ is reached by the polynomial in $\mathcal{P}_n$ whose error is:
+%    \begin{equation*}
+        %E_n(J) := \min_{p \in \mathcal{P}_n} \max_{t \in J} |\exp(t) - p(t)|.
+%    \end{equation*}
+    Note that $L_i(\tau,s)$ is a real function with values in the interval
+    \[ J_i(s) = \left[\min_{\tau \in [s, b]} L_i(\tau,s), \max_{\tau \in [s, b]} L_i(\tau,s)\right]. \]
+    Therefore, 
+    \begin{equation*}
+        \| R^\star(\lambda_i) - p^\star(\lambda_i)  \|_\star(s) \leq E_n(J_i(s)) \sqrt{(b-s)}.
+    \end{equation*}
+    Under the assumptions of the Theorem, the interval $J_i(s) \subset J$ for every $s \in [a,b)$.
+    %Let us define the ellipse $\mathcal{E}_\rho$ with foci $-1$ and $1$ and $\rho>1$ the sum of the semi-axes. 
+    By the classical Bernstein's Theorem (see, e.g., \cite[page~91]{meinardus}), there exist constant $M>0$ and $0<\rho<1$ such that
+    \begin{equation*}
+        E_n(J)\sqrt{(b-a)} \leq M \rho^{n+1}.
+    \end{equation*}
+    Now, note that
+            \begin{equation*}
+            \left(\int_s^b | U(\tau, s)\tilde{v} - (\Theta \star q^\star(A))(\tau, s) \tilde{v} |^2\right)^{\frac{1}{2}} = \| R^\star(A)\tilde{v} - q^\star(A)\tilde{v}  \|_\star(s) \; \| \tilde{v}\delta \|_\star(s).
+    \end{equation*}
+    Therefore, 
+        \begin{equation*}
+            \left(\int_s^b | U(\tau, s)\tilde{v} - (\Theta \star q^\star(A))(\tau, s) \tilde{v} |^2\right)^{\frac{1}{2}} \leq M \rho^{n+1} \| \tilde{v}\delta \|_\star(s).
+    \end{equation*}
+    Setting $s=a$ concludes the proof.
+
+
+\section{Conclusion}\label{sec:conc}
+The results presented are a first step in the direction of a new approach for the analysis of $\star$-product approximations of the solution of linear non-autonomous ordinary differential equations. The error analysis can affect the study of the related analytic expression and symbolic algorithms \cite{BonGis2020,GiPo20} as well as their numerical counterparts \cite{BoPoVB23} opening the way to the use of efficient Krylov subspace methods. Moreover, they can open the way to the analysis of the \emph{localization} (or \emph{decay}) phenomenon of the time-ordered exponential \cite{bensim,GiLuThJa15} by extending the techniques presented, e.g., in \cite{BenBoi14}. 
+Finally, future works will try to derive more refined bounds for the error than the one in Theorem~\ref{thm:main}. This will be possible by using more information on the eigecurves' behavior.
+
+
+
+%\section*{Acknowledgments}
+%The author thanks the anonymous authors whose work largely
+%constitutes this sample file. He also thanks the INFO-TeX mailing
+%list for the valuable indirect assistance he received.
+ 
+ 
+\begin{thebibliography}{10} 
+\bibitem{BenBoi14}
+{\sc M.~Benzi and P.~Boito}, {\em Decay properties for functions of matrices   over {$C^*$}-algebras}, Linear Algebra Appl., 456 (2014), pp.~174--198.
+
+\bibitem{bensim}
+{\sc  M. Benzi, V. Simoncini, editors}, {\em Exploiting hidden structure in matrix computations: Algorithms and applications}, 
+  Springer; 2016.
+
+  \bibitem{BoPoVB23} {\sc C.~Bonhomme, S.~Pozza, and N.~V. Buggenhout}, {\em A new fast numerical method for the generalized {R}osen-{Z}ener model}, arXiv preprint arXiv:2311.04144,  (2023).
+
+\bibitem{dieci99}
+{\sc L. Dieci and T. Eirola}, {\em On smooth decompositions of matrices}, SIAM J. Matrix Anal. Appl., 20 (1999), pp.~800--19.
+
+
+\bibitem{BonGis2020}
+{\sc P.-L. Giscard and C.~Bonhomme}, {\em Dynamics of quantum systems driven by time-varying {H}amiltonians: Solution for the {B}loch-{S}iegert {H}amiltonian
+  and applications to {NMR}}, Phys. Rev. Research, 2 (2020), p.~023081.
+
+\bibitem{GiLuThJa15}
+{\sc P.-L. Giscard, K.~Lui, S.~J. Thwaite, and D.~Jaksch}, {\em An exact formulation of the time-ordered exponential using path-sums}, J. Math. Phys.,
+  56 (2015), p.~053503.
+
+\bibitem{GisPozInv19}
+{\sc P.-L. Giscard and S.~Pozza}, {\em Lanczos-like algorithm for the
+  time-ordered exponential: The $\ast$-inverse problem}, Appl. Math., 65 (2020), pp.~807--827.
+
+\bibitem{GiPo20}
+{\sc P.-L. Giscard and S.~Pozza}, {\em A {L}anczos-like method for
+  non-autonomous linear ordinary differential equations}, Boll. Unione Mat. Ital., 16 (2023), pp.~81--102.
+
+\bibitem{kato}
+{\sc  T. Kato}, {\em Perturbation Theory for Linear Operators}, 
+  Second ed., Springer-Verlag, Berlin, 1976.
+
+\bibitem{liestr}
+{\sc  J. Liesen and Z. Strakos}, {\em Krylov subspace methods: principles and analysis}, Oxford University Press, 2012.
+
+\bibitem{meinardus}
+{\sc  G. Meinardus}, {\em Approximation of Functions: Theory and Numerical Methods}, Springer Tracts Natur. Philos., vol. 13, Springer,
+New York, 1967.
+
+\bibitem{Po23}
+{\sc S.~Pozza}, {\em A new closed-form expression for the solution of {ODE}s in a ring of distributions and its connection with the matrix algebra}, Linear Multilinear Algebra, to appear. arXiv:2302.11375 [math.NA]
+
+\bibitem{PoVB24}
+{\sc S.~Pozza and N.~Van~Buggenhout}, {\em A new Legendre polynomial-based approach for non-autonomous linear ODEs}, Electron. Trans. Numer. Anal., to appear. arXiv:2303.11284 [math.NA]
+
+\bibitem{PoVB23_PAMM_B}
+{\sc S.~Pozza and N.~Van~Buggenhout}, {\em A new matrix equation expression for the solution of non-autonomous linear systems of {ODE}s}, Proc. Appl. Math. Mech., 22 (2023), p.~e202200117.
+
+\bibitem{PoVB23_PAMM_A}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, {\em A $\star$-product   solver with spectral accuracy for non-autonomous ordinary differential
+  equations}, Proc. Appl. Math. Mech., 23 (2023), p.~e202200050.
+
+\bibitem{Ry23}
+{\sc M.~Ryckebusch}, {\em A {F}r\'echet-{L}ie group on distributions}, arXiv preprint arXiv:2307.09037,  (2023).
+
+
+%.......
+
+% \bibitem{bs} {\sc R.~A. Brualdi and B.~L. Shader}, 
+% {\em On sign-nonsingular matrices and the conversion of the
+% permanent into the determinant}, in Applied Geometry and
+% Discrete Mathematics, The Victor Klee Festschrift, P.
+% Gritzmann and B. Sturmfels, eds., American Mathematical
+% Society, Providence, RI, 1991, pp. 117--134.
+ 
+% \bibitem{djd} {\sc J. Drew, C.~R. Johnson, and P. van den Driessche}, 
+% {\em Strong forms of nonsingularity}, Linear Algebra Appl.,
+% 162 (1992), to appear. 
+ 
+% \bibitem{g} {\sc P.~M. Gibson}, {\em Conversion of the permanent into the 
+% determinant}, Proc. Amer. Math. Soc., 27 (1971),
+% pp.~471--476.
+ 
+% \bibitem{klm} 
+% {\sc V.~Klee, R.~Ladner, and R.~Manber}, {\it
+% Signsolvability revisited}, Linear Algebra Appl., 59
+% (1984), pp.~131--157.
+ 
+% \bibitem{m} 
+% {\sc K. Murota}, LU-{\em decomposition of a matrix with
+% entries of different kinds}, Linear Algebra Appl., 49
+% (1983), pp.~275--283.
+
+% \bibitem{Axelsson}
+% {\sc O.~Axelsson}, {\em Conjugate gradient type methods for unsymmetric and
+%   inconsistent systems of linear equations}, Linear Algebra Appl., 29 (1980),
+%   pp.~1--16.
+
+% \bibitem{Brown-Saad1}
+% {\sc P.~N. Brown and Y.~Saad}, {\em Hybrid {K}rylov methods for nonlinear
+%   systems of equations}, SIAM J. Sci. Statist. Comput., 11 (1990), 
+%   pp.~450--481.
+
+% \bibitem{DES}
+% {\sc R.~S. Dembo, S.~C. Eisenstat, and T.~Steihaug}, {\em Inexact {N}ewton
+%   methods}, SIAM J. Numer. Anal., 19 (1982), pp.~400--408.
+
+% \bibitem{EES}
+% {\sc S.~C. Eisenstat, H.~C. Elman, and M.~H. Schultz}, {\em Variational
+%   iterative methods for nonsymmetric systems of linear equations}, SIAM J.
+%   Numer. Anal., 20 (1983), pp.~345--357.
+
+% \bibitem{Elman}
+% {\sc H.~C. Elman}, {\em Iterative methods for large, sparse, nonsymmetric
+%   systems of linear equations}, Ph.D. thesis, Department of Computer
+%   Science, Yale University, New Haven, CT, 1982.
+
+% \bibitem{GloKR85}
+% {\sc R.~Glowinski, H.~B. Keller, and L.~Rheinhart}, {\em Continuation-conjugate
+%   gradient methods for the least-squares solution of nonlinear boundary value
+%   problems}, SIAM J. Sci. Statist. Comput., 6 (1985), pp.~793--832.
+
+% \bibitem{Golub-VanLoan}
+% {\sc G.~H. Golub and C.~F. Van~Loan}, {\em Matrix Computations}, 
+%   Second ed., The Johns  Hopkins University Press, Baltimore, MD,  1989.
+
+% \bibitem{More}
+% {\sc J.~J. Mor\'e}, {\em A collection of nonlinear model problems}, in
+%   Computational Solutions of Nonlinear Systems of Equations, E.~L. Allgower and
+%   K.~Georg, eds., Lectures in Applied Mathematics, Vol. 26, American
+%   Mathematical Society, Providence, RI, 1990, pp.~723--762.
+
+% \bibitem{Saad}
+% {\sc Y.~Saad}, {\em Krylov subspace methods for solving large unsymmetric
+%   linear systems}, Math. Comp., 37 (1981), pp.~105--126.
+
+% \bibitem{Saad-Schultz}
+% {\sc Y.~Saad and M.~H. Schultz}, {\em {\rm GMRES}: A generalized minimal
+%   residual method for solving nonsymmetric linear systems}, SIAM J. Sci. Statist.
+%   Comput., 7 (1986), pp.~856--869.
+
+% \bibitem{Swarztrauber-Sweet}
+% {\sc P.~N. Swarztrauber and R.~A. Sweet}, {\em Efficient {\rm FORTRAN}
+%   subprograms for the solution of elliptic partial differential equations}, ACM
+%   Trans. Math. Software, 5 (1979), pp.~352--364.
+
+% \bibitem{Walker88}
+% {\sc H.~F. Walker}, {\em Implementation of the {\rm GMRES} method using
+%   {H}ouseholder transformations}, SIAM J. Sci. Statist. Comput., 9 (1988),
+%   pp.~152--163.
+
+% \bibitem{Walker89}
+% \sameauthor, {\em Implementations of
+%   the {\rm GMRES} method}, Computer Phys. Comm., 53 (1989),  pp.~311--320.
+
+\end{thebibliography} 
+
+\end{document} 
+

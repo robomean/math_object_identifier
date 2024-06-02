@@ -1,626 +1,879 @@
-THE DISTRIBUTION ON PERMUTATIONS INDUCED BY
-A RANDOM PARKING FUNCTION
-ROSS G. PINSKY
-Abstract. A parking function on [n] creates a permutation in Sn via
-the order in which the n cars appear in the n parking spaces. Placing the uniform probability measure on the set of parking functions on
-[n] induces a probability measure on Sn. We initiate a study of some
-properties of this distribution.
-1. Introduction and Statement of Results
-Consider a row of n parking spaces on a one-way street. A line of n
-cars, numbered from 1 to n, attempts to park, one at a time. The ith car’s
-preferred space is spot number πi ∈ [n]. If this space is already taken, then
-car i proceeds forward and parks in the first available space, if one exists.
-If the car is unable to park, it exits the street. A sequence π = {πi}
-n
-i=1
-is called a parking function on [n] if all n cars are able to park. It is easy
-to see that π is a parking function if and only if |{i : πi ≤ j}| ≥ j, for all
-j ∈ [n]. Let Pn denote the set of parking functions. It is well-known that
-|Pn| = (n+ 1)n−1
-. There are a number of proofs of this result; a particularly
-elegant one due to Pollack can be found in [3]. There is a large literature on
-parking functions and their generalizations; see, for example, the survey [5].
-We can consider a random parking function by placing the uniform probability measure on Pn. Denote this probability measure by P
-Pn . A study of
-random parking functions was initiated by Diaconis and Hicks in [1]. Since
-each parking function yields a permutation σ = σ1 · · · σn ∈ Sn, where σj
-is the number of the car that parked in space j, it follows that a random
-2010 Mathematics Subject Classification. 60C05, 05A05.
-Key words and phrases. parking function, random permutation.
-1
-2 ROSS G. PINSKY
-parking function induces a distribution on the set Sn of permutations of [n].
+
+\documentclass[11pt]{amsart}
+\usepackage{amssymb, latexsym}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+%\newtheorem* {openquestion1}{Open Question 1}
+%\newtheorem* {openquestion2}{Open Question 2}
+
+\newtheorem {lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+
+
+
+
+
+%\newtheorem{example}{Example}
+\newtheorem*{example}{Example}
+\newtheorem*{Example2}{Example 2}
+\newtheorem*{Example1}{Example 1}
+%\newtheorem*{remarK 1}{Remark 1}
+%\newtheorem*{remarK 2}{Remark 2}
+%\newtheorem*{Remark 1}{Remark 1}
+%\newtheorem*{Remark 2}{Remark 2}
+%\newtheorem*{Remark 3}{Remark 3}
+%\newtheorem*{remark 1}{Remark 1}
+%\newtheorem*{remark 2}{Remark 2}
+%\newtheorem*{remark 3}{Remark 3}
+%\newtheorem*{remark 4}{Remark 4}
+
+%\newtheorem*{RemarK 1}{Remark 1}
+%\newtheorem*{RemarK 2}{Remark 2}
+
+\DeclareRobustCommand{\stirling}{\genfrac\{\}{0pt}{}}
+%\theoremstyle{definition}
+%\newtheorem{example}{Example}
+
+%\newtheorem*{definition}{Definition}
+
+\numberwithin{equation}{section}
+\renewcommand{\baselinestretch}{1.3}
+
+\begin{document}
+
+
+\title[Permutations induced by a random parking function ] {The distribution on permutations induced by a random parking function}
+
+
+
+\author{Ross G. Pinsky}
+
+%\noindent  pinsky@math.technion.ac.il\ \ \ \ tel: 972-4-829-4083\ \ \  fax: 972-4-829-3388
+
+\address{Department of Mathematics\\
+Technion---Israel Institute of Technology\\
+Haifa, 32000\\ Israel}
+\email{ pinsky@technion.ac.il}
+
+\urladdr{https://pinsky.net.technion.ac.il/}
+
+
+
+\subjclass[2010]{60C05, 05A05} \keywords{parking function, random permutation, Borel distribution}
+\date{}
+
+
+\begin{abstract}
+A parking function on $[n]$ creates a permutation in $S_n$ via the order in which the $n$ cars appear in the $n$ parking spaces.
+Placing the uniform probability measure on the set of parking functions on $[n]$ induces a probability measure on $S_n$. We initiate a study of some properties of this distribution.
+Let $P_n^{\text{park}}$ denote this distribution on $S_n$ and let $P_n$ denote the uniform distribution on $S_n$. In particular, we obtain an explicit formula for
+$P_n^{\text{park}}(\sigma)$ for all $\sigma\in S_n$. Then we show that for all but an asymptotically $P_n$-negligible set of permutations, one has
+$P_n^{\text{park}}(\sigma)\in\left(\frac{(2-\epsilon)^n}{(n+1)^{n-1}},\frac{(2+\epsilon)^n}{(n+1)^{n-1}}\right)$.
+However, this accounts for only an exponentially small part of the $P_n^{\text{park}}$-probability.  We also obtain an explicit formula for
+$P_n^{\text{park}}(\sigma^{-1}_{n-j+1}=i_1,\sigma^{-1}_{n-j+2}=i_2,\cdots, \sigma^{-1}_n=i_j)$, the probability that the last $j$ cars park in positions
+$i_1,\cdots, i_j$ respectively, and  show that
+the  $j$-dimensional random vector $(n+1-\sigma^{-1}_{n-j+l}, n+1-\sigma^{-1}_{n-j+2},\cdots, n+1-\sigma^{-1}_{n})$
+under $P_n^{\text{park}}$ converges in distribution to a random vector
+$(\sum_{r=1}^jX_r,\sum_{r=2}^j X_r,\cdots, X_{j-1}+X_j,X_j)$, where $\{X_r\}_{r=1}^j$ are IID with the Borel distribution.
+We then show that in fact for $j_n=o(n^\frac16)$, the final $j_n$ cars will park in increasing order with probability approaching 1 as $n\to\infty$.
+
+\end{abstract}
+
+\maketitle
+\section{Introduction and Statement of Results}\label{intro}
+\renewcommand{\baselinestretch}{1.3}
+Consider a row of  $n$ parking spaces on a one-way street. A line of $n$ cars, numbered from 1 to $n$, attempt to park, one at a time. The $i$th car's preferred space is spot number $\pi_i\in[n]$.
+If this space is already taken, then car $i$ proceeds forward and parks in the first available space, if one exists. If the  car is unable to park, it exits the street.
+A sequence $\pi=\{\pi_i\}_{i=1}^n$ is called a parking function on $[n]$ if all $n$ cars are able to park. It is easy to see that $\pi$ is a parking function if and only if
+$|\{i:\pi_i\le j\}|\ge j$, for all $j\in[n]$.  Let $\mathcal{P}_n$ denote the set of parking functions. It is well-known that
+$|\mathcal{P}_n|=(n+1)^{n-1}$. There are a number of proofs of this result; a particularly  elegant one due to Pollack can be found in
+\cite{FR}.
+There is a large literature on parking functions and their generalizations; see, for example, the survey \cite{Y}.
+
+We can consider a random parking function by placing the uniform probability measure on $\mathcal{P}_n$. Denote this probability measure by $P^{\mathcal{P}_n}$. A study of random parking functions was initiated by Diaconis and Hicks in \cite{DH}.
+Since each parking function yields a permutation $\sigma=\sigma_1\cdots\sigma_n\in S_n$, where $\sigma_j$ is the number of the car that parked in space $j$, it follows that
+ a random parking function induces a distribution on the set $S_n$ of permutations of $[n]$.
 In this paper we initiate a study of this distribution.
-We will use the notation Pn and En to denote the uniform probability
-measure and the corresponding expectation on Sn. We will denote by P
-park
-n
-the probability measure on Sn induced by a random parking function in
-Pn. The corresponding expectation will be denoted by E
-park
-n . To be more
-precise concerning the definition of the induced probability measure, define
-Tn : Pn → Sn by Tn(π) = σ, if when using the parking function π, σj is the
-number of the car that parked in space j, for j ∈ [n]. For example, if n = 4
-and π = 2213 ∈ P4, then we have T4(2213) = 3124 ∈ S4. We define
-(1.1) P
-park
-n
-(σ) = P
-Pn
 
-T
-−1
-n
-(σ)
-
+We will use the notation $P_n$ and $E_n$ to denote the uniform probability measure and the corresponding expectation on $S_n$. We will denote by $P_n^{\text{park}}$  the probability measure
+on $S_n$ induced by a random parking function in $\mathcal{P}_n$. The
+corresponding expectation will be  denoted by $E_n^{\text{park}}$.
+To be more precise concerning the definition of the induced probability measure, define $T_n:\mathcal{P}_n\to S_n$ by $T_n(\pi)=\sigma$,
+if when using the parking function $\pi$,  $\sigma_j$ is the number of the car that parked in space $j$, for $j\in[n]$.
+For example, if $n=4$ and $\pi=2213\in\mathcal{P}_4$, then we have $T_4(2213)=3124\in S_4$. We define
+\begin{equation}\label{defprob}
+P_n^{\text{park}}(\sigma)=P^{\mathcal{P}_n}\left(T_n^{-1}(\{\sigma\})\right).
+\end{equation}
+
+For $1\le i\le n<\infty$ and $\sigma\in S_n$, define
+\begin{equation}\label{littlel}
+l_{n,i}(\sigma)=\max\{l\in[i]: \sigma_i=\max(\sigma_i,\sigma_{i-1},\cdots, \sigma_{i-l+1}\}.
+\end{equation}
+For $n\in\mathbb{N}$, define
+\begin{equation*}
+L_n(\sigma)=\prod_{i=1}^nl_{n,i}(\sigma),\ \sigma\in S_n.
+\end{equation*}
+For example, if $\sigma=379218645\in S_9$, then $l_{n,i}(\sigma)=1$, for $i\in\{1,4,5,7,8\}$, $l_{n,i}(\sigma)=2$, for $i\in\{2,9\}$ and $l_{n,i}(\sigma)=3$, for $i\in\{3,6\}$.
+Thus, $L_9(\sigma)=1^52^23^2=36$.
+At certain points in the paper, it will be convenient to use the following variant of $l_{n,i}$.
+ Define
+\begin{equation}\label{littleltilde}
+\tilde l_{n,i}(\sigma)=l_{n,\sigma^{-1}_i}(\sigma).
+\end{equation}
+ For example, if $\sigma=379218645$, then $\tilde l_{n,i}(\sigma)=1$, for $i\in\{1,2,3,4,6\}$, $\tilde l_{n,i}=2$, for
+$i\in\{5,7\}$ and $\tilde l_{n,i}=3$, for $i\in\{8,9\}$.
+Of course,
+\begin{equation}\label{Ln}
+L_n(\sigma)=\prod_{i=1}^nl_{n,i}(\sigma)=\prod_{i=1}^n\tilde l_{n,i}(\sigma),\ \sigma\in S_n.
+\end{equation}
+
+We have the following theorem.
+\begin{theorem}\label{ptwisedist}
+\begin{equation}\label{ptwiseform}
+P_n^{\text{\rm park}}(\sigma)=\frac{L_n(\sigma)}{(n+1)^{n-1}}, \ \sigma\in S_n.
+\end{equation}
+\end{theorem}
+The following corollary of Theorem \ref{ptwisedist} is immediate, where the asymptotic behavior follows from Stirling's  formula,  $n!\sim n^ne^{-n}\sqrt{2\pi n}$.
+\begin{corollary}\label{corstir}
+The expected value of the  random variable $L_n=L_n(\sigma)$ on $(S_n,P_n)$ satisfies
+\begin{equation}\label{stir}
+E_nL_n=\frac1{n!}\sum_{\sigma\in S_n}L_n(\sigma)=\frac{(n+1)^{n-1}}{n!}\sim\frac{e^{n+1}}{\sqrt{2\pi}\thinspace n^\frac32}.
+\end{equation}
+\end{corollary}
+Although $E_nL_n$ is around $e^n$, with high $P_n$-probability $L_n(\sigma)$ is near $2^n$.
+We will prove the following weak convergence result  for $L_n$.
+\begin{theorem}\label{llnthm}
+For any $\epsilon\in(0,2]$, the random variable $L_n=L_n(\sigma)$ on $(S_n,P_n)$ satisfies
+\begin{equation}\label{wlln}
+\lim_{n\to\infty}P_n((2-\epsilon)^n\le L_n\le (2+\epsilon)^n))=1.
+\end{equation}
+\end{theorem}
+The following corollary follows immediately from Theorems \ref{ptwisedist} and \ref{llnthm}.
+\begin{corollary}\label{corP-Ppark}
+For any $\epsilon\in(0,2]$, the random variable $P_n^{\text{\rm park}}=P_n^{\text{\rm park}}(\sigma)$ on $(S_n,P_n)$ satisfies
+\begin{equation}\label{P-Ppark}
+\lim_{n\to\infty}P_n\left(\bigg\{\sigma\in S_n:P_n^{\text{\rm park}}(\sigma)\in\left(\frac{(2-\epsilon)^n}{(n+1)^{n-1}},\frac{(2+\epsilon)^n}{(n+1)^{n-1}}\right)\bigg\}\right)=1.
+\end{equation}
+\end{corollary}
+And the following corollary follows immediately from Theorem \ref{ptwisedist}, Corollary \ref{corstir} and Stirling's formula.
+\begin{corollary}\label{corexpP-Ppark}
+The expectation of the random variable $P_n^{\text{\rm park}}=P_n^{\text{\rm park}}(\sigma)$ on $(S_n,P_n)$ is given by
+\begin{equation}\label{expP-Ppark}
+E_nP_n^{\text{\rm park}}=\frac1{n!}\sim\frac{e^n}{\sqrt{2\pi} n^{n+\frac12}}.
+\end{equation}
+\end{corollary}
+Comparing \eqref{P-Ppark} and \eqref{expP-Ppark},
+we see that
+% the random variable $\mathcal{P}_n$ on $(S_n,P_n)$  falls in the interval
+%$\left(\frac{(2-\epsilon)^n}{(n+1)^{n-1}},\frac{(2+\epsilon)^n}{(n+1)^{n-1}}\right)$ WHP as $n\to\infty$, however its expected value is asymptotic
+%to $\frac{e^n}{\sqrt{2\pi} n^{n+\frac12}}$.
+ for all but an asymptotically $P_n$-negligible set of permutations in $S_n$, the $P_n^{\text{park}}$-probability of a permutation in $S_n$ is approximately $\frac{2^n}{(n+1)^{n-1}}$, but the
+``average'' $P_n^{\text{park}}$-probability of a permutation in $S_n$ is exponentially larger, namely asymptotic to $\frac{e^n}{\sqrt{2\pi} n^{n+\frac12}}$.
+By Stirling's formula, it also follows that there is a set $A_n\subset S_n$ with $P_n(A_n)\to1$ for which  $P_n^{\text{park}}(A_n)$ is around $(\frac2e)^n$.
+There is an asymptotically    $P_n$-negligible set of permutations in $S_n$
+each of whose elements has super-exponentially larger $P_n^{\text{park}}$-probability  than the   average probability,
+%for which the $P_n^{\text{park}}$-probability is super-exponentially larger than this average probability
+%(and this is where almost all the $P_n^{\text{park}}$-probability  lies),
+and an asymptotically
+$P_n$-negligible set of permutations in $S_n$
+each of whose elements has
+  exponentially smaller $P_n^{\text{park}}$-probability   than the average probability.
+In particular, we have the following corollary.
+\begin{corollary}\label{largesmall}
+The maximum value of $P_n^{\text{\rm park}}=P_n^{\text{\rm park}}(\sigma)$ is equal to
+ $\frac{n!}{(n+1)^{n-1}}\sim\frac{\sqrt{2\pi}\thinspace n^\frac32}{e^{n+1}}$ and is attained uniquely at  $\sigma=1\cdots n$.
+The minimum value of  $P_n^{\text{\rm park}}$ is equal to $\frac1{(n+1)^{n-1}}$ and is attained uniquely at $\sigma=n\cdots 1$.
+\end{corollary}
+\begin{proof}
+The function $L_n=L_n(\sigma), \sigma\in S_n$,
+ attains its maximum value $n!$ uniquely at $\sigma=1\cdots n$
+and attains its minimum value 1 uniquely at $\sigma=n\cdots 1$.
 .
-For 1 ≤ i ≤ n < ∞ and σ ∈ Sn, define
-ln,i(σ) = max{l ∈ [i] : σi = max(σi
-, σi−1, · · · , σi−l+1}.
-For n ∈ N, define
-(1.2) Ln(σ) = Yn
-i=1
-ln,i(σ), σ ∈ Sn.
-For example, if σ = 379218645 ∈ S9, then ln,i(σ) = 1, for i ∈ {1, 4, 5, 7, 8},
-ln,i(σ) = 2, for i ∈ {2, 9} and ln,i(σ) = 3, for i ∈ {3, 6}. Thus, L9(σ) =
-1
-52
-23
-3 = 36.
-We have the following proposition.
-Proposition 1.
-(1.3) P
-park
-n
-(σ) = Ln(σ)
-(n + 1)n−1
-, σ ∈ Sn.
-The following corollary of Proposition 1 is immediate, where the asymptotic behavior follows from Stirling’s formula.
-Corollary 1. The expected value of the random variable Ln = Ln(σ) on
-(Sn, Pn) satisfies
-(1.4) EnLn =
-1
-n!
-X
-σ∈Sn
-Ln(σ) = (n + 1)n−1
-n!
-∼
-e
-n+1
-√
-2π n
-3
-2
-.
-We will prove the following weak convergence result for Ln
-PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 3
-Theorem 1. For any ǫ ∈ (0, 2], the random variable Ln = Ln(σ) on (Sn, Pn)
-satisfies
-(1.5) limn→∞
-Pn((2 − ǫ)
-n ≤ Ln ≤ (2 + ǫ)
-n
-)) = 1
-The following corollary follows immediately from Proposition 1 and Theorem 1.
-Corollary 2. For any ǫ ∈ (0, 2], the random variable P
-park
-n = P
-park
-n (σ) on
-(Sn, Pn) satisfies
-(1.6) limn→∞
-Pn
-σ ∈ Sn : P
-park
-n
-(σ) ∈
-
-(2 − ǫ)
-n
-(n + 1)n−1
-,
-(2 + ǫ)
-n
-(n + 1)n−1
-  = 1.
-And the following corollary follows immediately from Corollary 1 and
-Theorem 1.
-Corollary 3. The expectation of the random variable P
-park
-n = P
-park
-n (σ) on
-(Sn, Pn) is given by
-(1.7) EnP
-park
-n =
-1
-n!
-∼
-e
-n
-√
-2πnn+ 1
-2
-.
-Comparing (1.6) and (1.7), we see that for all but a Pn-negligible set of
-permutations in Sn, the P
-park
-n -probability of a permutation in Sn is approximately 2
-n
-(n+1)n−1 , but the “average” P
-park
-n -probability of a permutation in
-Sn is exponentially larger, namely asymptotic to e
-n
-√
-2πn
-n+ 1
-2
-. There is also a
-Pn-negligible set of permutations in Sn each of whose elements has superexponentially larger P
-park
-n -probability than this average (and this is where
-almost all the P
-park
-n -probability lies), and a Pn-negligible set of permutations in Sn for which the P
-park
-n -probability is exponentially smaller than
-this average probability. In particular, we have the following corollary.
-Corollary 4. The maximum value of P
-park
-n = P
-park
-n (σ) is equal to n!
-(n+1)n−1 ∼
-√
-2π n
-3
-2
-en+1 and is attained uniquely at σ = 1 · · · n. The minimum value of P
-park
-n
-is equal to 1
-(n+1)n−1 and is attained uniquely at σ = n · · · 1.
-Proof. The function Ln = Ln(σ), σ ∈ Sn, attains its minimum value 1
-uniquely at σ = n · · · 1 and attains its maximum value n! uniquely at
-σ = 1 · · · n. 
-4 ROSS G. PINSKY
-From the definition of a parking function, it is obvious that
-P
-park
-n
-(σj = 1) = P
-Pn
-(π1 = j), j ∈ [n].
-In [1], the following asymptotic behavior was proven for π1 (or any πk by
-symmetry):
-(1.8)
-For fixed j, P Pn
-(π1 = j) ∼
-1 + P(X ≥ j)
-n
-;
-For fixed j, P Pn
-(π = n − j) ∼
-P(X ≤ j + 1)
-n
-,
-where X is a random variable satisfying P(X = j) = e
-−j
-j
-j−1
-j!
-, j = 1, 2, · · · .
-Thus, it follows that (1.8) also holds with P
-Pn (π1 = j) replaced by P
-park
-n (σj =
-1). It would be nice to obtain similar type asymptotics for P
-park
-n (σj = k),
-for general j, k. It doesn’t seem that our results in this paper can help here.
-Nor do they seem to be useful for obtaining information on the distributions
-of certain classical permutation statistics under P
-park
-n , such as the number
-of inversions, the number of cycles or the number of descents.
-We will also prove the following results.
-Proposition 2. For any m ∈ [n],
-(1.9) P
-park
-n
-(σ1 · · · σm = [m]) = 
-m + 1
-n + 1 m
-.
-We have the following immediately corollary.
-Corollary 5. For any m ∈ N,
-(1.10) limn→∞
-P
-park
-n
-(σ1 · · · σn−m = [n − m]) = e
-−m
-In fact, we also have the following result.
-Proposition 3. For any m ∈ N,
-(1.11) limn→∞
-P
-park
-n
-(σn−m+1 · · · σn = n − m + 1 · · · n) = e
-−m.
-Remark. Note that (1.10) and (1.11) give
-limn→∞
-P
-park
-n
-(σn−m+1 · · · σn = n − m + 1 · · · n|σ1 · · · σn−m = [n − m]) = 1.
-PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 5
-The proof of Proposition 1 is given in section 2, the proof of Theorem 1 is
-given in section 3 and the proofs of Propositions 2 and 3 are given in section
-4.
-2. Proof of Proposition 1
-Recall the definition of ln,i from the paragraph containing equation (1.2)
-which defines Ln. For the proof of the proposition, it will be convenient to
-define ˜ln,i(σ) = ln,σ−1
-i
-(σ). For example, if σ = 379218645, then ˜ln,i(σ) = 1,
-for i ∈ {1, 2, 3, 4, 6},
-˜ln,i = 2, for i ∈ {5, 7} and ˜ln,i = 3, for i ∈ {8, 9}. Of
-course, we can express L in terms of the {
-˜ln,i}:
-Ln(σ) = Yn
-i=1
-ln,i(σ) = Yn
-i=1
-˜ln,i(σ).
-The proposition will follow if we show that for each σ ∈ Sn, there are
-Ln(σ) different parking functions π ∈ P Fn such that Tn(π) = σ, where Tn
-is as in the paragraph containing equation (1.2). Before giving a formal
-proof of the proposition, we illustrate the proof with a concrete example,
-from which the general result should be clear. Consider the permutation
-σ = 379218645 ∈ S9. We look for those π ∈ P F9 that satisfy T9(π) = σ.
-From the definition of the parking process and from the definition of Tn, we
-need π1 = 5 in order to have σ5 = 1, π2 = 4 in order to have σ4 = 2, π3 = 1
-in order to have σ1 = 3 and π4 = 8 in order to have σ8 = 4. In order to
-have σ9 = 5, we can either have π5 = 9, in which case car number 5 parks
-in its preferred space 9, or alternatively, π5 = 8, in which case car number
-5 attempts to park in its preferred space 8 but fails, and then moves on to
-space 9 and parks. Then we need π6 = 7 in order to have σ7 = 6. Then
-similar to the explanation regarding π5, we need π7 to be either 1 or 2 in
-order to have σ2 = 7. In order to have σ6 = 8, we can have either π8 = 6, in
-which car number 8 parks directly in its preferred space 6, or alternatively
-π8 = 5, in which case car number 8 tries and fails to park in space number
-5 and then parks in space number 6, or alternatively, π8 = 4, it which case
-car number 8 tries and fails to park in space number 4 and then also in
-space number 5, before finally parking in space number 6. Similarly, we
-need π9 to be equal to 1,2 or 3 in order to have σ9 = 3. Thus, there are
-6 ROSS G. PINSKY
-1 × 1 × 1 × 1 × 2 × 1 × 2 × 3 × 3 = Q9
-i=1
-˜l9,i(σ) different parking functions
-π ∈ P F9 that yield T9(π) = σ.
-To give a formal proof for the general case, fix σ ∈ Sn. In order to have
-Tn(π) = σ, first we need π1 = σ
-−1
-1
-. Thus there is just one choice for π1,
-and note that ˜ln,1(σ) = 1. Now let k ∈ [n − 1] and assume that we have
-chosen π1, · · · πk in such a way that car number i has parked in space σ
-−1
-i
-,
-for i ∈ [k]. We now want car number k + 1 to park in space σ
-−1
-k+1. By
-construction, this space is vacant at this point, and so are the ˜ln,k(σ) − 1
-spaces immediately to the left of this space. However the space ˜ln,k spaces
-to the left of this space is not vacant (or possibly this space doesn’t exist–it
-would be the zeroth space). Thus, by the parking process, car number k + 1
-will park in space σ
-−1
-k+1 if and only if πk+1 is equal to one of the ˜ln,k+1(σ)
-numbers σ
-−1
-k+1, σ−1
-k+1 − 1, · · · , σ−1
-k+1 − ˜ln,k+1(σ) + 1. This shows that there are
-Ln(σ) = Qn
-i=1
-˜ln,i(σ) different parking functions π satisfying Tn(π) = σ.
-3. Proof of Theorem 1
-We begin with several preliminary results. Recall that Pn is the uniform
-probability measure on Sn.
-Lemma 1.
-(3.1) Pn(ln,i = j) =
-
-
-
-1
-j −
-1
-j+1 =
-1
-j(j+1) , j = 1, · · · , i − 1;
-1
-i
-, j = i.
-.
-Proof. Fix i and let j ∈ [i]. The event {ln,i(σ) ≥ j} is the event 
-σi =
-max{σi
-, σi−1, · · · , σi−j+1}
-	
-. Since Pn is the uniform distribution on Sn, we
-have
-(3.2) Pn(ln,i ≥ j) = 1
-j
-, i ∈ [n], 1 ≤ j ≤ i.
-The lemma now follows.
+\end{proof}
+
+Let $\sigma^{-1}$ denote the inverse permutation of $\sigma$. So $\sigma^{-1}_k=j$ if and only if $\sigma_j=k$.
+In car parking language,$\sigma^{-1}_k=j$ means that car number $k$ parked in space number $j$.
+From the definition of a parking function,  it is obvious that
+$$
+P_n^{\text{park}}(\sigma^{-1}_1=j)=P^{\mathcal{P}_n}(\pi_1=j),\ j\in[n].
+$$
+In \cite{DH}, the following asymptotic behavior was proven for  $\pi_1$ (or any $\pi_k$ by symmetry):
+\begin{equation}\label{DHresult}
+\begin{aligned}
+&\text{For fixed}\ j, P^{\mathcal{P}_n}(\pi_1=j)\sim\frac{1+P(X\ge j)}n;\\
+&\text{For fixed}\ j, P^{\mathcal{P}_n}(\pi_1=n-j)\sim\frac{P(X\le j+1)}n,\\
+&\text{where}\ X\ \text{is a random variable satisfying}\ P(X=j)=e^{-j}\frac{j^{j-1}}{j!},\ j=1,2,\cdots.
+\end{aligned}
+\end{equation}
+The distribution $\{e^{-j}\frac{j^{j-1}}{j!}\}_{j=1}^\infty$ is called the Borel distribution. It is not obvious that it is a distribution, that is, that it sums to 1. For more on this, see \cite[p.135]{DH}.
+It follows that \eqref{DHresult} also holds with
+$P^{\mathcal{P}_n}$ and $\pi_1$ replaced  respectively by $P_n^{\text{park}}$ and $\sigma^{-1}_1$.
+It would be nice to obtain asymptotic results  for  $P_n^{\text{park}}(\sigma^{-1}_{j_n}=k_n)$, for general $j_n,k_n$.
+We pursue this  direction  when $j_n$ is near $n$, that is for the last cars to park.
+
+%In fact, we can give an explicit formula for
+%$P_n^{\text{park}}(\sigma^{-1}_{n-j+1}=i_1,\sigma^{-1}_{n-j+2}=i_2,\cdots, \sigma^{-1}_n=i_j)$,  for any $j\in[n]$ and any $\{i_l\}_{l=1}^j$. This is Theorem \ref{lastcars} below. For %fixed values of $j$ and $\{i_l\}_{l=1}^j$, we can then obtain asymptotic formulas as $n\to\infty$.
+%In particular, it follows from Corollary \ref{genj} below that  the distribution on $\mathbb{N}^j$ defined by $P_n^{\text{park}}(\sigma^{-1}_{n-j+1}=n+1-i_1, %\sigma^{-1}_{n-j+2}=n+1-i_2,\cdots, \sigma^{-1}_n=n+1-i_j)$, for $\{i_l\}_{l=1}^j\in\mathbb{N}^j$,
+%converges weakly to an explicit distribution given in terms of  the Borel distribution, and that this   limiting distribution  is supported on $\{(i_1,\cdots i_j)\in\mathbb{N}^j: %i_1>i_2>\cdots >i_j\ge1\}$.
+
+%In order to state our  result for
+%$P_n^{\text{park}}(\sigma^{-1}_{n-j+1}=i_1,\sigma^{-1}_{n-j+2}=i_2,\cdots, \sigma^{-1}_n=i_j)$,
+% we need several definitions.
+%Let $\{k_l\}_{l=1}^j$ denote the increasing rearrangement of $\{i_l\}_{l=1}^j$.
+%For a permutation $\sigma\in S_n$ satisfying $\sigma^{-1}_{n-j+1}=i_1,\sigma^{-1}_{n-j+2}=i_2,\cdots, \sigma^{-1}_n=i_j$,
+%define $\tau^{(\sigma)}\in S_j$ by
+%\begin{equation}\label{iktrans}
+%i_l=k_{\tau^{(\sigma)}_l},\ l\in[j].
+%\end{equation}
+
+
+
+
+%It doesn't seem that our results in this paper can help here.
+%Nor do they seem to be useful for obtaining information on the distributions of certain classical permutation statistics under $P_n^{\text{park}}$, such as the number of inversions, the number of cycles or the number of %descents.
+
+\begin{theorem}\label{lastcars}
+
+
+
+\begin{equation}\label{lastcarsformula}
+\begin{aligned}
+&P_n^{\text{park}}(\sigma^{-1}_{n-j+1}=i_1,\sigma^{-1}_{n-j+2}=i_2,\cdots, \sigma^{-1}_n=i_j)=\\
+&\frac{(n-j)!\left(\prod_{l=1}^j(k_l-k_{l-1})^{k_l-k_{l-1}-2}\right)(n-k_j+1)^{n-k_j-1}\prod_{l=1}^j\tilde l_{n,n-j+l}(\sigma)}
+{(n+1)^{n-1}\left(\prod_{l=1}^j(k_l-k_{l-1}-1)!\right)(n-k_j)!},
+\end{aligned}
+\end{equation}
+where $\{k_l\}_{l=1}^j$ is the increasing rearrangement of $\{i_l\}_{l=1}^j$, $k_0=0$ and $\tilde l_{n,\cdot}(\sigma)$ is as in \eqref{littleltilde}.
+\end{theorem}
+One can use Theorem \ref{lastcars} to make  explicit calculations. Here we treat the cases $j=1$ and $j=2$ in depth in Corollaries \ref{j=1}-\ref{j=2asymp}.
+%(Corollaries \ref{j=1} and \ref{j=2} below follow directly from Theorem \ref{lastcars}. Corollaries \ref{j=1asymp} and \ref{j=2asymp} follow from Corollaries \ref{j=1} and \ref{j=2} %respectively by standard asymptotic analysis.)
+This will lead us to a result for general $j$ in Corollary \ref{genj} and for growing $j=j_n$ in Theorem \ref{jnlastcars}.
+%whose proof we will give.
+
+We begin with the case $j=1$.
+\begin{corollary}\label{j=1}
+\begin{equation}\label{j=1formula}
+P_n^{\text{park}}(\sigma^{-1}_n=k)=\frac1nk^k\binom nk\frac{(n-k+1)^{n-k-1}}{(n+1)^{n-1}}, \ k\in[n].
+\end{equation}
+\end{corollary}
+\begin{proof}
+Immediate from \eqref{lastcarsformula}, noting that if $\sigma^{-1}_n=k$, then $\tilde l_{n,n}(\sigma)=k$.
+\end{proof}
+From Corollary \ref{j=1} we obtain the following asymptotic formulas.
+\begin{corollary}\label{j=1asymp}
+\noindent i. For fixed $m\in \mathbb{N}$,
+\begin{equation}\label{j=1endformula}
+\lim_{n\to\infty}P_n^{\text{park}}(\sigma^{-1}_n=n+1-m)=\frac{m^{m-1}e^{-m}}{m!}.
+\end{equation}
+Thus, the random variable $n+1-\sigma^{-1}_n$ under $P_n^{\text{park}}$ converges in distribution to a random variable $X$ with the Borel distribution.
+
+%Thus, the distribution $\mu_{n;1}$ on $\mathbb{N}$ defined by
+%$$
+%\mu_{n;1}(m)=P_n^{\text{park}}(\sigma^{-1}_n=n+1-m)
+%$$
+% converges weakly to the Borel distribution as $n\to\infty$.
+
+\noindent ii. For fixed $k\in\mathbb{N}$,
+\begin{equation}\label{j=1beginformulaasymp}
+P_n^{\text{park}}(\sigma^{-1}_n=k)\sim\frac{k^ke^{-k}}{k!}\frac1n,\ \text{as}\ n\to\infty.
+\end{equation}
+
+
+
+\noindent iii. Let $c_nn$ be an integer with $\lim_{n\to\infty}c_n=c\in(0,1)$. Then
+\begin{equation}\label{bulk}
+P_n^{\text{park}}(\sigma^{-1}_n=c_nn)\sim\frac1{(2\pi c)^\frac12(1-c)^\frac32}\frac1{n^\frac32}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+The proof follows from \eqref{j=1formula} and standard asymptotic analysis. We write out the proof of  part (iii).
+Substituting in \eqref{j=1formula}, we have
+\begin{equation}\label{subfrom112}
+P_n^{\text{park}}(\sigma^{-1}_n=c_nn)=\frac1n(c_nn)^{c_nn}\frac{n!}{(c_nn)!((1-c_n)n)!}\frac{(n-c_nn+1)^{n-c_nn-1}}{(n+1)^{n-1}}.
+\end{equation}
+Replacing the three factorials on the right hand side of \eqref{subfrom112} by their Stirling's formula approximations, $m!\sim m^me^{-m}\sqrt{2\pi m}$ as $m\to\infty$, and performing many cancelations,
+we have
+$$
+\begin{aligned}
+&\frac1n(c_nn)^{c_nn}\frac{n!}{(c_nn)!((1-c_n)n)!}\frac{(n-c_nn+1)^{n-c_nn-1}}{(n+1)^{n-1}}\sim\\
+&\frac{n^{n-1}\left(1+\frac1{n-c_nn}\right)^{n-c_nn-1}}
+{n\sqrt{c_n}(1-c_n)\sqrt{2\pi(1-c_n)n}\thinspace(n+1)^{n-1}}.
+\end{aligned}
+$$
+Since $\lim_{n\to\infty}\frac{n^{n-1}\left(1+\frac1{n-c_nn}\right)^{n-c_nn-1}}{(n+1)^{n-1}}=1$, we conclude that
+the right hand side of \eqref{subfrom112} is asymptotic to
+$\frac1{(2\pi c)^\frac12(1-c)^\frac32}\frac1{n^\frac32}$.
+\end{proof}
+
+\noindent \bf Remark.\rm\
+One can check that $\frac{k^ke^{-k}}{k!}$
+is decreasing in $k$. Thus, from part (ii), for fixed $k$,  $P_n^{\text{park}}(\sigma^{-1}_n=k)$
+is on the order $\frac1n$ and decreasing in $k$. From part (iii), the probability of $\sigma^{-1}_n$ taking on any particular value in the bulk is even smaller, namely on the order $n^{-\frac32}$.
+And from part (i),
+the distance of $\sigma^{-1}_n$ from $n$ converges in distribution as $n\to\infty$.
+
+\medskip
+
+We now turn to the case $j=2$.
+\begin{corollary}\label{j=2}
+Let
+\begin{equation}\label{A}
+A_n(a,b)=\frac{(n-2)!a^{a-2}(b-a)^{b-a-2}(n-b+1)^{n-b-1}}{(a-1)!(b-a-1)!(n-b)!(n+1)^{n-1}}, \ \text{for}\ 1\le a<b\le n.
+\end{equation}
+Then
+\begin{equation}\label{j=2formula}
+P_n^{\text{park}}(\sigma^{-1}_{n-1}=l,\sigma^{-1}_n=m)=\begin{cases}lmA_n(l,m),\ \text{if}\ 1\le l<m\le n;\\ (l-m)mA_n(m,l),\ \text{if}\ 1\le m<l\le n.\end{cases}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Immediate from \eqref{lastcarsformula}, noting that if $\sigma^{-1}_{n-1}=l$ and $\sigma^{-1}_n=m$, then
+$$
+\begin{cases}\tilde l_{n,n-1}(\sigma)=l, \ \tilde l_{n,n}(\sigma)=m,\ \text{if}\ l<m;\\ \tilde l_{n,n-1}(\sigma)=l-m,\ \tilde l_{n,n}(\sigma)=m,\ \text{if}\ l>m.\end{cases}
+$$
+\end{proof}
+From Corollary \ref{j=2} we obtain the following
+asymptotic formulas.
+\begin{corollary}\label{j=2asymp}
+\noindent i.
+For fixed $l,m$,
+\begin{equation}\label{j=2endasympformula}
+\lim_{n\to\infty}P_n^{\text{park}}(\sigma^{-1}_{n-1}=n+1-l,\sigma^{-1}_n=n+1-m)=\frac{(l-m)^{l-m-1}m^{m-1}}{(l-m)!m!}e^{-l}, \ 1\le m<l;
+\end{equation}
+\begin{equation}\label{j=2endasympformulalower}
+P_n^{\text{park}}(\sigma^{-1}_{n-1}=n+1-l,\sigma^{-1}_n=n+1-m)\sim\frac{(m-l)^{m-l}l^{l-1}}{l!(m-l)!}\frac1n,\ 1\le l<m.
+\end{equation}
+Thus, the random vector $(n+1-\sigma^{-1}_{n-1},n+1-\sigma^{-1}_n)$ under $P_n^{\text{park}}$ converges in distribution to a random vector
+$(X_1+X_2,X_2)$
+where $X_1$ and $X_2$ are IID with the Borel distribution.
+
+%Thus, the  distribution $\mu_{n;2}$ on $\mathbb{N}^2$ defined by
+%$$
+%\mu_{n,2}(m_1,m_2):=P_n^{\text{park}}(\sigma^{-1}_{n-1}=n+1-m_1-m_2,\sigma^{-1}_n=n+1-m_2),\  m_1,m_2\in\mathbb{N},
+%$$
+%converges weakly to the product measure each of whose marginal distributions is the   Borel distribution.
+
+\noindent ii. For fixed, $l,m$,
+\begin{equation}\label{j=2beginasymptformula}
+P_n^{\text{park}}(\sigma^{-1}_{n-1}=l,\sigma^{-1}_n=m)\sim\begin{cases}\frac{l^l}{l!}\frac{(m-l)^{m-l-1}m}{(m-l)!}e^{-m}\frac1{n^2},\ 1\le l<m;\\
+\frac{m^m}{m!}\frac{(l-m)^{l-m}}{(l-m)!}e^{-l}\frac1{n^2},\ 1\le m<l.\end{cases}
+\end{equation}
+\end{corollary}
+\begin{proof}
+Standard asymptotic analysis.
+\end{proof}
+Part (i) of Corollaries \ref{j=1asymp} and \ref{j=2asymp} lead us to the following result for all $j$, which we will prove.
+\begin{corollary}\label{genj}
+Let $j\in\mathbb{N}$. The  $j$-dimensional random vector \newline$(n+1-\sigma^{-1}_{n-j+l}, n+1-\sigma^{-1}_{n-j+2},\cdots, n+1-\sigma^{-1}_{n})$
+under $P_n^{\text{park}}$ converges in distribution to a random vector
+$(\sum_{r=1}^jX_r,\sum_{r=2}^j X_r,\cdots, X_{j-1}+X_j,X_j)$, where $\{X_r\}_{r=1}^j$ are IID with the Borel distribution.
+
+\noindent In particular then, for any $j\in\mathbb{N}$, the last $j$ cars from among the $n$ cars will park in increasing order
+ with probability approaching 1 as $n\to\infty$:
+ \begin{equation}\label{jinincorder}
+\lim_{n\to\infty}P_n^{\text{park}}(\sigma^{-1}_{n+1-j}<\sigma^{-1}_{n+1-j+2}<\cdots<\sigma^{-1}_n)=1.
+ \end{equation}
+%For $j\in\mathbb{N}$, the distribution $\mu_{n;j}$ on $\mathbb{N}^j$ defined by
+%$$
+%\mu_{n;j}(m_1,\cdots, m_j):=P_n^{\text{park}}\left(\sigma^{-1}_{n-j+l}=n+1-\sum_{r=l}^jm_r, l\in[j]\right),\ m_r\in\mathbb{N}, r\in[j],
+%$$
+%converges weakly to the product measure each of whose marginal distributions is the   Borel distribution $\{\frac{m^{m-1}e^{-m}}{m!}\}_{m=1}^\infty$.
+\end{corollary}
+In fact, we can extend \eqref{jinincorder} to the last $j_n$ cars, where $j_n=o(n^\frac16)$.
+\begin{theorem}\label{jnlastcars}
+For $j_n=o(n^\frac16)$, the last $j_n$ cars from among the $n$ cars will park in increasing order with probability approaching 1 as $n\to\infty$:
+\begin{equation}\label{jninincorder}
+\lim_{n\to\infty}P_n^{\text{park}}(\sigma^{-1}_{n+1-j_n}<\sigma^{-1}_{n+1-j_n+1}<\cdots<\sigma^{-1}_n)=1.
+\end{equation}
+\end{theorem}
+
+
+
+We will also prove    the following result, without reference to Theorem \ref{lastcars}.
+\begin{proposition}\label{blockthm} For any $m\in[n]$,
+\begin{equation}\label{block}
+P_n^{\text{park}}
+\left(\{\sigma_1,\cdots,\sigma_m\}=[m]\right)=\left(\frac{m+1}{n+1}\right)^m.
+\end{equation}
+\end{proposition}
+We have the following immediately corollary of Proposition \ref{blockthm}.
+\begin{corollary}\label{eminusm}
+For any $m\in\mathbb{N}$,
+\begin{equation}\label{eminusmform}
+\lim_{n\to\infty}P_n^{\text{park}}(\{\sigma_1,\cdots,\sigma_{n-m}\}=[n-m])=e^{-m}
+\end{equation}
+\end{corollary}
+\noindent \bf Remark.\rm\ Corollary \ref{eminusm} can also be deduced from Corollary \ref{genj}.
+
+
+\medskip
+
+
+
+The proof of Theorem \ref{ptwisedist} is given in section \ref{secpfptwise} and the proof of Theorem \ref{llnthm} is given in section \ref{secllnthm}. The proof of Theorem \ref{lastcars} is given in
+section \ref{lastcarsproof}, the proof of Corollary \ref{genj} is given in section \ref{genjproof} and the proof of Theorem \ref{jnlastcars} is given in section \ref{jnlastcarsproof}.
+The proof of Proposition \ref{blockthm} is given in section \ref{propproof}.
+
+
+\section{Proof of Theorem \ref{ptwisedist}}\label{secpfptwise}
+Recall the definitions of $l_{n,i}$ and $\tilde l_{n,i}$ in \eqref{littlel} and \eqref{littleltilde}.
+For the proof of the theorem, it will be convenient to work with
+$\tilde l_{n,i}$.
+Recall from \eqref{Ln} that
+$$
+L_n(\sigma)=\prod_{i=1}^n\tilde l_{n,i}(\sigma).
+$$
+
+The theorem will follow if we show that for each $\sigma\in S_n$, there are $L_n(\sigma)$ different parking functions $\pi\in \mathcal{P}_n$ such that $T_n(\pi)=\sigma$, where
+$T_n$ is as in the paragraph containing equation \eqref{defprob}.
+Before giving a formal proof of the theorem, we illustrate the proof with a concrete example, from which the general result should be clear.
+Consider the permutation $\sigma=379218645\in S_9$.
+We look for those $\pi\in \mathcal{P}_9$ that satisfy $T_9(\pi)=\sigma$.
+From the definition of the parking process and from the definition of $T_n$, we need $\pi_1=5$ in order to have $\sigma_5=1$,  $\pi_2=4$ in order to have $\sigma_4=2$, $\pi_3=1$ in order to have $\sigma_1=3$ and $\pi_4=8$ in order to have $\sigma_8=4$.  In order to have $\sigma_9=5$, we can either have $\pi_5=9$, in which case car number 5 parks in its preferred space 9, or alternatively,
+$\pi_5=8$, in which case car number 5 attempts to park in its preferred space 8 but fails, and then moves on to space 9 and parks. Then we need $\pi_6=7$ in order to have $\sigma_7=6$.
+Then similar to the explanation regarding $\pi_5$, we need $\pi_7$ to be either 1 or 2 in order to have $\sigma_2=7$. In order to have
+$\sigma_6=8$, we can have either $\pi_8=6$, in which car number 8 parks directly in its preferred space 6, or alternatively $\pi_8=5$, in which case car number 8 tries and fails to park in space number 5 and then parks in space number 6, or alternatively, $\pi_8=4$, it which case car number 8 tries and fails to park in space number 4 and then also in space number 5, before finally parking in space number 6. Similarly, we need $\pi_9$ to be equal to 1,2 or 3 in order to have $\sigma_9=3$.
+Thus, there are $1\times1\times1\times1\times 2\times1\times 2\times 3\times 3=\prod_{i=1}^9\tilde l_{9,i}(\sigma)=L_9(\sigma)$ different parking functions $\pi\in \mathcal{P}_9$ that yield $T_9(\pi)=\sigma$.
+
+To give a formal proof for the general case, fix $\sigma\in S_n$. In order to have $T_n(\pi)=\sigma$, first we need $\pi_1=\sigma^{-1}_1$. Thus there is just one choice for
+$\pi_1$, and note that $\tilde l_{n,1}(\sigma)=1$. Now let $k\in[n-1]$ and assume that we have chosen $\pi_1,\cdots\pi_k$ in such a way that car number $i$ has parked in space
+$\sigma^{-1}_i$, for $i\in[k]$. We now want  car number $k+1$ to park in space $\sigma^{-1}_{k+1}$. By construction, this space is vacant at this point, and so are the $\tilde l_{n,k+1}(\sigma)-1$ spaces immediately to the left of this space. However the space $\tilde l_{n,k+1}$ spaces to the left of this space is not vacant (or possibly this space doesn't exist--it would be the zeroth space). Thus, by the parking process,  car number $k+1$ will park in space $\sigma^{-1}_{k+1}$ if and only if  $\pi_{k+1}$ is equal to one of the $\tilde l_{n,k+1}(\sigma)$ numbers $\sigma^{-1}_{k+1},\sigma^{-1}_{k+1}-1,\cdots, \sigma^{-1}_{k+1}-\tilde l_{n,k+1}(\sigma)+1$.
+This shows that there are $L_n(\sigma)=\prod_{i=1}^n\tilde l_{n,i}(\sigma)$ different parking functions $\pi$ satisfying $T_n(\pi)=\sigma$.
+\hfill $\square$
+
+
+\section{Proof of Theorem  \ref{llnthm}}\label{secllnthm}
+We begin with several preliminary results. Recall that $P_n$ is the uniform probability measure on $S_n$.
+\begin{lemma}\label{lemmadistlni}
+\begin{equation}\label{distlni}
+P_n(l_{n,i}=j)=\begin{cases} \frac1j-\frac1{j+1}=\frac1{j(j+1)},\ j=1,\cdots, i-1;\\ \frac1i, \ j=i.\end{cases}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Fix $i$ and let $j\in[i]$. The event  $\{l_{n,i}(\sigma)\ge j\}$ is the event $\big\{\sigma_i=\max\{\sigma_i,\sigma_{i-1}, \cdots, \sigma_{i-j+1}\}\big\}$.
+Since $P_n$ is the uniform distribution on $S_n$, we have
+\begin{equation}\label{uppertail}
+P_n(l_{n,i}\ge j)=\frac1j,\ i\in[n],\ 1\le j\le i.
+\end{equation}
+  The lemma now follows.
+\end{proof}
+
 We now write
-(3.3) Sn := log Ln =
-Xn
-i=1
-log ln,i.
-From Lemma 1, we have
-(3.4) En log ln,i =
-X
-i−1
-j=1
-log j
-j(j + 1) +
-log i
-i
-.
-PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 7
-Note that En log ln,i does not depend on n, but of course it is only defined
-for 1 ≤ i ≤ n.
-Lemma 2.
-(3.5) lim
-n,i→∞
-En log ln,i = log 2.
-Proof. Recall the Abel-type summation formula [4]:
-X
-1<r≤x
-a(r)f(r) = A(x)f(x)−A(1)f(1)−
-Z x
-1
-A(t)f
-′
-(t)dt, where A(r) = Xr
-i=1
-ai
-.
-We apply this formula with a(r) = 1
-r(r+1) =
-1
-r −
-1
-r+1 and f(r) = log r. We
-have A(r) = 1 − 1
-r+1 = r
-r+1 . Recalling (3.4), we obtain
-lim
-n,i→∞
-En log ln,i = lim
-i→∞
-X
-i−1
-j=1
-log j
-j(j + 1) = lim
-i→∞ 
-i
-i + 1
-log i −
-Z i
-1
-t
-t + 1
-1
-t
-dt
-=
-lim
-i→∞ 
-i
-i + 1
-log i − log(i + 1) + log 2
-= lim
-i→∞ 
-log i
-i + 1
-−
-log i
-i + 1
-+ log 2
-= log 2.
+\begin{equation}\label{logLn}
+\mathcal{S}_n:=\log L_n=\sum_{i=1}^n\log l_{n,i}.
+\end{equation}
+From Lemma \ref{lemmadistlni}, we have
+\begin{equation}\label{explni}
+E_n\log l_{n,i}=\sum_{j=1}^{i-1}\frac{\log j}{j(j+1)}+\frac{\log i}i.
+\end{equation}
+Note that $E_n\log l_{n,i}$ does not depend on $n$, but of course it is only defined for $1\le i\le n$.
+\begin{lemma}\label{lemmaexpvaluelim}
+\begin{equation}\label{expvaluelim}
+\lim_{n,i\to\infty}E_n\log l_{n,i}=\log 2.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Recall the Abel-type summation formula \cite{P14}:
+$$
+\sum_{1<r\le x}a(r)f(r)=A(x)f(x)-A(1)f(1)-\int_1^x A(t)f'(t)dt, \ \text{where}\ A(r)=\sum_{i=1}^ra_i.
+$$
+We apply  this formula with $a(r)=\frac1{r(r+1)}=\frac1r-\frac1{r+1}$ and  $f(r)=\log r$. We have
+$A(r)=1-\frac1{r+1}=\frac r{r+1}$.
+ Recalling \eqref{explni}, we obtain
+$$
+\begin{aligned}
+&\lim_{n,i\to\infty}E_n\log l_{n,i}=\lim_{i\to\infty}\sum_{j=1}^{i-1}\frac{\log j}{j(j+1)}=\lim_{i\to\infty}\left(\frac i{i+1}\log i-\int_1^i\frac t{t+1}\frac1tdt\right)=\\
+&\lim_{i\to\infty}\left(\frac i{i+1}\log i-\log(i+1)+\log2\right)=\lim_{i\to\infty}\left(\log\frac i{i+1}-\frac{\log i}{i+1}+\log2\right)=\log 2.
+\end{aligned}
+$$
+\end{proof}
+From \eqref{logLn} and \eqref{expvaluelim}, we conclude that
+\begin{equation}\label{limScaln}
+\lim_{n\to\infty}\frac{E_n\mathcal{S}_n}n=\lim_{n\to\infty}\frac1nE_n\log L_n=\log 2.
+\end{equation}
 
-From (3.3) and (3.5), we conclude that
-(3.6) limn→∞
-EnSn
-n
-= limn→∞
-1
-n
-En log Ln = log 2.
-We now consider EnS
-2
-n
-. We have
-(3.7)
-EnS
-2
-n = En
- Xn
-i=1
-log ln,i!2
-=
-Xn
-i=1
-En log l
-2
-n,i + 2 X
-1≤i<j≤n
-En log ln,i log ln,j .
+We now consider $E_n\mathcal{S}_n^2$. We have
+\begin{equation}\label{2ndmom}
+E_n\mathcal{S}_n^2=E_n\left(\sum_{i=1}^n\log l_{n,i}\right)^2=\sum_{i=1}^nE_n\log l_{n,i}^2\thinspace+2\sum_{1\le i<j\le n}E_n\log l_{n,i}\log l_{n,j}.
+\end{equation}
 We have the following proposition.
-Proposition 4. For 1 ≤ i < j ≤ n, the random variables ln,i and ln,j on
-(Sn, Pn) are negatively correlated; that is,
-(3.8) Pn(ln,i ≥ k, ln,j ≥ k) ≤ Pn(ln,i ≥ k)Pn(ln,j ≥ l), for k, l ≥ 1.
-Proof. Since Pn is the uniform probability measure on Sn, for any k ≤ i,
-the events {ln,i ≥ k} =
-
-σi = max(σi
-, · · · , σi−k+1)
-	
-and {ln,j ≥ l} =
-
-σj =
-max(σj , · · · , σj−l+1)
-	
-are independent if l ≤ j − i. Thus, (3.8) holds with
-equality in these cases.
-8 ROSS G. PINSKY
-Consider now the case k ≤ i and j − i + 1 ≤ l ≤ j. In this case
-(3.9)
-{ln,i ≥ k, ln,j ≥ l} =
-
-σj = max(σj , σj−1, · · · , σr)
-	
-∩
-
-σi = max(σi
-, σi−1, · · · , σi−k+1)
-	
-,
-where r = min(i − k + 1, j − l + 1).
-We have
-(3.10) Pn (σj = max(σj , σj−1, · · · , σr)) = 1
-max(l, j − i + k)
-≤
-1
-l
-.
-Also,
-(3.11)
-Pn (σi = max(σi
-, σi−1, · · · , σi−k+1|σj = max(σj , σj−1, · · · , σr)) = 1
-k
-.
-The proposition follows from (3.9)–(3.11) and (3.2).
-We can now prove the theorem.
-Proof of Theorem 1. Since ln,i and ln,j are negatively correlated, one has
-Enf(ln,i)g(ln,j ) ≤ Enf(ln,i)Eng(ln,j ), if f and g are increasing functions on
-[n]. In particular then,
-(3.12) En log ln,i log ln,j ≤ En log ln,iEn log ln,j .
-Using (3.12), a standard straightforward calculation gives
-(3.13) Var(Sn) ≤
-Xn
-i=1
-Var(log ln,i).
-From (3.1), we have
-En(log ln,i)
-2 =
-X
-i−1
-j=1
-(log j)
-2
-j(j + 1) +
-(log i)
-2
-i(i + 1).
-Using this with (3.5) and (3.13), we conclude that there exists a C > 0 such
-that
-(3.14) Var(Sn) ≤ Cn, n ∈ N.
-From (3.6) and(3.14), it follows from the second moment method that
-(3.15) limn→∞
-Pn(log 2 − ǫ ≤
-Sn
-n
-≤ log 2 + ǫ) = 1, for all ǫ > 0.
-Now (1.5) follows from (3.15) and (3.3). 
-PERMUTATIONS INDUCED BY A RANDOM PARKING FUNCTION 9
-4. Proofs of Propositions 2 and 3
-Proof of Proposition 2. Let σ = Tn(π), where Tn is as in the paragraph
-containing equation (1.2). Then σ1 · · · σm = [m] if and only if π1 · · · πm ∈
-Pm. Thus, there are (m + 1)m−1
-choices for π1 · · · πm. Given π1 · · · πm ∈
-Pm, we now consider how many sequences πm+1 · · · πn there are so that
-the concatenated sequence π1 · · · πmπm+1 · · · πn belongs to Pn. Of course,
-we start with the restriction 1 ≤ πj ≤ n, for all j ∈ {m + 1, · · · n}. It is
-easy to see that such a sequence πm+1 · · · πn will be such that the above
-concatenated sequence belongs to Pn if and only if this sequence results in
-all n − m cars being able to park in the following scenario: There is a oneway street with n spaces, but with the first m of them already taken up by a
-trailer. A sequence of n−m cars enters, each with a preferred parking space
-between 1 and n. It is known that the number of such sequences resulting
-in all n − m cars successfully parking is equal to (m + 1)(n + 1)n−m−1
-[2].
-Thus, the number of parking functions π ∈ Pn such that σ = Tn(π) satisfies
-σ1 · · · σm = [m] is equal to (m + 1)m−1
-(m + 1)(n + 1)n−m−1
-. Consequently,
-P
-park
-n
-(σ1 · · · σm = [m]) = (m + 1)m−1
-(m + 1)(n + 1)n−m−1
-(n + 1)n−1
-=
-
-m + 1
-n + 1 m
-.
+\begin{proposition}
+For $1\le i<j\le n$, the random variables  $l_{n,i}$ and $l_{n,j}$ on $(S_n,P_n)$ are negatively correlated; that is,
+\begin{equation}\label{negcorr}
+P_n(l_{n,i}\ge k,\l_{n,j}\ge k)\le P_n(l_{n,i}\ge k)P_n(l_{n,j}\ge l), \ \text{for}\ k,l\ge1.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Since $P_n$ is the uniform probability measure on $S_n$,  for any $k\le i$,   the events $\{l_{n,i}\ge k\}=\big\{\sigma_i=\max(\sigma_i,\cdots, \sigma_{i-k+1})\big\}$ and
+$\{l_{n,j}\ge l\}=\big\{\sigma_j=\max(\sigma_j,\cdots, \sigma_{j-l+1})\big\}$ are independent if $l\le j-i$.
+Thus, \eqref{negcorr} holds with equality in these cases.
 
-Proof of Proposition 3. Let σ = Tn(π), where Tn is as in the paragraph
-containing equation (1.2). In order to have σn−m+1 · · · σn = n − m + 1 · · · n,
-it is of course necessary to have σ1 · · · σn−m = [n − m]. As in the proof
-of Proposition 2, but with m replaced by n − m, the number of sequences
-π1 · · · πn−m such that σ1 · · · σn−m = [n − m], is (n − m + 1)n−m−1
-, and for
-each such π1 · · · πn−m, the number of sequences πn−m+1 · · · πn such that the
-concatenation π1 · · · πn−mπn−m+1 · · · πn belongs to Pn is equal to
-(n − m + 1)(n + 1)m−1
-. It is easy to see from the definition of the parking
-process that a sequence πn−m+1 · · · πn from among these (n−m+1)(n+1)m−1
-sequences will be such that for the concatenation π1 · · · πn−mπn−m+1 · · · πn,
-one has σn−m+1 · · · σn = n − m + 1 · · · n if and only if πn−m+i ≤ n − m + i,
-for i ∈ [m]. There are Qm
-i=1(n − m + i) = n!
-(n−m)! such sequences. From this
-10 ROSS G. PINSKY
-it follows that
-P
-park
-n
-(σn−m+1 · · · σn = n − m + 1 · · · n|σ1 · · · σn−m = [n − m]) =
-n!
-(n−m)!
-(n − m + 1)(n + 1)m−1
-,
+Consider now the case $k\le i$ and $j-i+1\le l\le j$. In this case
+\begin{equation}\label{intersectionevents}
+\begin{aligned}
+&\{l_{n,i}\ge k,l_{n,j}\ge l\}=\big\{\sigma_j=\max(\sigma_j,\sigma_{j-1},\cdots, \sigma_r)\big\}\cap\big\{\sigma_i=\max(\sigma_i,\sigma_{i-1},\cdots, \sigma_{i-k+1})\big\},\\
+& \text{where}\
+r=\min(i-k+1,j-l+1).
+\end{aligned}
+\end{equation}
+We have
+\begin{equation}\label{firstprob}
+P_n\left(\sigma_j=\max(\sigma_j,\sigma_{j-1},\cdots, \sigma_r)\right)=\frac1{\max(l,j-i+k)}\le \frac1l.
+\end{equation}
+Also,
+\begin{equation}\label{cond2ndprob}
+P_n\left(\sigma_i=\max(\sigma_i,\sigma_{i-1},\cdots,\sigma_{i-k+1} |\sigma_j=\max(\sigma_j,\sigma_{j-1},\cdots, \sigma_r)\right)=\frac1k,
+\end{equation}
+because $\{\sigma_i,\cdots, \sigma_{i-k+1}\}\subset\{\sigma_j,\sigma_{j-1},\cdots, \sigma_r\}$.
+The proposition follows from \eqref{intersectionevents}--\eqref{cond2ndprob} and \eqref{uppertail}.
+\end{proof}
+We can now prove the theorem.
+
+\noindent \it Proof of Theorem \ref{llnthm}.\rm\
+Since $l_{n,i}$ and $l_{n,j}$ are negatively correlated, one has $E_nf(l_{n,i})g(l_{n,j})\le E_nf(l_{n,i})E_ng(l_{n,j})$, if $f$ and $g$ are increasing functions on $[n]$.
+In particular then,
+\begin{equation}\label{covar}
+E_n\log l_{n,i}\log l_{n,j}\le E_n\log l_{n,i}E_n\log l_{n,j}.
+\end{equation}
+From \eqref{logLn} and  \eqref{covar}, a standard straightforward calculation gives
+\begin{equation}\label{varsuminequal}
+\text{\rm Var}(\mathcal{S}_n)\le\sum_{i=1}^n\text{\rm Var}(\log l_{n,i}).
+\end{equation}
+From \eqref{distlni}, we have
+$$
+E_n(\log l_{n,i})^2=\sum_{j=1}^{i-1}\frac{(\log j)^2}{j(j+1)}+\frac{(\log i)^2}{i(i+1)}.
+$$
+Using this with \eqref{expvaluelim} and \eqref{varsuminequal}, we conclude that there exists a $C>0$ such that
+\begin{equation}\label{varbound}
+\text{\rm Var}(\mathcal{S}_n)\le Cn,\ n\in\mathbb{N}.
+\end{equation}
+From \eqref{limScaln} and\eqref{varbound}, it follows from the second moment method (Chebyshev's inequality) that
+\begin{equation}\label{WLLN}
+\lim_{n\to\infty}P_n(\log2-\epsilon\le \frac{\mathcal{S}_n}n\le\log2+\epsilon)=1,\ \text{for all}\ \epsilon>0.
+\end{equation}
+Now \eqref{wlln} follows from \eqref{WLLN} and \eqref{logLn}.
+\hfill $\square$
+
+\section{Proof of Theorem \ref{lastcars}}\label{lastcarsproof}
+We count how many parking functions $\{\pi_l\}_{l=1}^n$  yield  the event $\{\sigma^{-1}_{n-j+1}=i_1,\sigma^{-1}_{n-j+2}=i_2,\cdots, \sigma^{-1}_n=i_j\}$. In order for this event to occur,  the first $n-j$ cars have to park arbitrarily in the spots
+$[n]-\{k_l\}_{l=1}^j$. Then the last $j$ cars have to park, with each one in its appropriate space.
+
+We now analyze the parking of the first $n-j$ cars.
+In order for $k_1-1$ cars from among   the first  $n-j$  cars to park in the first $k_1-1$ spaces, but for no one of the first $n-j$ cars  to park in the $k_1$th space,
+it follows from the definition of the parking process that
+there must be a collection of $k_1-1$ of the $\{\pi_i\}_{l=1}^{n-j}$ which constitute a parking function of length $k_1-1$. We can freely choose which of the first $n-j$ cars to use for these spaces.
+Since there are $k_1^{k_1-2}$ parking functions of length $k_1-1$, this gives $\binom{n-j}{k_1-1}k_1^{k_1-2}$ different choices.
+
+In order for $k_2-k_1-1$ cars, from among   the  $n-j-(k_1-1)$ cars that still remain from among the first $n-j$ cars, to park in the spaces $k_1+1,\cdots, k_2-1$, but for no one of the first $n-j$ cars to park in the $k_1$th space or the $k_2$th space,
+there must be a collection  of $k_2-k_1-1$ of the remaining $n-j-(k_1-1)$ members of $\{\pi_l\}_{l=1}^{n-j}$ that constitute a parking function of length $k_2-k_1-1$, but shifted forward by $k_1$ spaces.
+(If $\{\pi_l\}_{l=1}^m$ is  a parking function of length $m$, then we call the collection $\{a+\pi_l\}_{l=1}^m$, where $a\in\mathbb{N}$, a parking function of length $m$ shifted forward by $a$ spaces. Obviously, the number of such parking functions coincides with the number of parking functions of length $m$.)
+We can freely choose which of the remaining $n-j-(k_1-1)$ cars from among the first $n-j$ cars to  use for these spaces. Thus, there are $\binom{n-j-(k_1-1)}{k_2-k_1-1}(k_2-k_1)^{k_2-k_1-2}$ different choices.
+
+We continue counting in this fashion until we have chosen cars for the $k_j-k_{j-1}-1$ spaces between spaces $k_{j-1}$ and $k_j$. Recall that $k_0$ has been defined to be 0. Now we need for all of the $n-j-\sum_{i=1}^j(k_i-k_{i-1}-1)=n-k_j$ cars that remain from among the first $n-j$ cars to park in the spaces $k_j+1,\cdots, n$.
+In order for this to occur, but for no one of the first $n-j$ cars to park in the $k_j$th space, these remaining members of $\{\pi_i\}_{l=1}^{n-j}$  must   constitute a parking function of length $n-k_j$, but shifted forward by $k_j$ spaces. This gives $(n-k_j+1)^{n-k_j-1}$ different choices.
+
+Thus, we have shown that the number of ways to choice $\{\pi_l\}_{l=1}^{n-j}$ is
+\begin{equation}\label{n-jcount}
+\begin{aligned}
+&\binom{n-j}{k_1-1}k_1^{k_1-2}\binom{n-j-k_1+1}{k_2-k_1-1}(k_2-k_1)^{k_2-k_1-2}\cdots\times\\
+&\binom{n-j-\sum_{l=1}^{j-1}(k_l-k_{l-1})}{k_j-k_{j-1}-1}(k_j-k_{j-1})^{k_j-k_{j-1}-2}(n-k_j+1)^{n-k_j-1}=\\
+&\frac{(n-j)!}{(n-k_j)!\prod_{l=1}^j(k_l-k_{l-1}-1)!}\thinspace(n-k_j+1)^{n-k_j-1}\prod_{l=1}^j(k_l-k_{l-1})^{k_l-k_{l-1}-2}.
+\end{aligned}
+\end{equation}
+
+Now we count how many ways we can choice the $\{\pi_l\}_{l=n-j+1}^n$ in order that $\sigma_{n-j+l}=i_l,\ l=1,\cdots, j$, or equivalently, in order that car $n-j+l$ park in space $i_l,\ l=1,\cdots, j$. This calculation uses the same reasoning that was used in the proof of Theorem \ref{ptwisedist}.
+After the first $n-j$ cars have parked appropriately as above, the spaces
+$\{k_l\}_{l=1}^j=\{i_l\}_{l=1}^j$ are still vacant. From the definition of the parking process and from the definition of $\tilde l_{n,n-j+1}(\sigma)$,
+in order that car $n-j+1$ park in space $i_1$,  $\pi_{n-j+1}$ must take on one of the values $i_1.i_1-1,\cdots i_1-\tilde l_{n,n-j+1}(\sigma)+1$.
+Then in order that car $n-j+2$ park in space $i_2$, $\pi_{n-j+2}$ must take on one of the values $i_2,i_2-1,\cdots i_2-\tilde l_{n,n-j+2}(\sigma)+1$.
+Continuing like this, we conclude that there are $\prod_{l=1}^j\tilde l_{n,n-j+l}(\sigma)$ choices.
+Using this with \eqref{n-jcount}, and noting that there are $(n+1)^{n-1}$ different parking functions of length $n$, we obtain \eqref{lastcarsformula}.
+\hfill $\square$
+
+
+\section{Proof of Corollary \ref{genj}}\label{genjproof}
+Let $\{m_r\}_{r=1}^j\subset\mathbb{N}$.
+By Theorem \ref{lastcars}, for $n\ge\sum_{r=1}^jm_r$,
+the probability\newline
+ $P_n^{\text{park}}(n+1-\sigma^{-1}_{n-j+l}=\sum_{r=l}^jm_r;\ l=1,\cdots, j)$
+is given by
+the formula on the right hand side of \eqref{lastcarsformula} with
+%By Theorem \ref{lastcars},
+%the formula for $\mu_{n;j}(m_1,\cdots, m_j)$ is given by the right hand side of \eqref{lastcarsformula}
+ with $i_l=n+1-\sum_{r=l}^jm_r,\ l\in[j]$. Since these $\{i_l\}_{l=1}^j$ are increasing, we have $k_l=i_l, \ l\in[j]$.
+So we have
+\begin{equation}\label{kdifferences}
+\begin{aligned}
+&k_l-k_{l-1}=m_{l-1},\ l=2,\cdots j; \\
+ &k_1-k_0=n+1-\sum_{r=1}^jm_r.
+\end{aligned}
+\end{equation}
+Since the $\{i_l\}_{l=1}^j$ are increasing and represent the positions respectively of the numbers  $\{n-j+l\}_{l=1}^j$ in the permutation $\sigma$, it follows
+from the definition of $\tilde l_{n,\cdot}(\sigma)$ in \eqref{littleltilde} that
+\begin{equation}\label{ltildevalues}
+\tilde l_{n,n-j+l}(\sigma)=i_l=n+1-\sum_{r=l}^jm_r.
+\end{equation}
+Substituting from \eqref{kdifferences} and \eqref{ltildevalues} into the right hand side of  \eqref{lastcarsformula}, the expression there becomes
+\begin{equation}\label{bigexpression}
+\begin{aligned}
+&\frac{(n-j)!\left(n+1-\sum_{r=1}^jm_r\right)^{n-1-\sum_{r=1}^jm_r}\left(\prod_{l=2}^jm_{l-1}^{m_{l-1}-2}\right)m_j^{m_j-2}\prod_{l=1}^j\left(n+1-\sum_{r=l}^jm_r\right)}
+{(n+1)^{n-1}(n-\sum_{r=1}^jm_r)!\left(\prod_{l=2}^j(m_{l-1}-1)!\right)(m_j-1)!}.
+\end{aligned}
+\end{equation}
+We rewrite the terms in \eqref{bigexpression} that do not involve $n$ as
+\begin{equation}\label{notn}
+\frac{\left(\prod_{l=2}^jm_{l-1}^{m_{l-1}-2}\right)m_j^{m_j-2}}{\left(\prod_{l=2}^j(m_{l-1}-1)!\right)(m_j-1)!}=\prod_{l=1}^j\frac{m_l^{m_l-1}}{m_l!}.
+\end{equation}
+The terms in \eqref{bigexpression} that involve $n$ satisfy
+\begin{equation}\label{withn}
+\begin{aligned}
+&\lim_{n\to\infty}\frac{(n-j)!\left(n+1-\sum_{r=1}^jm_r\right)^{n-1-\sum_{r=1}^jm_r}\prod_{l=1}^j\left(n+1-\sum_{r=l}^jm_r\right)}{(n+1)^{n-1}(n-\sum_{r=1}^jm_r)!}=\\
+&e^{-\sum_{r=1}^jm_r}.
+\end{aligned}
+\end{equation}
+From \eqref{bigexpression}-\eqref{withn}, it follows that the right hand side of \eqref{lastcarsformula} with $i_l=n+1-\sum_{r=l}^jm_r,\ l\in[j]$, converges as $n\to\infty$ to
+$\prod_{l=1}^j\frac{m_l^{m_l-1}e^{-m_l}}{m_l!}$.
+Thus, we have proven that
+\begin{equation}\label{weaklimitproduct}
+\lim_{n\to\infty}P_n^{\text{park}}(n+1-\sigma^{-1}_{n-j+l}=\sum_{r=l}^jm_r;\ l=1,\cdots, j)=\prod_{l=1}^j\frac{m_l^{m_l-1}e^{-m_l}}{m_l!}.
+\end{equation}
+The corollary follows from this.
+\hfill $\square$
+
+\section{Proof of Theorem \ref{jnlastcars}}\label{jnlastcarsproof}
+From the proof of Corollary \ref{genj} up to \eqref{notn}, in particular, from \eqref{bigexpression} and \eqref{notn}, we have for $j_n\le n$,
+\begin{equation}\label{bigexpressionjn}
+\begin{aligned}
+&P_n^{\text{park}}\left(n+1-\sigma^{-1}_{n-j_n+1}=\sum_{r=1}^{j_n}m_r,n+1-\sigma^{-1}_{n-j_n+2}=\sum_{r=2}^{j_n}m_r,\cdots,n+1-\sigma^{-1}_n=m_{j_n}\right)=\\
+&\left(\prod_{r=1}^{j_n}\frac{m_r^{m_r-1}e^{-m_r}}{m_r!}\right)A(n,j_n;m_1\cdots,m_{j_n})B(n,j_n;m_1,\cdots,m_{j_n}),\ \text{for}\ \sum_{r=1}^{j_n}m_r\le n,\ m_r\ge1,
+\end{aligned}
+\end{equation}
+where
+\begin{equation}\label{AB}
+\begin{aligned}
+&A(n,j;m_1\cdots,m_j)=e^{\sum_{r=1}^jm_r}\left(\frac{n+1-\sum_{r=1}^jm_r}{n+1}\right)^{n-1}=
+e^{\sum_{r=1}^jm_r}\left(1-\frac{\sum_{r=1}^jm_r}{n+1}\right)^{n-1};\\
+& B(n,j;m_1,\cdots, m_j)=\frac{(n-j)!}{(n-\sum_{r=1}^jm_r)!}\frac{\prod_{r=1}^j(n+1-\sum_{r=l}^jm_r)}{(n+1-\sum_{r=1}^jm_r)^{\sum_{r=1}^jm_r}}.
+\end{aligned}
+\end{equation}
+
+By Stirling's formula, $\frac{m^{m-1}e^{-m}}{m!}\sim\frac1{\sqrt{2\pi}}m^{-\frac32}$.
+Thus, there exists a $C>0$ such that
+$$
+\sum_{m=N+1}^\infty\frac{m^{m-1}e^{-m}}{m!}<\frac C{N^{\frac12}},\ N\in\mathbb{N}.
+$$
+Since $\{\frac{m^{m-1}e^{-m}}{m!}\}_{m=1}^\infty$ is a probability distribution, it then follows that
+\begin{equation}\label{wotail}
+\sum_{m=1}^N\frac{m^{m-1}e^{-m}}{m!}\ge1-\frac C{N^\frac12},\ N\in\mathbb{N}.
+\end{equation}
+Using  \eqref{wotail} for the inequality below, we have
+\begin{equation}\label{wotailproduct}
+\sum_{\stackrel{1\le m_r\le N}{r=1,\cdots, j_n}}\prod_{r=1}^N\frac{m_r^{m_r-1}e^{-m_r}}{m_r!}=\left(\sum_{m=1}^N\frac{m^{m-1}e^{-m}}{m!}\right)^{j_n}\ge\left(1-\frac C{N^\frac12}\right)^{j_n}.
+\end{equation}
+ Substituting $N_n$ for $N$ in \eqref{wotailproduct},  a standard estimate gives
+\begin{equation}\label{probgoesto0}
+\lim_{n\to\infty}\sum_{\stackrel{1\le m_r\le N_n}{r=1,\cdots, j_n}}\prod_{r=1}^{N_n}\frac{m_r^{m_r-1}e^{-m_r}}{m_r!} =1,\ \text{if}\ j_n=o(N_n^\frac12).
+\end{equation}
+
+We can express $P_n^{\text{park}}(\sigma^{-1}_{n+1-j_n}<\sigma^{-1}_{n+1-j_n+1}<\cdots<\sigma^{-1}_n)$ as
+$$
+\begin{aligned}
+&P_n^{\text{park}}(\sigma^{-1}_{n+1-j_n}<\sigma^{-1}_{n+1-j_n+1}<\cdots<\sigma^{-1}_n)=\\
+&\sum_{\stackrel{m_r\ge1;r=1,\cdots, j_n}{\sum_{r=1}^{j_n}m_r\le n}}P_n^{\text{park}}\left(n+1-\sigma^{-1}_{n-j_n+l}=\sum_{r=l}^{j_n}m_r,\ l=1,\cdots j_n\right).
+\end{aligned}
+$$
+Using this with \eqref{bigexpressionjn}, we have
+\begin{equation}\label{giant}
+\begin{aligned}
+&P_n^{\text{park}}(\sigma^{-1}_{n+1-j_n}<\sigma^{-1}_{n+1-j_n+1}<\cdots<\sigma^{-1}_n)=\\
+&\sum_{\stackrel{m_r\ge1;r=1,\cdots, j_n}{\sum_{r=1}^{j_n}m_r\le n}}\left(\prod_{r=1}^{j_n}\frac{m_r^{m_r-1}e^{-m_r}}{m_r!}\right)A(n,j_n;m_1\cdots,m_{j_n})B(n,j_n;m_1,\cdots,m_{j_n}).
+\end{aligned}
+\end{equation}
+If $m_r\le N_n$ for $r=1,\cdots, j_n$, then
+ trivially, $\sum_{r=1}^{j_n}m_r\le j_nN_n$. Thus,
+if we choose $j_n$ and $N_n$ such that
+\begin{equation}\label{ABto1}
+\begin{aligned}
+&\lim_{n\to\infty}A(n,j_n;m_1\cdots,m_{j_n})=1,\ \text{uniformly over}\ \{1\le m_r\le N_n;r=1,\cdots, j_n\};\\
+&\lim_{n\to\infty}B(n,j_n;m_1,\cdots,m_{j_n})=1, \ \text{uniformly over}\ \{1\le m_r\le N_n;r=1,\cdots, j_n\},
+\end{aligned}
+\end{equation}
+and such that
+\begin{equation}\label{jnNnrelation}
+j_nN_n\le n;\ \text{and}\   j_n=o(N_n^\frac12),
+\end{equation}
+then it will follow from \eqref{probgoesto0}-\eqref{ABto1} that
+\begin{equation}\label{goal}
+\lim_{n\to\infty}P_n^{\text{park}}(\sigma^{-1}_{n+1-j_n}<\sigma^{-1}_{n+1-j_n+1}<\cdots<\sigma^{-1}_n)=1.
+\end{equation}
+
+
+In the calculations below, we always assume that $1\le m_r\le N_n$, for $r=1,\cdots, j_n$.
+We first consider $A(n,j_n;m_1\cdots,m_{j_n})$ in \eqref{AB}.
+From Taylor's remainder formula, we have
+\begin{equation}\label{Taylor}
+-x\ge\log(1-x)\ge-x-\frac12x^2\frac1{(1-x)^2}, \ x\in(0,1).
+\end{equation}
+Using \eqref{Taylor}, we have
+\begin{equation}\label{partofA}
+\begin{aligned}
+&-\frac{n-1}{n+1}\sum_{r=1}^{j_n}m_r\ge\log\left(1-\frac{\sum_{r=1}^{j_n}m_r}{n+1}\right)^{n-1}\ge\\
+&-\frac{n-1}{n+1}\sum_{r=1}^{j_n}m_r-
+(n-1)\left(\frac12\frac{(\sum_{r=1}^{j_n}m_r)^2}{(n+1-\sum_{r=1}^{j_n}m_r)^2}\right).
+\end{aligned}
+\end{equation}
+From \eqref{AB} and \eqref{partofA}, we have
+\begin{equation}\label{Aest}
+\begin{aligned}
+&\frac2{n+1}\sum_{r=1}^{j_n}m_r\ge\log A(n,j_n;m_1\cdots,m_{j_n})\ge\\
+&\frac2{n+1}\sum_{r=1}^{j_n}m_r-\frac{(n-1)(\sum_{r=1}^{j_n}m_r)^2}{2(n+1-\sum_{r=1}^{j_n}m_r)^2}.
+\end{aligned}
+\end{equation}
+Recalling that $\sum_{r=1}^{j_n}m_r\le j_nN_n$, it follows from \eqref{Aest} that
+\begin{equation}\label{Ato1}
+\eqref{ABto1}\ \text{holds for}\ A(n,j_n;m_1\cdots,m_{j_n}) \ \text{if}\ j_nN_n=o(n^\frac12).
+\end{equation}
+
+We now turn to $B(n,j_n;m_1\cdots,m_{j_n})$ in \eqref{AB}.
+We write
+\begin{equation}\label{Bform}
+B(n,j_n;m_1\cdots,m_{j_n})=C(n,j_n;m_1\cdots,m_{j_n})D(n,j_n;m_1\cdots,m_{j_n}),
+\end{equation}
+where
+\begin{equation}\label{CD}
+\begin{aligned}
+&C(n,j_n;m_1\cdots,m_{j_n})=\frac{(n-j_n)!}{(n-\sum_{r=1}^{j_n}m_r)!}n^{j_n-\sum_{r=1}^{j_n}m_r};\\
+&D(n,j_n;m_1\cdots,m_{j_n})=\frac{\prod_{r=1}^{j_n}(n+1-\sum_{r=l}^{j_n}m_r)}{(n+1-\sum_{r=1}^{j_n}m_r)^{\sum_{r=1}^{j_n}m_r}}n^{\sum_{r=1}^{j_n}m_r-j_n}.
+\end{aligned}
+\end{equation}
+Let $w_n=\sum_{r=1}^{j_n}m_r$. We suppress the dependence of $w_n$ on $\{m_r\}_{r=1}^{j_n}$. For any choice of $\{m_r\}_{r=1}^{j_n}$,   we have
+$j_n\le w_n\le j_nN_n$.
+
+We have
+$$
+(n-w_n)^{w_n-j_n}n^{j_n-w_n}\le C(n,j_n;m_1\cdots,m_{j_n})\le(n-j_n)^{w_n-j_n}n^{j_n-w_n},
+$$
+or equivalently,
+\begin{equation}\label{Cest}
+\left(1-\frac{w_n}n\right)^{w_n-j_n}\le C(n,j_n;m_1\cdots,m_{j_n})\le\left(1-\frac{j_n}n\right)^{w_n-j_n}.
+\end{equation}
+Since $w_n\le j_nN_n$, it follows from \eqref{Cest} that
+\begin{equation}\label{Cto1}
+\begin{aligned}
+&\text{if}\ j_nN_n=o(n^\frac12), \ \text{then}\\
+&\lim_{n\to\infty}C(n,j_n;m_1\cdots,m_{j_n})=1, \ \text{uniformly over}\ \{1\le m_r\le N_n;r=1,\cdots, j_n\}.
+\end{aligned}
+\end{equation}
+
+We have
+$$
+\frac{(n+1-w_n)^{j_n}}{(n+1-w_n)^{w_n}}n^{w_n-j_n}\le D(n,j_n;m_1\cdots,m_{j_n})\le \frac{n^{j_n}}{(n+1-w_n)^{w_n}}n^{w_n-j_n},
+$$
+or equivalently,
+\begin{equation}\label{Dest}
+\left(1-\frac{w_n-1}n\right)^{j_n}\left(1+\frac{w_n-1}{n+1-w_n}\right)^{w_n}\le D_n\le\left(1+\frac{w_n-1}{n+1-w_n}\right)^{w_n}.
+\end{equation}
+Since $w_n\le j_nN_n$, it follows from \eqref{Dest} that
+\begin{equation}\label{Dto1}
+\begin{aligned}
+&\text{if}\ j_nN_n=o(n^\frac12), \ \text{then}\\
+&\lim_{n\to\infty}D(n,j_n;m_1\cdots,m_{j_n})=1, \ \text{uniformly over}\ \{1\le m_r\le N_n;r=1,\cdots, j_n\}.
+\end{aligned}
+\end{equation}
+From  \eqref{Bform}, \eqref{Cto1} and \eqref{Dto1}, it follows that
+\begin{equation}\label{Bto1}
+\eqref{ABto1}\ \text{holds for}\ B(n,j_n;m_1\cdots,m_{j_n}) \ \text{if}\ j_nN_n=o(n^\frac12).
+\end{equation}
+
+From \eqref{Ato1}, \eqref{Bto1} and \eqref{jnNnrelation}, we conclude that \eqref{goal} holds if
+$j_nN_n=o(n^\frac12)$ and $j_n=o(N_n^\frac12)$.
+Thus, if $j_n=o(n^\frac16)$ and $N_n=[n^\frac13]$, then \eqref{goal} holds. This completes the proof of the theorem.
+\hfill$\square$
+
+
+
+
+\section{Proof of Proposition  \ref{blockthm}}\label{propproof}
+Let $\sigma=T_n(\pi)$, where $T_n$ is as in the paragraph containing equation \eqref{defprob}.
+Then $\{\sigma_1,\cdots,\sigma_m\}=[m]$ if and only if $\pi_1\cdots\pi_m\in \mathcal{P}_m$.
+Thus, there are $(m+1)^{m-1}$ choices for $\pi_1\cdots\pi_m$.
+Given $\pi_1\cdots\pi_m\in \mathcal{P}_m$, we now consider how  many sequences $\pi_{m+1}\cdots\pi_n$  there are so that the concatenated sequence $\pi_1\cdots\pi_m\pi_{m+1}\cdots\pi_n$  belongs to
+$\mathcal{P}_n$. Of course, we start with the restriction $1\le \pi_j\le n$, for all $j\in\{m+1,\cdots, n\}$. It is easy to see that such a sequence $\pi_{m+1}\cdots\pi_n$ will be such that the above concatenated sequence belongs to $\mathcal{P}_n$  if and only if this sequence
+results in all $n-m$ cars being able to park in the following scenario:
+ There is a one-way street with $n$ spaces, but with the first $m$ of them already taken up by a trailer. A sequence of $n-m$ cars enters, each with a preferred parking space between 1 and $n$. It is known that the number of such sequences resulting in all $n-m$ cars successfully parking   is equal to $(m+1)(n+1)^{n-m-1}$ \cite{EH}.
+ Thus, the number of parking functions $\pi\in \mathcal{P}_n$ such that
+ $\sigma=T_n(\pi)$ satisfies
+ $\{\sigma_1,\cdots,\sigma_m\}=[m]$ is equal to $(m+1)^{m-1}(m+1)(n+1)^{n-m-1}$.
+ Consequently,
+ $$
+ P_n^{\text{\rm park}}(\{\sigma_1,\cdots,\sigma_m\}=[m])=\frac{(m+1)^{m-1}(m+1)(n+1)^{n-m-1}}{(n+1)^{n-1}}=\left(\frac{m+1}{n+1}\right)^m.
+ $$
+
+
+ \hfill $\square$
+
+
+\begin{thebibliography}{99}
+\bibitem{DH}  Diaconis, P. and Hicks, A.,   \emph{ Probabilizing parking functions}, Adv. in Appl. Math. \textbf{89} (2017), 125–155.
+
+\bibitem{EH}
+Ehrenborg, R. and Happ, A.,
+\emph{Parking cars after a trailer}, Australas. J. Combin. \textbf{70} (2018), 402–406.
+
+\bibitem{FR}
+Foata, D, and Riordan, J., \emph{Mappings of acyclic and parking functions}, Aequ. Math. \textbf{10} (1974), 10-22.
+
+
+\bibitem{P14} Pinsky, R.G. \emph{Problems From the Discrete to the Continuous},
+Universitext
+Springer, Cham, (2014).
+
+\bibitem{Y} Yan, C.H., \emph{Parking functions},
+Discrete Math. Appl.
+CRC Press, Boca Raton, FL, (2015), 835–893.
+\end{thebibliography}
+
+
+
+
+\end{document}
+
+
+In fact, we also have the following result.
+\begin{proposition}\label{idenatend}
+For any $m\in\mathbb{N}$,
+\begin{equation}\label{idenatendform}
+\lim_{n\to\infty}P_n^{\text{park}}(\sigma_{n-m+1}\cdots\sigma_n=n-m+1\cdots n)=e^{-m}.
+\end{equation}
+\end{proposition}
+\noindent \bf Remark.\rm\ Note that \eqref{eminusmform} and \eqref{idenatendform} give
+$$
+\lim_{n\to\infty}P_n^{\text{park}}\left(\sigma_{n-m+1}\cdots\sigma_n=n-m+1\cdots n|  \sigma_1\cdots\sigma_{n-m}=[n-m] \right)=1.
+$$
+
+
+ \noindent \it Proof of Proposition \ref{idenatend}.\rm\
+ Let $\sigma=T_n(\pi)$,
+where $T_n$ is as in the paragraph containing equation \eqref{Ln}.
+In order to have $\sigma_{n-m+1}\cdots\sigma_n=n-m+1\cdots n$, it is of course
+ necessary to have $\sigma_1\cdots \sigma_{n-m}=[n-m]$.   As in the proof of Proposition \ref{blockthm}, but with $m$ replaced by $n-m$, the number
+ of sequences
+ $\pi_1\cdots\pi_{n-m}$ such that $\sigma_1\cdots\sigma_{n-m}=[n-m]$, is $(n-m+1)^{n-m-1}$, and for each such $\pi_1\cdots\pi_{n-m}$, the number of sequences
+ $\pi_{n-m+1}\cdots\pi_n$ such that the concatenation $\pi_1\cdots\pi_{n-m}\pi_{n-m+1}\cdots\pi_n$ belongs to $\mathcal{P}_n$ is equal to \newline $(n-m+1)(n+1)^{m-1}$.
+It is easy to see from the definition of the parking process that a sequence $\pi_{n-m+1}\cdots\pi_n$ from among these $(n-m+1)(n+1)^{m-1}$ sequences will be such that for the concatenation $\pi_1\cdots\pi_{n-m}\pi_{n-m+1}\cdots\pi_n$, one has
+ $\sigma_{n-m+1}\cdots\sigma_n=n-m+1\cdots n$ if and only if $\pi_{n-m+i}\le n-m+i$, for $i\in[m]$. There are
+ $\prod_{i=1}^m(n-m+i)=\frac{n!}{(n-m)!}$ such sequences.
+ From this it follows that
+ $$
+\begin{aligned}
+& P_n^{\text{\rm park}}\left(\sigma_{n-m+1}\cdots\sigma_n=n-m+1\cdots n|\sigma_1\cdots\sigma_{n-m}=[n-m]\right)=\\
+&\frac{\frac{n!}{(n-m)!}}{(n-m+1)(n+1)^{m-1}},
+\end{aligned}
+ $$
 and consequently,
-(4.1)
-limn→∞
-P
-park
-n
-(σn−m+1 · · · σn = n − m + 1 · · · n|σ1 · · · σn−m = [n − m]) = 1.
-Now (1.11) follows from (4.1) and (1.10).
-References
-[1] Diaconis, P. and Hicks, A., Probabilizing parking functions, Adv. in Appl. Math. 89
-(2017), 125–155.
-[2] Ehrenborg, R. and Happ, A., Parking cars after a trailer, Australas. J. Combin. 70
-(2018), 402–406.
-[3] Foata, D, and Riordan, J., Mappings of acyclic and parking functions, Aequ. Math.
-10 (1974), 10-22.
-[4] Pinsky, R.G. Problems from the discrete to the continuous, Universitext Springer,
-Cham, (2014).
-[5] Yan, C.H., Parking functions, Discrete Math. Appl. CRC Press, Boca Raton, FL,
-(2015), 835–893.
-Department of Mathematics, Technion—Israel Institute of Technology,
-Haifa, 32000, Israel
-Email address: pinsky@technion.ac.il
-URL: http://www.math.technion.ac.il/~pinsky/
+\begin{equation}\label{limitcond}
+\lim_{n\to\infty} P_n^{\text{\rm park}}\left(\sigma_{n-m+1}\cdots\sigma_n=n-m+1\cdots n|\sigma_1\cdots\sigma_{n-m}=[n-m]\right)=1.
+\end{equation}
+Now  \eqref{idenatendform}
+ follows from \eqref{limitcond} and \eqref{eminusmform}. 

@@ -1,26 +1,82 @@
-BEST POLYNOMIAL APPROXIMATION FOR NON-AUTONOMOUS
-LINEAR ODES IN THE ⋆-PRODUCT FRAMEWORK∗
-STEFANO POZZA†
-Abstract. We present the first formulation of the optimal polynomial approximation of the
-solution of linear non-autonomous systems of ODEs in the framework of the so-called ⋆-product.
-This product is the basis of new approaches for the solution of such ODEs, both in the analytical
-and the numerical sense. The paper shows how to formally state the problem and derives upper
-bounds for its error.
-Key words. Non-autonomous linear ODEs, polynomial approximation, error analysis,
-AMS subject classifications. 46F10, 37C60, 65L05
-1. Introduction. Recently, a new approach has been introduced for the solution
-of systems of linear non-autonomous ordinary differential equations based on the socalled ⋆-product [6, 7, 12, 16]. Such an approach has proved to be valuable and
-effective analytically, by producing new explicit expressions for the solution of certain
-problems [5, 6, 8], and numerically, being the basis of new efficient algorithms in
-quantum chemistry problems [3, 13, 14, 15].
-Given a Hermitian matrix-valued function A˜(t) ∈ C
-N×N analytic on the bounded
-interval I, and the nonzero vector ˜v ∈ C
-N×N we consider the initial value problem
-∂
-∂tu˜(t) = A˜(t)˜u(t), u˜(a) = ˜v, t ∈ I = [a, b]. (1.1)
-The ⋆-product is defined over a Fr´echet-Lie group on distributions [16]. In such a
-group, the initial value problem becomes a ⋆-linear system. Thanks to this “linearization” of the ODE, new techniques can be applied to solve the problem. Here, we
-focus on the polynomial approximation approach, which can be used both in numerical approaches and in the theoretical framework. In particular, in the latter one,
-a symbolic algorithm named ⋆-Lanczos [8] is able to produce a Krylov-like subspace
-approximation, that is, a polynomial approximation in the ⋆-product sense.
+%%
+%% This is file `paper.tex', 
+%% Sample file for ALGORITMY 2024 macros for use with LaTeX 2e
+%% based on SIAM macros 
+%% 
+%% Modified by Daniel Sevcovic 2015
+
+%\documentclass[final]{algoritmy}
+\documentclass{algoritmy}
+
+\usepackage{graphicx,amsmath,amssymb}
+
+% definitions used by included articles, reproduced here for 
+% educational benefit, and to minimize alterations needed to be made
+% in developing this sample file.
+
+\newcommand{\pe}{\psi}
+\def\d{\delta} 
+\def\ds{\displaystyle} 
+\def\e{{\epsilon}} 
+\def\eb{\bar{\eta}}  
+\def\enorm#1{\|#1\|_2} 
+\def\Fp{F^\prime}  
+\def\fishpack{{FISHPACK}} 
+\def\fortran{{FORTRAN}} 
+\def\gmres{{GMRES}} 
+\def\gmresm{{\rm GMRES($m$)}} 
+\def\Kc{{\cal K}} 
+\def\norm#1{\|#1\|} 
+\def\wb{{\bar w}} 
+\def\zb{{\bar z}} 
+
+% some definitions of bold math italics to make typing easier.
+% They are used in the corollary.
+
+%\def\bfE{\mbox{\boldmath$E$}}
+%\def\bfG{\mbox{\boldmath$G$}}
+
+\title{Best polynomial approximation for non-autonomous linear ODEs in the $\star$-product framework\thanks{This work was supported by Charles University Research Centre program No. PRIMUS/21/SCI/009 and UNCE/24/SCI/005, and by the Magica project ANR-20-CE29-0007 funded by the French National Research Agency.}}
+
+% The thanks line in the title should be filled in if there is
+% any support acknowledgement for the overall work to be included
+% This \thanks is also used for the received by date info, but
+% authors are not expected to provide this.
+
+\author{Stefano Pozza\thanks{Faculty of Mathematics and Physics, Charles University, Sokolovská 83, 186 75 Praha 8, Czech Republic,({\tt pozza@karlin.mff.cun.cz}).}}
+
+\begin{document}
+
+
+%% Start and end pages of the document. Do not chenge
+\AlgLogo{1}{10}
+
+
+
+\maketitle
+
+\begin{abstract}
+We present the first formulation of the optimal polynomial approximation of the solution of linear non-autonomous systems of ODEs in the framework of the so-called $\star$-product. This product is the basis of new approaches for the solution of such ODEs, both in the analytical and the numerical sense.
+The paper shows how to formally state the problem and derives upper bounds for its error.
+\end{abstract}
+
+\begin{keywords} 
+Non-autonomous linear ODEs, polynomial approximation, error analysis, 
+\end{keywords}
+
+\begin{AMS}
+46F10, 37C60, 65L05
+\end{AMS}
+
+\pagestyle{myheadings}
+\thispagestyle{plain}
+\markboth{S. Pozza}{POLYNOMIAL APPROXIMATION IN THE $\star$-FRAMEWORK}
+
+\section{Introduction}
+Recently, a new approach has been introduced for the solution of systems of linear non-autonomous ordinary differential equations based on the so-called $\star$-product \cite{GiLuThJa15,GisPozInv19,Po23,Ry23}. Such an approach has proved to be valuable and effective analytically, by producing new explicit expressions for the solution of certain problems \cite{BonGis2020,GiLuThJa15,GiPo20}, and numerically, being the basis of new efficient algorithms in quantum chemistry problems \cite{BoPoVB23,PoVB24,PoVB23_PAMM_B,PoVB23_PAMM_A}. 
+
+Given a Hermitian matrix-valued function $\tilde{A}(t) \in \mathbb{C}^{N \times N}$ analytic on the bounded interval $I$, and the nonzero vector $\tilde{v}\in \mathbb{C}^{N \times N}$ we consider the initial value problem
+    \begin{equation}\label{eq:ode}
+        \frac{\partial}{\partial t}\tilde{u}(t) = \tilde{A}(t)\tilde{u}(t), \quad \tilde{u}(a) = \tilde{v}, \quad t \in I=[a, b].
+    \end{equation} 
+The $\star$-product is defined over a Fréchet-Lie group on distributions \cite{Ry23}. In such a group, the initial value problem becomes a \emph{$\star$-linear system}. Thanks to this ``linearization'' of the ODE, new techniques can be applied to solve the problem. Here, we focus on the polynomial approximation approach, which can be used both in numerical approaches and in the theoretical framework. In particular, in the latter one, a symbolic algorithm named $\star$-Lanczos \cite{GiPo20} is able to produce a Krylov-like subspace approximation, that is, a polynomial approximation in the $\star$-product sense.
