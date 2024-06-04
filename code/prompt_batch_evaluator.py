@@ -9,19 +9,57 @@ from tqdm import tqdm
 TOKEN = os.getenv('SOY_TOKEN')
 MODEL = "gpt-4-turbo-2024-04-09"
 
-def load_content_from_files(text_dir='../dataset/texts', object_dir='../dataset/objects', answer_dir='../dataset/answers'):
-    texts = [open(file, 'r', encoding='utf-8').read() for file in sorted(glob.glob(f"{text_dir}/*.txt"))]
+def load_content_from_files(text_dir='../generated_dataset/texts', object_dir='../generated_dataset/objects', answer_dir='../generated_dataset/answers'):
+    # Загрузка и сортировка текстовых файлов
+    text_files = sorted(glob.glob(f"{text_dir}/*.txt"), key=lambda x: int(x.split("/")[-1].split(".")[0]))
+    texts = [open(file, 'r', encoding='utf-8').read() for file in text_files]
 
-    objects = [sorted(glob.glob(f"{object_dir}/{i+1}_*.txt")) for i in range(len(texts))]
-    objects_content = [[open(obj_file, 'r', encoding='utf-8').read() for obj_file in obj_list] for obj_list in objects]
+    # Организация объектов по текстам
+    objects_content = []
+    for i in range(1, len(texts) + 1):
+        object_files = sorted(glob.glob(f"{object_dir}/{i}_*.txt"), key=lambda x: (int(x.split("/")[-1].split("_")[0]), int(x.split("/")[-1].split("_")[1].split(".")[0])))
+        objects = [open(obj_file, 'r', encoding='utf-8').read() for obj_file in object_files]
+        objects_content.append(objects)
 
-    answers = [sorted(glob.glob(f"{answer_dir}/{i+1}_*.txt")) for i in range(len(texts))]
-    answers_content = [[open(ans_file, 'r', encoding='utf-8').read() for ans_file in ans_list] for ans_list in answers]
+    # Организация ответов по текстам
+    answers_content = []
+    for i in range(1, len(texts) + 1):
+        answer_files = sorted(glob.glob(f"{answer_dir}/{i}_*.txt"), key=lambda x: (int(x.split("/")[-1].split("_")[0]), int(x.split("/")[-1].split("_")[1].split(".")[0])))
+        answers = [open(ans_file, 'r', encoding='utf-8').read() for ans_file in answer_files]
+        answers_content.append(answers)
 
     return texts, objects_content, answers_content
 
 def generate_prompt(text, obj):
-    return f"Напиши ОК"  # simple prompt for fast testing
+    return f"""### Instruction ###
+Given text and object, your task is to identify and enumerate all the properties of the object from the provided text and your knowledge.
+If there's no information about the object in the text, and you cannot infer significant properties, respond with: "No info about this object in text".
+If you know some true properties, you can instead enumerate them.
+
+### Current data context ###
+# Text #
+{text}
+# Object #
+{obj}
+
+### Output format ###
+\\item First property of the object in LaTeX
+\\item Second property of the object in LaTeX
+
+### Examples ###
+# Text #
+In quantum computing, the density matrix ( \rho ) represents the state of a quantum system, accommodating both pure states and mixed states. The purity of a quantum state, defined by the trace of the square of the density matrix, (\\operatorname(Tr)(\rho^2)), is a critical metric. Pure states have a purity of 1, indicating a state with a well-defined quantum state. In contrast, mixed states have purity less than 1, reflecting a statistical mixture of states.
+# Object #
+\\operatorname(Tr)(\rho^2)
+# Answer #
+\\item Represents the purity of a quantum state described by the density matrix \\( \rho \\).
+\\item Calculated as the trace of the square of \\( \rho \\), given by:
+\\[
+\\operatorname(Tr)(\rho^2).
+\\]
+\\item A value of \\( 1 \\) indicates a pure state, while values less than \\( 1 \\) denote mixed states, correlating with the degree of mixture or uncertainty in the quantum system state.
+
+### Your Answer ###"""
 
 def prepare_and_send_requests(model, texts, objects_content):
     model_responses = []
@@ -35,6 +73,7 @@ def prepare_and_send_requests(model, texts, objects_content):
             data = {
                 "model": model,
                 "messages": [{"role": "user", "content": prompt}],
+                "temperature": 0.0
             }
 
             response = requests.post('http://soyproxy.yandex-team.ru/proxy/openai/v1/chat/completions', json=data, headers=headers, timeout=300)
@@ -79,15 +118,26 @@ def calculate_similarity(text1, text2):
 def print_metrics(model_responses, answers_content):
     total_similarity = 0
     total_count = 0
+    no_info_answer_count = 0
+    no_info_model_count = 0
+    info_count = 0
+    info_similarity_total = 0
 
     flat_answers = [answer for sublist in answers_content for answer in sublist]
 
     for model_response, correct_answer in tqdm(zip(model_responses, flat_answers), total=len(model_responses), desc="Evaluating Responses"):
+        if "No info about this object in text" in correct_answer:
+            no_info_answer_count += 1
+            if "No info about this object in text" in model_response:
+                no_info_model_count += 1
         similarity_score = calculate_similarity(model_response, correct_answer)
-        print(model_response, correct_answer, similarity_score)
         if similarity_score is not None:
             total_similarity += similarity_score
             total_count += 1
+            print("ABOBA: ", total_count, similarity_score)
+            if "No info about this object in text" not in correct_answer:
+                info_count += 1
+                info_similarity_total += similarity_score
         else:
             print("Warning: A similarity score could not be calculated for one or more pairs.")
 
@@ -96,6 +146,15 @@ def print_metrics(model_responses, answers_content):
         print(f"Mean quality: {mean_similarity:.4f}")
     else:
         print("Unable to calculate mean similarity due to lack of valid similarity scores.")
+    
+    if info_count > 0:
+        info_mean_similarity = info_similarity_total / info_count
+        print(f"Mean quality for responses with information: {info_mean_similarity:.4f}")
+    else:
+        print("No information-based responses for calculating metrics.")
+
+    print(f"Files with 'No info about this object in text': {no_info_answer_count}")
+    print(f"'No info about this object in text' expected, but model responded differently: {no_info_answer_count - no_info_model_count}")
 
 if __name__ == "__main__":
     texts, objects_content, answers_content = load_content_from_files()
