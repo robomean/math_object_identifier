@@ -9,7 +9,7 @@ from tqdm import tqdm
 TOKEN = os.getenv('SOY_TOKEN')
 MODEL = "gpt-4-turbo-2024-04-09"
 
-def load_content_from_files(text_dir='../generated_dataset/texts', object_dir='../generated_dataset/objects', answer_dir='../generated_dataset/answers'):
+def load_content_from_files(text_dir='../dataset/texts', object_dir='../dataset/objects', answer_dir='../dataset/answers'):
     # Загрузка и сортировка текстовых файлов
     text_files = sorted(glob.glob(f"{text_dir}/*.txt"), key=lambda x: int(x.split("/")[-1].split(".")[0]))
     texts = [open(file, 'r', encoding='utf-8').read() for file in text_files]
@@ -57,9 +57,7 @@ In quantum computing, the density matrix ( \rho ) represents the state of a quan
 \\[
 \\operatorname(Tr)(\rho^2).
 \\]
-\\item A value of \\( 1 \\) indicates a pure state, while values less than \\( 1 \\) denote mixed states, correlating with the degree of mixture or uncertainty in the quantum system state.
-
-### Your Answer ###"""
+\\item A value of \\( 1 \\) indicates a pure state, while values less than \\( 1 \\) denote mixed states, correlating with the degree of mixture or uncertainty in the quantum system state."""
 
 def prepare_and_send_requests(model, texts, objects_content):
     model_responses = []
@@ -81,6 +79,9 @@ def prepare_and_send_requests(model, texts, objects_content):
                 model_responses.append(response.json()['response']['choices'][0]['message']['content'])
             else:
                 logging.error(f"Error: {response.status_code} {response.json()['response']['error']['message']}")
+
+            print(response.json()['response']['choices'][0]['message']['content'])
+            print()
 
     return model_responses
 
@@ -134,7 +135,6 @@ def print_metrics(model_responses, answers_content):
         if similarity_score is not None:
             total_similarity += similarity_score
             total_count += 1
-            print("ABOBA: ", total_count, similarity_score)
             if "No info about this object in text" not in correct_answer:
                 info_count += 1
                 info_similarity_total += similarity_score
@@ -159,6 +159,4 @@ def print_metrics(model_responses, answers_content):
 if __name__ == "__main__":
     texts, objects_content, answers_content = load_content_from_files()
     model_responses = prepare_and_send_requests(MODEL, texts, objects_content)
-    print(model_responses)
-    print(answers_content)
     print_metrics(model_responses, answers_content)
