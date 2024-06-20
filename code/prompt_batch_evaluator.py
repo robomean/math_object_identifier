@@ -6,22 +6,21 @@ import os
 import requests
 from tqdm import tqdm
 
+
 TOKEN = os.getenv('SOY_TOKEN')
 MODEL = "gpt-4-turbo-2024-04-09"
 
+
 def load_content_from_files(text_dir='../dataset/texts', object_dir='../dataset/objects', answer_dir='../dataset/answers'):
-    # Загрузка и сортировка текстовых файлов
     text_files = sorted(glob.glob(f"{text_dir}/*.txt"), key=lambda x: int(x.split("/")[-1].split(".")[0]))
     texts = [open(file, 'r', encoding='utf-8').read() for file in text_files]
 
-    # Организация объектов по текстам
     objects_content = []
     for i in range(1, len(texts) + 1):
         object_files = sorted(glob.glob(f"{object_dir}/{i}_*.txt"), key=lambda x: (int(x.split("/")[-1].split("_")[0]), int(x.split("/")[-1].split("_")[1].split(".")[0])))
         objects = [open(obj_file, 'r', encoding='utf-8').read() for obj_file in object_files]
         objects_content.append(objects)
 
-    # Организация ответов по текстам
     answers_content = []
     for i in range(1, len(texts) + 1):
         answer_files = sorted(glob.glob(f"{answer_dir}/{i}_*.txt"), key=lambda x: (int(x.split("/")[-1].split("_")[0]), int(x.split("/")[-1].split("_")[1].split(".")[0])))
@@ -31,35 +30,9 @@ def load_content_from_files(text_dir='../dataset/texts', object_dir='../dataset/
     return texts, objects_content, answers_content
 
 def generate_prompt(text, obj):
-    return f"""### Instruction ###
-Given text and object, your task is to identify and enumerate all the properties of the object from the provided text and your knowledge.
-If there's no information about the object in the text, and you cannot infer significant properties, respond with: "No info about this object in text".
-If you know some true properties, you can instead enumerate them.
+    return f"Write ОК"  # simple prompt for fast testing
 
-### Current data context ###
-# Text #
-{text}
-# Object #
-{obj}
-
-### Output format ###
-\\item First property of the object in LaTeX
-\\item Second property of the object in LaTeX
-
-### Examples ###
-# Text #
-In quantum computing, the density matrix ( \rho ) represents the state of a quantum system, accommodating both pure states and mixed states. The purity of a quantum state, defined by the trace of the square of the density matrix, (\\operatorname(Tr)(\rho^2)), is a critical metric. Pure states have a purity of 1, indicating a state with a well-defined quantum state. In contrast, mixed states have purity less than 1, reflecting a statistical mixture of states.
-# Object #
-\\operatorname(Tr)(\rho^2)
-# Answer #
-\\item Represents the purity of a quantum state described by the density matrix \\( \rho \\).
-\\item Calculated as the trace of the square of \\( \rho \\), given by:
-\\[
-\\operatorname(Tr)(\rho^2).
-\\]
-\\item A value of \\( 1 \\) indicates a pure state, while values less than \\( 1 \\) denote mixed states, correlating with the degree of mixture or uncertainty in the quantum system state."""
-
-def prepare_and_send_requests(model, texts, objects_content):
+def prepare_and_send_requests(model, texts, objects_content, a):
     model_responses = []
 
     for text, obj_list in tqdm(list(zip(texts, objects_content)), desc="Processing texts"):
@@ -80,9 +53,6 @@ def prepare_and_send_requests(model, texts, objects_content):
             else:
                 logging.error(f"Error: {response.status_code} {response.json()['response']['error']['message']}")
 
-            print(response.json()['response']['choices'][0]['message']['content'])
-            print()
-
     return model_responses
 
 def get_embedding(text):
@@ -91,7 +61,7 @@ def get_embedding(text):
     }
     data = {
         'input': text,
-        'model': 'text-embedding-ada-002',  # the only available embedding model
+        'model': 'text-embedding-ada-002',
     }
 
     response = requests.post('http://soyproxy.yandex-team.ru/proxy/openai/v1/embeddings', headers=headers, json=data)
@@ -120,7 +90,8 @@ def print_metrics(model_responses, answers_content):
     total_similarity = 0
     total_count = 0
     no_info_answer_count = 0
-    no_info_model_count = 0
+    no_info_model_right_count = 0
+    no_info_model_wrong_count = 0
     info_count = 0
     info_similarity_total = 0
 
@@ -130,7 +101,9 @@ def print_metrics(model_responses, answers_content):
         if "No info about this object in text" in correct_answer:
             no_info_answer_count += 1
             if "No info about this object in text" in model_response:
-                no_info_model_count += 1
+                no_info_model_right_count += 1
+        elif "No info about this object in text" in model_response:
+            no_info_model_wrong_count += 1
         similarity_score = calculate_similarity(model_response, correct_answer)
         if similarity_score is not None:
             total_similarity += similarity_score
@@ -154,9 +127,10 @@ def print_metrics(model_responses, answers_content):
         print("No information-based responses for calculating metrics.")
 
     print(f"Files with 'No info about this object in text': {no_info_answer_count}")
-    print(f"'No info about this object in text' expected, but model responded differently: {no_info_answer_count - no_info_model_count}")
+    print(f"Wrong 'No info about this object in text': {no_info_model_wrong_count}")
+    print(f"Right 'No info about this object in text': {no_info_model_right_count}")
 
 if __name__ == "__main__":
     texts, objects_content, answers_content = load_content_from_files()
-    model_responses = prepare_and_send_requests(MODEL, texts, objects_content)
+    model_responses = prepare_and_send_requests(MODEL, texts, objects_content, answers_content)
     print_metrics(model_responses, answers_content)

@@ -1,0 +1,13 @@
+\item Kraus operators used to represent the quantum channel \(\Phi\) in the form: 
+\[
+\Phi(\rho) = \sum_{k} A_k \rho A_k^\dagger.
+\]
+\item Each \( A_k \) is a linear operator acting on the state space of the quantum system.
+\item The operators \(\{A_k\}\) collectively satisfy the trace-preserving condition for the channel:
+\[
+\sum_{k} A_k^\dagger A_k = I,
+\]
+where \( I \) is the identity operator.
+\item Contributes to the construction of the dilation of the channel to a larger, unitary system incorporating environmental interactions.
+\item The rank and properties of each \(A_k\) influence the channel's characteristics, such as whether the channel is entanglement-breaking. Channels with all rank-one Kraus operators are classified as entanglement-breaking.
+\item Determines the dynamic evolution of quantum states under the effect of noise and information leakage into the ecology of the quantum system.

@@ -1,0 +1,6 @@
+\item Denotes the joint probability density function for the eigenvalues \( \{\lambda_i\} \) of a matrix from the circular unitary ensemble.
+\item Given by the formula:
+\[
+P(\lambda_1, \ldots, \lambda_n) = \frac{1}{n!} \prod_{1 \leq j < k \leq n} |\lambda_k - \lambda_j|^2.
+\]
+\item Illustrates the level repulsion phenomenon where eigenvalues statistically repel each other, a characteristic feature in random matrix theory.

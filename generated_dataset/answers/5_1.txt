@@ -1,0 +1,5 @@
+\item Complexity measure for finite binary sequences, defined as $C_{\text{LZ}}(s)$.
+\item Represents the smallest number of distinct non-empty substrings in the unique parsing of $s$ into consecutive, non-overlapping blocks, mathematically given by: \begin{equation} C_{\text{LZ}}(s) = \min \left{ k : s = s_1s_2\ldots s_k, \text{ and } \forall i, s_i \notin {s_1s_2\ldots s_{i-1}} \right}. \end{equation}
+\item Sensitive to the sequential structure of the sequence, making it a measure of structural complexity.
+\item For a purely random sequence of length $n$, the expected value of $C_{\text{LZ}}$ is approximated by: \begin{equation} E[C_{\text{LZ}}(s)] \approx \frac{n}{\log_2(n)}. \end{equation}
+\item This expected value serves as a benchmark for assessing the randomness of binary sequences, with deviations indicating potential non-randomness.

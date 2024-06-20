@@ -1,0 +1,3 @@
+Please process the text: {text} and the object: {obj}. Identify and enumerate all the properties of the object from the provided text and your knowledge. Use this format for your output:
+“\\item First property of the object in LaTeX \\item Second property of the object in LaTeX”.
+If there's no information about the object in the text, and you cannot infer significant properties, respond with: "No info about this object in text".

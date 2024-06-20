@@ -1,1 +1,3 @@
-No info about this object in text
+\item \( P_n^{\text{park}}(\sigma) \) is a probability measure on \( S_n \) induced by placing the uniform probability measure on the set of parking functions on \([n]\).
+\item \( P_n^{\text{park}}(\sigma) \) has an explicit formula for all \( \sigma \in S_n \) as described in the text.
+\item For most permutations \( \sigma \), \( P_n^{\text{park}}(\sigma) \) falls within the range \( \left(\frac{(2-\epsilon)^n}{(n+1)^{n-1}},\frac{(2+\epsilon)^n}{(n+1)^{n-1}}\right) \), though this represents only an exponentially small part of the total \( P_n^{\text{park}} \)-probability.

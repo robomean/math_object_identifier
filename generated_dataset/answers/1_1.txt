@@ -1,0 +1,8 @@
+\item Quantum channel represented as a completely positive, trace-preserving (CPTP) map.
+\item Described using Kraus operators representation: \(\Phi(\rho) = \sum_{k} A_k \rho A_k^\dagger\).
+\item Completeness condition for Kraus operators: \(\sum_{k} A_k^\dagger A_k = I\).
+\item Can be dilated to a unitary evolution on a larger Hilbert space including an environment.
+\item Characterized by a Choi-Jamiołkowski isomorphism which relates the channel to a density matrix \(J(\Phi)\).
+\item Determines the ability to preserve or degrade quantum information.
+\item Entanglement-breaking if all Kraus operators are of rank one, can degrade all entangled states into separable states.
+\item Impact on quantum correlations, specifically regarding the preservation of entanglement in quantum states.

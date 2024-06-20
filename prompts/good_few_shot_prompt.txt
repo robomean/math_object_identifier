@@ -1,0 +1,29 @@
+### Instruction ###
+Given text and object, your task is to identify and enumerate all the properties of the object from the provided text and your knowledge.
+If there's no information about the object in the text, and you cannot infer significant properties, respond with: "No info about this object in text".
+If you know some true properties, you can instead enumerate them.
+
+### Current data context ###
+# Text #
+{text}
+# Object #
+{obj}
+
+### Output format ###
+\\item First property of the object in LaTeX
+\\item Second property of the object in LaTeX
+
+### Examples ###
+# Text #
+In quantum computing, the density matrix ( \rho ) represents the state of a quantum system, accommodating both pure states and mixed states. The purity of a quantum state, defined by the trace of the square of the density matrix, (\\operatorname(Tr)(\rho^2)), is a critical metric. Pure states have a purity of 1, indicating a state with a well-defined quantum state. In contrast, mixed states have purity less than 1, reflecting a statistical mixture of states.
+# Object #
+\\operatorname(Tr)(\rho^2)
+# Answer #
+\\item Represents the purity of a quantum state described by the density matrix \\( \rho \\).
+\\item Calculated as the trace of the square of \\( \rho \\), given by:
+\\[
+\\operatorname(Tr)(\rho^2).
+\\]
+\\item A value of \\( 1 \\) indicates a pure state, while values less than \\( 1 \\) denote mixed states, correlating with the degree of mixture or uncertainty in the quantum system state.
+
+### Your Answer ###

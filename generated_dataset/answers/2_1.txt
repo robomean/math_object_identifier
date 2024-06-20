@@ -1,0 +1,8 @@
+\item Homoclinic tangle where the stable \( W^s(p) \) and unstable \( W^u(p) \) manifolds of a periodic orbit intersect.
+\item Points in this intersection are homoclinic points \( q \) satisfying 
+\[
+q \in W^s(p) \cap W^u(p) \quad \text{and} \quad q \neq p.
+\]
+\item Indicates sensitive dependence on initial conditions, characteristic of chaotic systems.
+\item Leads to complex dynamical behaviors and plays a crucial role in the creation of chaotic dynamics such as Smale's horseshoes.
+\item Drives the system behavior into unpredictable and intricate dynamics due to the 'stretch and fold' mechanism inherent in chaotic systems.
